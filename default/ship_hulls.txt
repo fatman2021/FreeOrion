@@ -1,0 +1,3115 @@
+include "shared_macros.txt"
+
+Hull
+    name = "SH_XENTRONIUM"
+    description = "SH_XENTRONIUM_DESC"
+    speed = 50
+    starlaneSpeed = 70
+    fuel = 3
+    stealth = 5
+    structure = 50
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.40, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = External position = (0.80, 0.15)
+        Slot type = Core     position = (0.40, 0.75)
+    ]
+    buildCost = 100 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 10
+    tags = [ "SHINY" "EXOTIC" ]
+    location = Contains And [
+        Building "BLD_SHIPYARD_BASE"
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        [[REGULAR_HULL_DETECTION]]
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/xentronium_hull_small.png"
+    graphic = "hulls_design/xentronium_hull.png"
+
+Hull
+    name = "SH_COLONY_BASE"
+    description = "SH_COLONY_BASE_DESC"
+    speed = 10
+    starlaneSpeed = 0
+    fuel = 0
+    stealth = 5
+    structure = 2
+    slots = Slot type = Internal position = (0.50, 0.50)
+    buildCost = 1
+    buildTime = 1
+    location = OwnedBy TheEmpire Source.Owner
+    effectsgroups =
+        [[REGULAR_HULL_DETECTION]]
+    icon = "icons/ship_hulls/colony_base_hull_small.png"
+    graphic = "hulls_design/colony_base_hull.png"
+    
+Hull
+    name = "SH_BASIC_SMALL"
+    description = "SH_BASIC_SMALL_DESC"
+    speed = 50
+    starlaneSpeed = 75
+    fuel = 4
+    stealth = 5
+    structure = 5
+    slots = [
+        Slot type = External position = (0.50, 0.45)
+    ]
+    buildCost = 10.0 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 2
+    location = Contains And [
+        Building "BLD_SHIPYARD_BASE"
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        [[REGULAR_HULL_DETECTION]]
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/basic-small-hull_small.png"
+    graphic = "hulls_design/basic-small-hull.png"
+    
+Hull
+    name = "SH_BASIC_MEDIUM"
+    description = "SH_BASIC_MEDIUM_DESC"
+    speed = 50
+    starlaneSpeed = 60
+    fuel = 3
+    stealth = 5
+    structure = 10
+    slots = [
+        Slot type = External position = (0.35, 0.40)
+        Slot type = External position = (0.65, 0.40)
+        Slot type = Internal position = (0.50, 0.65)
+    ]
+    buildCost = 25 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 2
+    location = Contains And [
+        Building "BLD_SHIPYARD_BASE"
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        [[REGULAR_HULL_DETECTION]]
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/basic-medium-hull_small.png"
+    graphic = "hulls_design/basic-medium-hull.png"
+
+Hull
+    name = "SH_STANDARD"
+    description = "SH_STANDARD_DESC"
+    speed = 50
+    starlaneSpeed = 40
+    fuel = 3
+    stealth = 5
+    structure = 15
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.50, 0.15)
+        Slot type = External position = (0.80, 0.15)
+        Slot type = Internal position = (0.40, 0.75)
+    ]
+    buildCost = 50 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 2
+    location = Contains And [
+        Building "BLD_SHIPYARD_BASE"
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        [[REGULAR_HULL_DETECTION]]
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/generic_hull.png"
+    graphic = "hulls_design/generic_hull.png"
+
+Hull
+    name = "SH_ROBOTIC"
+    description = "SH_ROBOTIC_DESC"
+    speed = 60
+    starlaneSpeed = 75
+    fuel = 3
+    stealth = 5
+    structure = 25
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.40, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = External position = (0.80, 0.15)
+        Slot type = Internal position = (0.40, 0.75)
+    ]
+    buildCost = 60 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 2
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_ORBITAL_DRYDOCK"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = Source
+            activation = Source
+            effects = SetStructure Value + 2
+
+        [[REGULAR_HULL_DETECTION]]
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/robotic_hull_small.png"
+    graphic = "hulls_design/robotic_hull.png"
+
+Hull
+    name = "SH_SPATIAL_FLUX"
+    description = "SH_SPATIAL_FLUX_DESC"
+    speed = 80
+    starlaneSpeed = 80
+    fuel = 6
+    stealth = 15
+    structure = 3
+    slots = [
+        Slot type = External position = (0.40, 0.50)
+        Slot type = External position = (0.60, 0.50)
+    ]
+    buildCost = 6 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 2
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_ORBITAL_DRYDOCK"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = Source
+            activation = Not Stationary
+            effects = SetStealth Value - 30
+
+        [[REGULAR_HULL_DETECTION]]
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/spatial_flux_hull_small.png"
+    graphic = "hulls_design/spatial_flux_hull.png"
+
+Hull
+    name = "SH_SELF_GRAVITATING"
+    description = "SH_SELF_GRAVITATING_DESC"
+    speed = 30
+    starlaneSpeed = 80
+    fuel = 3
+    stealth = -5
+    structure = 100
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.40, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = External position = (0.80, 0.15)
+        Slot type = External position = (0.20, 0.50)
+        Slot type = Core     position = (0.50, 0.50)
+        Slot type = External position = (0.80, 0.50)
+        Slot type = Internal position = (0.20, 0.85)
+        Slot type = Internal position = (0.40, 0.85)
+    ]
+    buildCost = 200 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 2
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_CON_GEOINT"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_ORBITAL_DRYDOCK"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        [[REGULAR_HULL_DETECTION]]
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/self_gravitating_hull_small.png"
+    graphic = "hulls_design/self_gravitating_hull.png"
+
+Hull
+    name = "SH_NANOROBOTIC"
+    description = "SH_NANOROBOTIC_DESC"
+    speed = 70
+    starlaneSpeed = 80
+    fuel = 3
+    stealth = 10
+    structure = 30
+    slots = [
+        Slot type = External position = (0.15, 0.15)
+        Slot type = External position = (0.30, 0.15)
+        Slot type = External position = (0.45, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = External position = (0.75, 0.15)
+        Slot type = External position = (0.90, 0.15)
+        Slot type = Internal position = (0.30, 0.75)
+    ]
+    buildCost = 50 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 2
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_CON_NANOROBO"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_ORBITAL_DRYDOCK"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = Source
+            activation = Source
+            effects = SetStructure Target.MaxStructure
+
+        [[REGULAR_HULL_DETECTION]]
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/nano_robotic_hull_small.png"
+    graphic = "hulls_design/nano_robotic_hull.png"
+
+Hull
+    name = "SH_TITANIC"
+    description = "SH_TITANIC_DESC"
+    speed = 10
+    starlaneSpeed = 80
+    fuel = 3
+    stealth = -30
+    structure = 160
+    slots = [
+        Slot type = External position = (0.10, 0.15)
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.30, 0.15)
+        Slot type = External position = (0.40, 0.15)
+        Slot type = External position = (0.50, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = External position = (0.70, 0.15)
+        Slot type = External position = (0.80, 0.15)
+        Slot type = External position = (0.10, 0.50)
+        Slot type = External position = (0.20, 0.50)
+        Slot type = External position = (0.30, 0.50)
+        Slot type = External position = (0.40, 0.50)
+        Slot type = External position = (0.50, 0.50)
+        Slot type = External position = (0.60, 0.50)
+        Slot type = External position = (0.70, 0.50)
+        Slot type = External position = (0.80, 0.50)
+        Slot type = Internal position = (0.10, 0.85)
+        Slot type = Internal position = (0.20, 0.85)
+        Slot type = Internal position = (0.30, 0.85)
+    ]
+    buildCost = 400 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 5
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_CON_GEOINT"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_ORBITAL_DRYDOCK"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        [[REGULAR_HULL_DETECTION]]
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/titanic_hull_small.png"
+    graphic = "hulls_design/titanic_hull.png"
+
+Hull
+    name = "SH_TRANSSPATIAL"
+    description = "SH_TRANSSPATIAL_DESC"
+    speed = 100
+    starlaneSpeed = 80
+    fuel = 3
+    stealth = 30
+    structure = 9
+    slots = Slot type = External position = (0.50, 0.50)
+    buildCost = 50 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 3
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_CON_ADV_ENGINE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_ORBITAL_DRYDOCK"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        [[REGULAR_HULL_DETECTION]]
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/trans_spatial_hull_small.png"
+    graphic = "hulls_design/trans_spatial_hull.png"
+
+Hull
+    name = "SH_LOGISTICS_FACILITATOR"
+    description = "SH_LOGISTICS_FACILITATOR_DESC"
+    speed = 25
+    starlaneSpeed = 80
+    fuel = 3
+    stealth = 5
+    structure = 110
+    slots = [
+        Slot type = External position = (0.10, 0.15)
+        Slot type = External position = (0.22, 0.15)
+        Slot type = External position = (0.34, 0.15)
+        Slot type = External position = (0.46, 0.15)
+        Slot type = External position = (0.58, 0.15)
+        Slot type = External position = (0.70, 0.15)
+        Slot type = External position = (0.82, 0.15)
+        Slot type = Internal position = (0.22, 0.75)
+        Slot type = Internal position = (0.34, 0.75)
+    ]
+    buildCost = 200 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 15
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_CON_ADV_ENGINE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_CON_GEOINT"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_CON_NANOROBO"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_ORBITAL_DRYDOCK"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                WithinDistance 0 Source
+                Ship
+                Or [
+                    OwnedBy TheEmpire Source.Owner
+                    OwnedBy AllyOf Source.Owner
+                ]
+            ]
+            activation = Source
+            stackinggroup = "FLAGSHIP_EFFECT_LOGISTICS"
+            effects = SetStructure Target.MaxStructure
+
+        [[REGULAR_HULL_DETECTION]]
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/logistics_facilitator_hull_small.png"
+    graphic = "hulls_design/logistics_facilitator_hull.png"
+
+Hull
+    name = "SH_ASTEROID"
+    description = "SH_ASTEROID_DESC"
+    speed = 35
+    starlaneSpeed = 60
+    fuel = 4
+    stealth = 5
+    structure = 30
+    slots = [
+        Slot type = External position = (0.50, 0.15)
+        Slot type = External position = (0.20, 0.50)
+        Slot type = External position = (0.80, 0.50)
+        Slot type = External position = (0.50, 0.85)
+        Slot type = Internal position = (0.40, 0.50)
+        Slot type = Internal position = (0.60, 0.50)
+    ]
+    buildCost = 5.0 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 2
+    location = And [
+        Planet
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        ContainedBy And [
+            System 
+            Contains And [
+                Building "BLD_SHIPYARD_AST"
+                OwnedBy TheEmpire Source.Owner
+            ]
+        ]
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = Source
+            activation = ContainedBy And [
+                System 
+                Contains Planet type = Asteroids
+            ]
+            effects = SetStealth Value + 25
+
+        [[REGULAR_HULL_DETECTION]]
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/asteroid_hull_small.png"
+    graphic = "hulls_design/asteroid_hull.png"
+
+Hull
+    name = "SH_SMALL_ASTEROID"
+    description = "SH_SMALL_ASTEROID_DESC"
+    speed = 70
+    starlaneSpeed = 60
+    fuel = 4
+    stealth = 5
+    structure = 15
+    slots = [
+        Slot type = External position = (0.50, 0.15)
+        Slot type = Internal position = (0.50, 0.75)
+    ]
+    buildCost = 2.0 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 2
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        ContainedBy And [
+            System 
+            Contains And [
+                Building "BLD_SHIPYARD_AST"
+                OwnedBy TheEmpire Source.Owner
+            ]
+        ]
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = Source
+            activation = ContainedBy And [
+                System 
+                Contains Planet type = Asteroids
+            ]
+            effects = SetStealth Value + 25
+
+        [[REGULAR_HULL_DETECTION]]
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/small_asteroid_hull_small.png"
+    graphic = "hulls_design/small_asteroid_hull.png"
+
+Hull
+    name = "SH_HEAVY_ASTEROID"
+    description = "SH_HEAVY_ASTEROID_DESC"
+    speed = 30
+    starlaneSpeed = 60
+    fuel = 4
+    stealth = 10
+    structure = 50
+    slots = [
+        Slot type = External position = (0.12, 0.15)
+        Slot type = External position = (0.24, 0.15)
+        Slot type = External position = (0.36, 0.15)
+        Slot type = External position = (0.48, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = External position = (0.72, 0.15)
+        Slot type = Internal position = (0.12, 0.75)
+        Slot type = Internal position = (0.24, 0.75)
+        Slot type = Internal position = (0.36, 0.75)
+    ]
+    buildCost = 12.0 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 3
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        ContainedBy And [
+            System 
+            Contains And [
+                Building "BLD_SHIPYARD_AST"
+                OwnedBy TheEmpire Source.Owner
+            ]
+        ]
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = Source
+            activation = ContainedBy And [
+                System 
+                Contains Planet type = Asteroids
+            ]
+            effects = SetStealth Value + 25
+
+        [[REGULAR_HULL_DETECTION]]
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/heavy_asteroid_hull_small.png"
+    graphic = "hulls_design/heavy_asteroid_hull.png"
+
+Hull
+    name = "SH_CAMOUFLAGE_ASTEROID"
+    description = "SH_CAMOUFLAGE_ASTEROID_DESC"
+    speed = 35
+    starlaneSpeed = 60
+    fuel = 4
+    stealth = 5
+    structure = 40
+    slots = [
+        Slot type = Internal position = (0.15, 0.40)
+        Slot type = Internal position = (0.30, 0.40)
+        Slot type = Internal position = (0.45, 0.40)
+        Slot type = Internal position = (0.60, 0.40)
+    ]
+    buildCost = 8.0 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 2
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        ContainedBy And [
+            System 
+            Contains And [
+                Building "BLD_SHIPYARD_AST"
+                OwnedBy TheEmpire Source.Owner
+            ]
+        ]
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = Source
+            activation = ContainedBy And [
+                System 
+                Contains Planet type = Asteroids
+            ]
+            effects = SetStealth Value + 45
+
+        [[REGULAR_HULL_DETECTION]]
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/camouflage_asteroid_hull_small.png"
+    graphic = "hulls_design/camouflage_asteroid_hull.png"
+
+Hull
+    name = "SH_SMALL_CAMOUFLAGE_ASTEROID"
+    description = "SH_SMALL_CAMOUFLAGE_ASTEROID_DESC"
+    speed = 50
+    starlaneSpeed = 60
+    fuel = 4
+    stealth = 35
+    structure = 15
+    slots = [
+        Slot type = External position = (0.50, 0.15)
+        Slot type = Internal position = (0.50, 0.75)
+    ]
+    buildCost = 3.0 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 2
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        ContainedBy And [
+            System 
+            Contains And [
+                Building "BLD_SHIPYARD_AST"
+                OwnedBy TheEmpire Source.Owner
+            ]
+        ]
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = Source
+            activation = ContainedBy And [
+                System 
+                Contains Planet type = Asteroids
+            ]
+            effects = SetStealth Value + 20
+
+        [[REGULAR_HULL_DETECTION]]
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/small_camouflage_asteroid_hull_small.png"
+    graphic = "hulls_design/small_camouflage_asteroid_hull.png"
+
+/*
+Hull
+    name = "SH_AGREGATE_ASTEROID"
+    description = "SH_AGREGATE_ASTEROID_DESC"
+    speed = 10
+    starlaneSpeed = 60
+    fuel = 4
+    stealth = -20
+    structure = 140
+    slots = [
+        Slot type = External position = (0.10, 0.15)
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.30, 0.15)
+        Slot type = External position = (0.40, 0.15)
+        Slot type = External position = (0.50, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = External position = (0.70, 0.15)
+        Slot type = External position = (0.80, 0.15)
+        Slot type = External position = (0.90, 0.15)
+        Slot type = External position = (0.10, 0.50)
+        Slot type = External position = (0.20, 0.50)
+        Slot type = External position = (0.30, 0.50)
+        Slot type = External position = (0.40, 0.50)
+        Slot type = External position = (0.50, 0.50)
+        Slot type = External position = (0.60, 0.50)
+        Slot type = Internal position = (0.70, 0.50)
+        Slot type = Internal position = (0.80, 0.50)
+        Slot type = Internal position = (0.90, 0.50)
+        Slot type = Internal position = (0.10, 0.85)
+    ]
+    buildCost = 60.0 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 3
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        ContainedBy And [
+            System 
+            Contains And [
+                Building "BLD_SHIPYARD_AST"
+                OwnedBy TheEmpire Source.Owner
+            ]
+        ]
+        ContainedBy And [
+            System 
+            Contains And [
+                Building "BLD_SHIPYARD_AST_REF"
+                OwnedBy TheEmpire Source.Owner
+            ]
+        ]
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = Source
+            activation = ContainedBy And [
+                System 
+                Contains Planet type = Asteroids
+            ]
+            effects = SetStealth Value + 40
+
+        [[REGULAR_HULL_DETECTION]]
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/agregate_asteroid_hull_small.png"
+    graphic = "hulls_design/agregate_asteroid_hull.png"
+*/
+    
+Hull
+    name = "SH_MINIASTEROID_SWARM"
+    description = "SH_MINIASTEROID_SWARM_DESC"
+    speed = 70
+    starlaneSpeed = 60
+    fuel = 4
+    stealth = 40
+    structure = 11
+    slots = [
+        Slot type = External position = (0.20, 0.40)
+        Slot type = External position = (0.40, 0.40)
+    ]
+    buildCost = 5.0 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 3
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        ContainedBy And [
+            System 
+            Contains And [
+                Building "BLD_SHIPYARD_AST"
+                OwnedBy TheEmpire Source.Owner
+            ]
+        ]
+        ContainedBy And [
+            System 
+            Contains And [
+                Building "BLD_SHIPYARD_AST_REF"
+                OwnedBy TheEmpire Source.Owner
+            ]
+        ]
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = Source
+            activation = ContainedBy And [
+                System 
+                Contains Planet type = Asteroids
+            ]
+            effects = SetStealth Value + 20
+
+        [[REGULAR_HULL_DETECTION]]
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/mini_asteroid_swarm_small.png"
+    graphic = "hulls_design/mini_asteroid_swarm.png"
+
+Hull
+    name = "SH_SCATTERED_ASTEROID"
+    description = "SH_SCATTERED_ASTEROID_DESC"
+    speed = 10
+    starlaneSpeed = 60
+    fuel = 4
+    stealth = 1
+    structure = 160
+    slots = [
+        Slot type = External position = (0.10, 0.15)
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.30, 0.15)
+        Slot type = External position = (0.40, 0.15)
+        Slot type = External position = (0.50, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = External position = (0.70, 0.15)
+        Slot type = External position = (0.80, 0.15)
+        Slot type = External position = (0.90, 0.15)
+        Slot type = External position = (0.10, 0.50)
+        Slot type = External position = (0.20, 0.50)
+        Slot type = External position = (0.30, 0.50)
+        Slot type = External position = (0.40, 0.50)
+        Slot type = External position = (0.50, 0.50)
+        Slot type = External position = (0.60, 0.50)
+        Slot type = Internal position = (0.70, 0.50)
+        Slot type = Internal position = (0.80, 0.50)
+        Slot type = Internal position = (0.90, 0.50)
+        Slot type = Internal position = (0.10, 0.85)
+    ]
+    buildCost = 50.0 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 15
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        ContainedBy And [
+            System 
+            Contains And [
+                Building "BLD_SHIPYARD_AST"
+                OwnedBy TheEmpire Source.Owner
+            ]
+        ]
+        ContainedBy And [
+            System 
+            Contains And [
+                Building "BLD_SHIPYARD_AST_REF"
+                OwnedBy TheEmpire Source.Owner
+            ]
+        ]
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = Source
+            activation = ContainedBy And [
+                System 
+                Contains Planet type = Asteroids
+            ]
+            effects = SetStealth Value + 40
+
+        EffectsGroup
+            scope = And [
+                WithinDistance 0 Source
+                Ship
+                Or [
+                    OwnedBy TheEmpire Source.Owner
+                    OwnedBy AllyOf Source.Owner
+                ]
+            ]
+            activation = Source
+            stackinggroup = "FLAGSHIP_EFFECT_SCATTERED_ASTEROID"
+            effects = SetMaxShield Value + 5
+
+        [[REGULAR_HULL_DETECTION]]
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/scattered_asteroid_hull_small.png"
+    graphic = "hulls_design/scattered_asteroid_hull.png"
+
+Hull
+    name = "SH_CRYSTALLIZED_ASTEROID"
+    description = "SH_CRYSTALLIZED_ASTEROID_DESC"
+    speed = 35
+    starlaneSpeed = 60
+    fuel = 4
+    stealth = 5
+    structure = 55
+    slots = [
+        Slot type = External position = (0.50, 0.15)
+        Slot type = External position = (0.20, 0.50)
+        Slot type = External position = (0.80, 0.50)
+        Slot type = External position = (0.50, 0.85)
+        Slot type = Internal position = (0.40, 0.50)
+        Slot type = Internal position = (0.60, 0.50)
+    ]
+    buildCost = 10.0 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 3
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        ContainedBy And [
+            System 
+            Contains And [
+                Building "BLD_SHIPYARD_AST"
+                OwnedBy TheEmpire Source.Owner
+            ]
+        ]
+        ContainedBy And [
+            System 
+            Contains And [
+                Building "BLD_SHIPYARD_AST_REF"
+                OwnedBy TheEmpire Source.Owner
+            ]
+        ]
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = Source
+            activation = ContainedBy And [
+                System 
+                Contains Planet type = Asteroids
+            ]
+            effects = SetStealth Value + 15
+
+        [[REGULAR_HULL_DETECTION]]
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/crystalized_asteroid_hull_small.png"
+    graphic = "hulls_design/crystalized_asteroid_hull.png"
+
+Hull
+    name = "SH_ORGANIC"
+    description = "SH_ORGANIC_DESC"
+    speed = 50
+    starlaneSpeed = 90
+    fuel = 2
+    stealth = 10
+    structure = 5
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.40, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = Internal position = (0.20, 0.75)
+    ]
+    buildCost = 10 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 3
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_ORG_ORB_INC"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = Source
+            activation = Source
+            effects = [
+                SetStructure Value + 2
+                SetFuel Value + 0.2
+                SetDetection Value + 10
+            ]
+
+        EffectsGroup
+            scope = Source
+            activation = Source
+            accountinglabel = "ORGANIC_GROWTH"
+            effects = SetMaxStructure Value + min(Source.Age*0.2, 5)
+
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/organic_hull_small.png"
+    graphic = "hulls_design/organic_hull.png"
+
+Hull
+    name = "SH_STATIC_MULTICELLULAR"
+    description = "SH_STATIC_MULTICELLULAR_DESC"
+    speed = 75
+    starlaneSpeed = 100
+    fuel = 2
+    stealth = 0
+    structure = 16
+    slots = [
+        Slot type = External position = (0.30, 0.35)
+        Slot type = External position = (0.50, 0.35)
+        Slot type = External position = (0.70, 0.35)
+        Slot type = Internal position = (0.40, 0.75)
+        Slot type = Internal position = (0.60, 0.75)
+    ]
+    buildCost = 8 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 4
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_ORG_XENO_FAC"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_ORG_ORB_INC"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        [[REGULAR_HULL_DETECTION]]
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/static_multicellular_small.png"
+    graphic = "hulls_design/static_multicellular.png"
+
+Hull
+    name = "SH_ENDOMORPHIC"
+    description = "SH_ENDOMORPHIC_DESC"
+    speed = 50
+    starlaneSpeed = 100
+    fuel = 2
+    stealth = 0
+    structure = 5
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.40, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = External position = (0.80, 0.15)
+        Slot type = Internal position = (0.60, 0.75)
+        Slot type = Internal position = (0.80, 0.75)
+    ]
+    buildCost = 10 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 5
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_ORG_XENO_FAC"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_ORG_ORB_INC"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = Source
+            activation = Source
+            effects = SetDetection Value + 50
+            
+        EffectsGroup
+            scope = Source
+            activation = Source
+            accountinglabel = "ORGANIC_GROWTH"
+            effects = SetMaxStructure Value + min(Source.Age*0.2, 15)
+
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/endomorphic_hull_small.png"
+    graphic = "hulls_design/endomorphic_hull.png"
+
+Hull
+    name = "SH_SYMBIOTIC"
+    description = "SH_SYMBIOTIC_DESC"
+    speed = 70
+    starlaneSpeed = 100
+    fuel = 2
+    stealth = 10
+    structure = 10
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.40, 0.15)
+        Slot type = Internal position = (0.20, 0.75)
+        Slot type = Internal position = (0.40, 0.75)
+    ]
+    buildCost = 8 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 4
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_ORG_CELL_GRO_CHAMB"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_ORG_ORB_INC"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = Source
+            activation = Source
+            effects = [
+                SetStructure Value + 2
+                SetFuel Value + 0.2
+                SetDetection Value + 50
+            ]
+            
+        EffectsGroup
+            scope = Source
+            activation = Source
+            accountinglabel = "ORGANIC_GROWTH"
+            effects = SetMaxStructure Value + min(Source.Age*0.2, 10)
+
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/symbiotic_hull_small.png"
+    graphic = "hulls_design/symbiotic_hull.png"
+
+Hull
+    name = "SH_PROTOPLASMIC"
+    description = "SH_PROTOPLASMIC_DESC"
+    speed = 50
+    starlaneSpeed = 100
+    fuel = 2
+    stealth = 20
+    structure = 5
+    slots = [
+        Slot type = External position = (0.30, 0.50)
+        Slot type = External position = (0.45, 0.50)
+        Slot type = Internal position = (0.45, 0.75)
+        Slot type = Internal position = (0.60, 0.75)
+        Slot type = Internal position = (0.75, 0.75)
+    ]
+    buildCost = 10 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 5
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_ORG_CELL_GRO_CHAMB"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_ORG_ORB_INC"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = Source
+            activation = Source
+            effects = [
+                SetStructure Value + 2
+                SetFuel Value + 0.2
+                SetDetection Value + 50
+            ]
+
+        EffectsGroup
+            scope = Source
+            activation = Source
+            accountinglabel = "ORGANIC_GROWTH"
+            effects = SetMaxStructure Value + min(Source.Age*0.2, 25)
+
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/protoplasmic_hull_small.png"
+    graphic = "hulls_design/protoplasmic_hull.png"
+
+Hull
+    name = "SH_ENDOSYMBIOTIC"
+    description = "SH_ENDOSYMBIOTIC_DESC"
+    speed = 60
+    starlaneSpeed = 100
+    fuel = 2
+    stealth = 20
+    structure = 5
+    slots = [
+        Slot type = External position = (0.15, 0.15)
+        Slot type = External position = (0.30, 0.15)
+        Slot type = External position = (0.45, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = Internal position = (0.60, 0.75)
+        Slot type = Internal position = (0.75, 0.75)
+        Slot type = Internal position = (0.90, 0.75)
+    ]
+    buildCost = 11 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 6
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_ORG_CELL_GRO_CHAMB"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_ORG_XENO_FAC"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_ORG_ORB_INC"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = Source
+            activation = Source
+            effects = [
+                SetStructure Value + 2
+                SetFuel Value + 0.2
+                SetDetection Value + 50
+            ]
+            
+        EffectsGroup
+            scope = Source
+            activation = Source
+            accountinglabel = "ORGANIC_GROWTH"
+            effects = SetMaxStructure Value + min(Source.Age*0.2, 15)
+            
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/endosymbiotic_hull_small.png"
+    graphic = "hulls_design/endosymbiotic_hull.png"
+
+Hull
+    name = "SH_RAVENOUS"
+    description = "SH_RAVENOUS_DESC"
+    speed = 80
+    starlaneSpeed = 100
+    fuel = 2
+    stealth = 0
+    structure = 5
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.40, 0.15)        
+        Slot type = Internal position = (0.45, 0.50)
+        Slot type = Internal position = (0.55, 0.50)        
+        Slot type = External position = (0.80, 0.55)        
+        Slot type = External position = (0.20, 0.75)
+        Slot type = External position = (0.40, 0.75)
+    ]
+    buildCost = 12 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 6
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_ORG_XENO_FAC"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_ORG_ORB_INC"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = Source
+            activation = Source
+            effects = SetDetection Value + 75
+            
+        EffectsGroup
+            scope = Source
+            activation = Source
+            accountinglabel = "ORGANIC_GROWTH"
+            effects = SetMaxStructure Value + min(Source.Age*0.2, 20)
+            
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/ravenous_hull_small.png"
+    graphic = "hulls_design/ravenous_hull.png"
+
+Hull
+    name = "SH_BIOADAPTIVE"
+    description = "SH_BIOADAPTIVE_DESC"
+    speed = 80
+    starlaneSpeed = 100
+    fuel = 2
+    stealth = 20
+    structure = 15
+    slots = [
+        Slot type = External position = (0.30, 0.35)
+        Slot type = External position = (0.50, 0.35)
+        Slot type = External position = (0.70, 0.35)
+        Slot type = Internal position = (0.20, 0.65)
+        Slot type = Internal position = (0.40, 0.65)
+        Slot type = Internal position = (0.60, 0.65)
+    ]
+    buildCost = 14 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 6
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_ORG_CELL_GRO_CHAMB"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_ORG_ORB_INC"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = Source
+            activation = Source
+            effects = [
+                SetStructure Target.MaxStructure
+                SetFuel Value + 0.2
+                SetDetection Value + 75
+            ]
+            
+        EffectsGroup
+            scope = Source
+            activation = Source
+            accountinglabel = "ORGANIC_GROWTH"
+            effects = SetMaxStructure Value + min(Source.Age*0.2, 25)
+            
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/bio_adaptive_hull_small.png"
+    graphic = "hulls_design/bio_adaptive_hull.png"
+
+Hull
+    name = "SH_SENTIENT"
+    description = "SH_SENTIENT_DESC"
+    speed = 30
+    starlaneSpeed = 100
+    fuel = 2
+    stealth = 20
+    structure = 12
+    slots = [
+        Slot type = External position = (0.10, 0.15)
+        Slot type = External position = (0.25, 0.15)
+        Slot type = External position = (0.40, 0.15)
+        Slot type = External position = (0.55, 0.15)
+        Slot type = External position = (0.70, 0.15)
+        Slot type = External position = (0.85, 0.15)
+        Slot type = Internal position = (0.10, 0.75)
+        Slot type = Internal position = (0.25, 0.75)
+        Slot type = Internal position = (0.40, 0.75)
+    ]
+    buildCost = 16 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 15
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_ORG_XENO_FAC"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_ORG_CELL_GRO_CHAMB"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_ORG_ORB_INC"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = Source
+            activation = Source
+            effects = [
+                SetStructure Value + 2
+                SetFuel Value + 0.2
+                SetDetection Value + 50
+            ]
+    
+        EffectsGroup
+            scope = And [
+                WithinDistance 0 Source
+                Ship
+                Or [
+                    OwnedBy TheEmpire Source.Owner
+                    OwnedBy AllyOf Source.Owner
+                ]
+            ]
+            activation = Source
+            stackinggroup = "FLAGSHIP_EFFECT_SENTIENT"
+            effects = [
+                SetStealth Value + 20
+                SetDetection Value + 50
+            ]
+            
+        EffectsGroup
+            scope = Source
+            activation = Source
+            accountinglabel = "ORGANIC_GROWTH"
+            effects = SetMaxStructure Value + min(Source.Age*0.2, 45)
+            
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/sentient_hull_small.png"
+    graphic = "hulls_design/sentient_hull.png"
+
+Hull
+    name = "SH_COMPRESSED_ENERGY"
+    description = "SH_COMPRESSED_ENERGY_DESC"
+    speed = 100
+    starlaneSpeed = 120
+    fuel = 5
+    stealth = 40
+    structure = 10
+    slots = Slot type = External position = (0.15, 0.40)
+    buildCost = 2.5 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 2
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_ENRG_COMP"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+        Star type = [White Blue BlackHole]
+    ]
+    effectsgroups = [
+        [[REGULAR_HULL_DETECTION]]
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/compressed_energy_hull_small.png"
+    graphic = "hulls_design/compressed_energy_hull.png"
+
+Hull
+    name = "SH_FRACTAL_ENERGY"
+    description = "SH_FRACTAL_ENERGY_DESC"
+    speed = 50
+    starlaneSpeed = 120
+    fuel = 5
+    stealth = 0
+    structure = 80
+    slots = [
+        Slot type = External position = (0.10, 0.15)
+        Slot type = External position = (0.30, 0.15)
+        Slot type = External position = (0.50, 0.15)
+        Slot type = External position = (0.70, 0.15)
+        Slot type = External position = (0.90, 0.15)
+        Slot type = External position = (0.20, 0.50)
+        Slot type = External position = (0.40, 0.50)
+        Slot type = External position = (0.60, 0.50)
+        Slot type = External position = (0.80, 0.50)
+        Slot type = External position = (0.10, 0.85)
+        Slot type = External position = (0.30, 0.85)
+        Slot type = External position = (0.50, 0.85)
+        Slot type = External position = (0.70, 0.85)
+        Slot type = External position = (0.90, 0.85)
+    ]
+    buildCost = 20.0 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 7
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_ENRG_COMP"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+        Star type = [Blue BlackHole]
+    ]
+    effectsgroups = [
+        [[REGULAR_HULL_DETECTION]]
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/fractal_energy_hull_small.png"
+    graphic = "hulls_design/fractal_energy_hull.png"
+
+Hull
+    name = "SH_QUANTUM_ENERGY"
+    description = "SH_QUANTUM_ENERGY_DESC"
+    speed = 100
+    starlaneSpeed = 120
+    fuel = 5
+    stealth = -15
+    structure = 100
+    slots = [
+        Slot type = External position = (0.10, 0.15)
+        Slot type = External position = (0.22, 0.15)
+        Slot type = External position = (0.34, 0.15)
+        Slot type = External position = (0.46, 0.15)
+        Slot type = External position = (0.58, 0.15)
+        Slot type = External position = (0.70, 0.15)
+        Slot type = External position = (0.82, 0.15)
+        Slot type = Internal position = (0.10, 0.75)
+        Slot type = Internal position = (0.22, 0.75)
+        Slot type = Internal position = (0.34, 0.75)
+    ]
+    buildCost = 7.5 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 5
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_ENRG_COMP"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+        Star type = [Blue BlackHole]
+    ]
+    effectsgroups = [
+        [[REGULAR_HULL_DETECTION]]
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/quantum_energy_hull_small.png"
+    graphic = "hulls_design/quantum_energy_hull.png"
+
+Hull
+    name = "SH_SOLAR"
+    description = "SH_SOLAR_DESC"
+    speed = 5
+    starlaneSpeed = 120
+    fuel = 5
+    stealth = -60
+    structure = 300
+    slots = [
+        Slot type = External position = (0.10, 0.15)
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.30, 0.15)
+        Slot type = External position = (0.40, 0.15)
+        Slot type = External position = (0.50, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = External position = (0.70, 0.15)
+        Slot type = External position = (0.80, 0.15)
+        Slot type = External position = (0.90, 0.15)
+        Slot type = External position = (0.10, 0.50)
+        Slot type = External position = (0.20, 0.50)
+        Slot type = External position = (0.30, 0.50)
+        Slot type = External position = (0.40, 0.50)
+        Slot type = External position = (0.50, 0.50)
+        Slot type = External position = (0.60, 0.50)
+        Slot type = External position = (0.70, 0.50)
+        Slot type = External position = (0.80, 0.50)
+        Slot type = External position = (0.90, 0.50)
+        Slot type = Internal position = (0.10, 0.85)
+        Slot type = Internal position = (0.20, 0.85)
+        Slot type = Internal position = (0.30, 0.85)
+        Slot type = Internal position = (0.40, 0.85)
+        Slot type = Internal position = (0.50, 0.85)
+        Slot type = Internal position = (0.60, 0.85)
+        Slot type = Internal position = (0.70, 0.85)
+        Slot type = Internal position = (0.80, 0.85)
+        Slot type = Internal position = (0.90, 0.85)
+    ]
+    buildCost = 30.0 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildTime = 20
+    location = And [
+        Contains And [
+            Building "BLD_SHIPYARD_ENRG_COMP"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_ENRG_SOLAR"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+        Star type = BlackHole
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = Source
+            activation = Star type = [Blue White Yellow Orange Red]
+            stackinggroup = "STEALTH_SOLAR_STACK"
+            effects = SetStealth Value + 120
+
+        EffectsGroup
+            scope = And [
+                Ship
+                InSystem Source.SystemID
+                Or [
+                    OwnedBy TheEmpire Source.Owner
+                    OwnedBy AllyOf Source.Owner
+                ]
+            ]
+            activation = And [
+                Source
+                InSystem
+            ]
+            effects = SetFuel Target.MaxFuel
+
+        EffectsGroup
+            scope = And [
+                WithinDistance 0 Source
+                Ship
+                Not Or [
+                    OwnedBy TheEmpire Source.Owner
+                    OwnedBy AllyOf Source.Owner
+                ]
+            ]
+            activation = Source
+            stackinggroup = "FLAGSHIP_EFFECT_SOLAR"
+            effects = SetStealth Value - 100
+
+        [[REGULAR_HULL_DETECTION]]
+        [[SCAVANGE_FUEL_UNOWNED]]
+        [[UNOWNED_GOOD_VISION]]
+        [[UNOWNED_MOVE]]
+    ]
+    icon = "icons/ship_hulls/solar_hull_small.png"
+    graphic = "hulls_design/solar_hull.png"
+    
+Hull
+    name = "SH_FLOATER_BODY"
+    description = "SH_FLOATER_BODY_DESC"
+    speed = 5
+    starlaneSpeed = 20
+    fuel = 3
+    stealth = 15
+    structure = 20
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = Internal position = (0.50, 0.15)
+        Slot type = External position = (0.80, 0.15)
+    ]
+    buildCost = 1
+    buildTime = 2
+    Unproducible
+    location = All
+    effectsgroups = [
+        [[MONSTER_MOVE_ALWAYS]]
+        [[INFINITE_FUEL]]
+        [[MODERATE_VISION]]
+
+        EffectsGroup    // in systems with no other monsters, spawn trees
+            scope = And [
+                System
+                Star type = [Blue White Yellow Orange Red]
+                InSystem Source.SystemID
+                Not Number low = 2 condition = And [
+                    Ship
+                    Monster
+                    InSystem Source.SystemID
+                ]
+            ]
+            activation = Random probability = 0.1
+            stackinggroup = "TREE_GROWTH"
+            effects = CreateShip "SM_TREE"
+        ]
+    icon = ""
+    graphic = "icons/monsters/floater.png"
+    
+Hull
+    name = "SH_TREE_BODY"
+    description = "SH_TREE_BODY_DESC"
+    speed = 0
+    starlaneSpeed = 0
+    fuel = 0
+    stealth = 10
+    structure = 5
+    slots = Slot type = External position = (0.30, 0.15)
+    buildCost = 1
+    buildTime = 2
+    Unproducible
+    location = All
+    effectsgroups = [
+        [[EXCELLENT_VISION]]
+
+        EffectsGroup    // remove self and recreate on first turn, so that trees start with age 0, and thus low initial health, instead of having thousands of structure at start of game
+            scope = Source
+            activation = Turn high = 2
+            effects = [
+                CreateShip "SM_TREE"
+                Destroy
+            ]
+
+        EffectsGroup    // grow larger / stronger with age
+            scope = Source
+            effects = [
+                SetMaxStructure Value + Source.Age*3
+                SetStructure Value + 7
+            ]
+
+        EffectsGroup    // spawn floaters to reproduce
+            scope = Source
+            activation = Random probability = 0.03
+            stackinggroup = "TREE_GROWTH"
+            effects = CreateShip "SM_FLOATER"
+
+        EffectsGroup
+            scope = And [
+                Object Source.FleetID
+                Fleet
+            ]
+            effects = SetAggressive
+    ]
+    icon = ""
+    graphic = "icons/monsters/tree.png"
+
+Hull
+    name = "SH_STRONG_MONSTER_BODY"
+    description = "SH_STRONG_MONSTER_BODY_DESC"
+    speed = 20
+    starlaneSpeed = 30
+    fuel = 5
+    stealth = 10
+    structure = 80
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.40, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = External position = (0.80, 0.15)
+        Slot type = Internal position = (0.50, 0.65)
+    ]
+    buildCost = 1
+    buildTime = 2
+    Unproducible
+
+    location = All
+    effectsgroups = [
+        [[MONSTER_MOVE_ALWAYS]]
+        [[INFINITE_FUEL]]
+        [[EXCELLENT_VISION]]
+    ]
+    icon = ""
+    graphic = "icons/monsters/dragon.png"
+
+Hull
+    name = "SH_GUARD_MONSTER_BODY"
+    description = "SH_GUARD_MONSTER_BODY_DESC"
+    speed = 20
+    starlaneSpeed = 0
+    fuel = 0
+    stealth = 10
+    structure = 35
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.40, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = External position = (0.80, 0.15)
+        Slot type = External position = (0.20, 0.65)
+        Slot type = Internal position = (0.40, 0.65)
+        Slot type = External position = (0.60, 0.65)
+    ]
+    buildCost = 1
+    buildTime = 2
+    Unproducible
+    location = All
+    effectsgroups = [
+        [[GOOD_VISION]]
+    ]
+    icon = ""
+    graphic = "icons/monsters/sentinel.png"
+    
+Hull
+    name = "SH_DRONE_BODY"
+    description = "SH_DRONE_BODY_DESC"
+    speed = 12
+    starlaneSpeed = 30
+    fuel = 3
+    stealth = 5
+    structure = 10
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.50, 0.15)
+        Slot type = External position = (0.80, 0.15)
+    ]
+    buildCost = 1
+    buildTime = 2
+    Unproducible
+    location = All
+    effectsgroups = [
+        [[MONSTER_MOVE_ALWAYS]]
+        [[INFINITE_FUEL]]
+        [[MODERATE_VISION]]
+    ]
+    icon = ""
+    graphic = "icons/monsters/drone.png"
+
+Hull
+    name = "SH_IMMOBILE_FACTORY"
+    description = "SH_IMMOBILE_FACTORY_DESC"
+    speed = 0
+    starlaneSpeed = 0
+    fuel = 0
+    stealth = 10
+    structure = 1000
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = Internal position = (0.50, 0.15)
+        Slot type = External position = (0.80, 0.15)
+    ]
+    buildCost = 1
+    buildTime = 1
+    Unproducible
+    location = All
+    effectsgroups = [
+        [[EXCELLENT_VISION]]
+        EffectsGroup
+            scope = Source
+            activation = Not Turn low = 1
+            effects = [   
+                CreateShip "SM_DRONE"
+                CreateShip "SM_DRONE"
+            ]
+
+        EffectsGroup
+            scope = And [
+                System
+                InSystem Source.SystemID
+                Number high = 7 And [   // Limits the factory to producing only when there are less than 7 drones in system
+                    Ship
+                    InSystem Source.SystemID
+                    DesignHasHull name = "SH_DRONE_BODY"
+                ]
+            ]
+            activation = Random probability = .1
+            effects = CreateShip "SM_DRONE"
+    ]
+    icon = ""
+    graphic = "icons/monsters/factory.png"
+
+Hull
+    name = "SH_KRILL_1_BODY"
+    description = "SH_KRILL_1_BODY_DESC"
+    speed = 7
+    starlaneSpeed = 30
+    fuel = 5
+    stealth = 15
+    structure = 20
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.50, 0.15)
+        Slot type = External position = (0.80, 0.15)
+    ]
+    buildCost = 1
+    buildTime = 1
+    Unproducible
+    location = All
+    effectsgroups = [
+
+        EffectsGroup    // merge small krills to create a medium krill
+            scope = And [
+                System
+                InSystem Source.SystemID 
+                Number low = 2 high = 3 And [
+                    Ship
+                    InSystem Source.SystemID
+                    DesignHasHull name = "SH_KRILL_1_BODY"
+                ]
+            ]
+            activation = InSystem
+            stackinggroup = "KRILL_1_ACTION_STACK"
+            effects = CreateShip "SM_KRILL_2"
+
+        EffectsGroup    // remove merged krills
+            scope = And [
+                Number low = 2 And [
+                    Ship
+                    InSystem Source.SystemID
+                    DesignHasHull name = "SH_KRILL_1_BODY"
+                ]
+                NumberOf 2 And [
+                    Ship
+                    InSystem Source.SystemID
+                    DesignHasHull name = "SH_KRILL_1_BODY"
+                ]
+            ]
+            activation = InSystem
+            effects = Destroy
+
+        EffectsGroup    // mature into medium krill
+            scope = And [
+                Source
+                ContainedBy And [
+                    System 
+                    Contains Planet type = Asteroids
+                ]
+            ]
+            activation = Random probability = 0.1
+            stackinggroup = "KRILL_1_ACTION_STACK"
+            effects = [
+                CreateShip "SM_KRILL_2"
+                Destroy
+                /*
+                GenerateSitRepMessage
+                    message = "EFFECT_MONSTER_SPAWNING"
+                    parameters = [
+                        tag = "predefinedshipdesign" data = "SM_KRILL_2"
+                        tag = "system" data = Source.SystemID
+                    ]
+                */
+            ]
+
+        [[MONSTER_MOVE_ALWAYS]]
+        [[INFINITE_FUEL]]
+        [[WEAK_VISION]]
+
+        EffectsGroup
+            scope = And [
+                Fleet
+                Stationary
+                Object id = Source.FleetID
+            ]
+            activation = Random probability = 0.80
+            stackinggroup = "KRILL_1_ACTION_STACK"
+            effects = SetDestination destination = And [
+                System
+                WithinStarlaneJumps 1 Source
+                Not InSystem Source.SystemID
+            ]
+    ]
+    icon = ""
+    graphic = "icons/monsters/krill-1.png"
+
+Hull
+    name = "SH_KRILL_2_BODY"
+    description = "SH_KRILL_2_BODY_DESC"
+    speed = 5
+    starlaneSpeed = 30
+    fuel = 6
+    stealth = 10
+    structure = 40
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.50, 0.15)
+        Slot type = External position = (0.80, 0.15)
+    ]
+    buildCost = 1
+    buildTime = 1
+    Unproducible
+    location = All
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                System
+                InSystem Source.SystemID
+                Number low = 2 high = 3 And [
+                    Ship
+                    InSystem Source.SystemID
+                    DesignHasHull name = "SH_KRILL_2_BODY"
+                ]
+            ]
+            activation = InSystem
+           stackinggroup = "KRILL_2_ACTION_STACK"
+            effects = [
+                CreateShip "SM_KRILL_3"
+                /*
+                GenerateSitRepMessage
+                    message = "EFFECT_MONSTER_SPAWNING"
+                    parameters = [
+                        tag = "predefinedshipdesign" data = "SM_KRILL_3"
+                        tag = "system" data = Source.SystemID
+                    ]
+                */
+            ]
+        EffectsGroup
+            scope = And [
+                Number low = 2 And [
+                    Ship
+                    InSystem Source.SystemID
+                    DesignHasHull name = "SH_KRILL_2_BODY"
+                ]
+                NumberOf 2 And [
+                    Ship
+                    InSystem Source.SystemID
+                    DesignHasHull name = "SH_KRILL_2_BODY"
+                ]
+            ]
+            activation = InSystem
+            effects = Destroy
+
+        EffectsGroup
+            scope = And [
+                Source
+                ContainedBy And [
+                    System
+                    Contains Planet type = Asteroids
+                ]
+            ]
+            activation = Random probability = 0.15
+            stackinggroup = "KRILL_2_ACTION_STACK"
+            effects = [
+                CreateShip "SM_KRILL_1"
+                /*
+                GenerateSitRepMessage
+                    message = "EFFECT_MONSTER_SPAWNING"
+                    parameters = [
+                        tag = "predefinedshipdesign" data = "SM_KRILL_1"
+                        tag = "system" data = Source.SystemID
+                    ]
+                    */
+            ]
+            
+        [[MONSTER_MOVE_ALWAYS]]
+        [[INFINITE_FUEL]]
+        [[MODERATE_VISION]]
+
+        EffectsGroup
+            scope = And [
+                Fleet
+                Stationary
+                Object id = Source.FleetID
+            ]
+            activation = Random probability = 0.70
+            stackinggroup = "KRILL_2_ACTION_STACK"
+            effects = SetDestination destination = And [
+                System
+                WithinStarlaneJumps 1 Source
+                Not InSystem Source.SystemID
+            ]
+    ]
+    icon = ""
+    graphic = "icons/monsters/krill-2.png"
+
+Hull
+    name = "SH_KRILL_3_BODY"
+    description = "SH_KRILL_3_BODY_DESC"
+    speed = 5
+    starlaneSpeed = 25
+    fuel = 5
+    stealth = 10
+    structure = 250
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.50, 0.15)
+        Slot type = External position = (0.70, 0.15)
+        Slot type = External position = (0.80, 0.15)
+    ]
+    buildCost = 1
+    buildTime = 1
+    Unproducible
+    location = All
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                System
+                InSystem Source.SystemID
+                Number low = 2 high = 3 And [
+                    Ship
+                    InSystem Source.SystemID
+                    DesignHasHull name = "SH_KRILL_3_BODY"
+                ]
+            ]
+            activation = InSystem
+            stackinggroup = "KRILL_3_ACTION_STACK"
+            effects = [
+                CreateShip "SM_KRILL_4"
+                /*
+                GenerateSitRepMessage
+                    message = "EFFECT_MONSTER_SPAWNING"
+                    parameters = [
+                        tag = "predefinedshipdesign" data = "SM_KRILL_4"
+                        tag = "system" data = Source.SystemID
+                    ]
+                */
+            ]
+        EffectsGroup
+            scope = And [
+                Number low = 2 And [
+                    Ship
+                    InSystem Source.SystemID
+                    DesignHasHull name = "SH_KRILL_3_BODY"
+                ]
+                NumberOf 2 And [
+                    Ship
+                    InSystem Source.SystemID
+                    DesignHasHull name = "SH_KRILL_3_BODY"
+                ]
+            ]
+            activation = InSystem
+            effects = Destroy
+
+        EffectsGroup
+            scope = And [
+                Source
+                ContainedBy And [
+                    System
+                    Contains Planet type = Asteroids
+                ]
+            ]
+            activation = Random probability = 0.08
+            stackinggroup = "KRILL_3_ACTION_STACK"
+            effects = [
+                CreateShip "SM_KRILL_1"
+                /*
+                GenerateSitRepMessage
+                    message = "EFFECT_MONSTER_SPAWNING"
+                    parameters = [
+                        tag = "predefinedshipdesign" data = "SM_KRILL_1"
+                        tag = "system" data = Source.SystemID
+                    ]
+                    */
+            ]
+            
+        [[MONSTER_MOVE_ALWAYS]]
+        [[INFINITE_FUEL]]
+        [[GOOD_VISION]]
+
+        EffectsGroup
+            scope = And [
+                Fleet
+                Stationary
+                Object id = Source.FleetID
+            ]
+            activation = Random probability = 0.60
+            stackinggroup = "KRILL_3_ACTION_STACK"
+            effects = SetDestination destination = And [
+                System
+                WithinStarlaneJumps 1 Source
+                Not InSystem Source.SystemID
+            ]
+    ]
+    icon = ""
+    graphic = "icons/monsters/krill-3.png"
+    
+Hull
+    name = "SH_KRILL_4_BODY"
+    description = "SH_KRILL_4_BODY_DESC"
+    speed = 5
+    starlaneSpeed = 20
+    fuel = 4
+    stealth = 10
+    structure = 1000
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.50, 0.15)
+        Slot type = External position = (0.70, 0.15)
+        Slot type = External position = (0.80, 0.15)
+    ]
+    buildCost = 1
+    buildTime = 1
+    Unproducible
+    location = All
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                Source
+                ContainedBy And [
+                    System 
+                    Contains Planet type = Asteroids
+                ]
+            ]
+            activation = Random probability = 0.06
+            stackinggroup = "KRILL_4_ACTION_STACK"
+            effects = [
+                CreateShip "SM_KRILL_1"
+                /*
+                GenerateSitRepMessage
+                    message = "EFFECT_MONSTER_SPAWNING"
+                    parameters = [
+                        tag = "predefinedshipdesign" data = "SM_KRILL_1"
+                        tag = "system" data = Source.SystemID
+                    ]
+                */
+            ]
+
+        [[MONSTER_MOVE_ALWAYS]]
+        [[INFINITE_FUEL]]
+        [[GOOD_VISION]]
+    ]
+    icon = ""
+    graphic = "icons/monsters/krill-4.png"
+
+//   KRAKEN
+
+Hull
+    name = "SH_KRAKEN_1_BODY"
+    description = "SH_KRAKEN_1_BODY_DESC"
+    speed = 20
+    starlaneSpeed = 40
+    fuel = 4
+    stealth = 10
+    structure = 20
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.40, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = Internal position = (0.50, 0.65)
+    ]
+    buildCost = 1
+    buildTime = 1
+    Unproducible
+    location = All
+    effectsgroups = [
+        EffectsGroup     
+            scope = NumberOf number = 2 condition = And [
+                Planet
+                Planet type = GasGiant
+                Not WithinStarlaneJumps 2 And [
+                    System
+                    Contains And [
+                        Planet
+                        OwnedBy AnyEmpire
+                    ]
+                ]
+            ]
+            activation = Turn high = 2
+            effects = AddSpecial name = "KRAKEN_NEST_SPECIAL"
+            
+        [[MONSTER_MOVE_ALWAYS]]
+        [[INFINITE_FUEL]]
+
+        EffectsGroup
+            scope = And [
+                Source
+                ContainedBy And [
+                    System 
+                    Contains Planet type = GasGiant
+                ]
+            ]
+            activation = Random probability = 0.025
+            effects = [
+                CreateShip "SM_KRAKEN_2" Source.Owner
+                Destroy
+                GenerateSitRepMessage
+                    message = "EFFECT_TAME_MONSTER_MATURED"
+                    icon = "icons/monsters/kraken-2.png"
+                    parameters = [
+                        tag = "system" data = Source.SystemID
+                        tag = "predefinedshipdesign" data = "SM_KRAKEN_2"
+                    ]
+                    empire = Source.Owner
+            ]
+        [[WEAK_VISION]]
+    ]
+    icon = ""
+    graphic = "icons/monsters/kraken-1.png"
+    
+Hull
+    name = "SH_KRAKEN_2_BODY"
+    description = "SH_KRAKEN_2_BODY_DESC"
+    speed = 20
+    starlaneSpeed = 45
+    fuel = 4
+    stealth = 10
+    structure = 100
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.40, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = Internal position = (0.50, 0.65)
+    ]
+    buildCost = 1
+    buildTime = 1
+    Unproducible
+    location = All
+    effectsgroups = [
+        [[MONSTER_MOVE_ALWAYS]]
+        [[INFINITE_FUEL]]
+
+        EffectsGroup
+            scope = And [
+                Source
+                ContainedBy And [
+                    System 
+                    Contains Planet type = GasGiant
+                ]
+            ]
+            activation = Random probability = 0.025
+            effects = [
+                CreateShip "SM_KRAKEN_3" Source.Owner
+                Destroy
+                GenerateSitRepMessage
+                    message = "EFFECT_TAME_MONSTER_MATURED"
+                    icon = "icons/monsters/kraken-3.png"
+                    parameters = [
+                        tag = "system" data = Source.SystemID
+                        tag = "predefinedshipdesign" data = "SM_KRAKEN_3"
+                    ]
+                    empire = Source.Owner
+            ]
+        [[GOOD_VISION]]
+    ]
+    icon = ""
+    graphic = "icons/monsters/kraken-2.png"
+    
+Hull
+    name = "SH_KRAKEN_3_BODY"
+    description = "SH_KRAKEN_3_BODY_DESC"
+    speed = 20
+    starlaneSpeed = 50
+    fuel = 4
+    stealth = 10
+    structure = 1000
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.40, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = Internal position = (0.50, 0.65)
+    ]
+    buildCost = 1
+    buildTime = 1
+    Unproducible
+    location = All
+    effectsgroups = [
+        [[MONSTER_MOVE_ALWAYS]]
+        [[INFINITE_FUEL]]
+
+        [[GOOD_VISION]]
+    ]
+    icon = ""
+    graphic = "icons/monsters/kraken-3.png"
+    
+//   SNOWFLAKE
+
+Hull
+    name = "SH_SNOWFLAKE_1_BODY"
+    description = "SH_SNOWFLAKE_1_BODY_DESC"
+    speed = 50
+    starlaneSpeed = 55
+    fuel = 5
+    stealth = 15
+    structure = 25
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.40, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = Internal position = (0.50, 0.65)
+    ]
+    buildCost = 1
+    buildTime = 1
+    Unproducible
+    location = All
+    effectsgroups = [
+        EffectsGroup
+            scope = NumberOf number = 2 condition = And [
+                Planet
+                Planet size = Small
+                Not WithinStarlaneJumps 2 And [
+                    System
+                    Contains And [
+                        Planet
+                        OwnedBy AnyEmpire
+                    ]
+                ]
+            ]
+            activation = Not Turn low = 1
+            effects = AddSpecial name = "SNOWFLAKE_NEST_SPECIAL"
+            
+        [[MONSTER_MOVE_ALWAYS]]
+        [[INFINITE_FUEL]]
+
+        EffectsGroup
+            scope = And [
+                Source
+                ContainedBy And [
+                    System 
+                    Contains Planet size = Small
+                ]
+            ]
+            activation = Random probability = 0.03
+            effects = [
+                CreateShip "SM_SNOWFLAKE_2" Source.Owner
+                Destroy
+                GenerateSitRepMessage
+                    message = "EFFECT_TAME_MONSTER_MATURED"
+                    icon = "icons/monsters/snowflake-2.png"
+                    parameters = [
+                        tag = "system" data = Source.SystemID
+                        tag = "predefinedshipdesign" data = "SM_SNOWFLAKE_2"
+                    ]
+                    empire = Source.Owner
+            ]
+        [[EXCELLENT_VISION]]
+    ]
+    icon = ""
+    graphic = "icons/monsters/snowflake-1.png"
+    
+Hull
+    name = "SH_SNOWFLAKE_2_BODY"
+    description = "SH_SNOWFLAKE_2_BODY_DESC"
+    speed = 50
+    starlaneSpeed = 60
+    fuel = 5
+    stealth = 10
+    structure = 60
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.40, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = Internal position = (0.50, 0.65)
+    ]
+    buildCost = 1
+    buildTime = 1
+    Unproducible
+    location = All
+    effectsgroups = [
+        [[MONSTER_MOVE_ALWAYS]]
+        [[INFINITE_FUEL]]
+
+        EffectsGroup
+            scope = And [
+                Source
+                ContainedBy And [
+                    System 
+                    Contains Planet size = Small
+                ]
+            ]
+            activation = Random probability = 0.03
+            effects = [
+                CreateShip "SM_SNOWFLAKE_3" Source.Owner
+                Destroy
+                GenerateSitRepMessage
+                    message = "EFFECT_TAME_MONSTER_MATURED"
+                    icon = "icons/monsters/snowflake-3.png"
+                    parameters = [
+                        tag = "system" data = Source.SystemID
+                        tag = "predefinedshipdesign" data = "SM_SNOWFLAKE_3"
+                    ]
+                    empire = Source.Owner
+            ]
+        [[EXCELLENT_VISION]]
+    ]
+    icon = ""
+    graphic = "icons/monsters/snowflake-2.png"
+    
+Hull
+    name = "SH_SNOWFLAKE_3_BODY"
+    description = "SH_SNOWFLAKE_3_BODY_DESC"
+    speed = 50
+    starlaneSpeed = 65
+    fuel = 5
+    stealth = 10
+    structure = 120
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.40, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = Internal position = (0.50, 0.65)
+    ]
+    buildCost = 1
+    buildTime = 1
+    Unproducible
+    location = All
+    effectsgroups = [
+        [[MONSTER_MOVE_ALWAYS]]
+        [[INFINITE_FUEL]]
+        [[EXCELLENT_VISION]]
+    ]
+    icon = ""
+    graphic = "icons/monsters/snowflake-3.png"
+    
+//   JUGGERNAUT
+
+Hull
+    name = "SH_JUGGERNAUT_1_BODY"
+    description = "SH_JUGGERNAUT_1_BODY_DESC"
+    speed = 20
+    starlaneSpeed = 30
+    fuel = 3
+    stealth = 10
+    structure = 30
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.40, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = Internal position = (0.50, 0.65)
+    ]
+    buildCost = 1
+    buildTime = 1
+    Unproducible
+    location = All
+    effectsgroups = [
+        EffectsGroup
+            scope = NumberOf number = 2 condition = And [
+                Planet
+                Planet type = Asteroids
+                Not WithinStarlaneJumps 2 And [
+                    System
+                    Contains And [
+                        Planet
+                        OwnedBy AnyEmpire
+                    ]
+                ]
+            ]
+            activation = Not Turn low = 1
+            effects = AddSpecial name = "JUGGERNAUT_NEST_SPECIAL"
+            
+        [[MONSTER_MOVE_ALWAYS]]
+        [[INFINITE_FUEL]]
+
+        EffectsGroup
+            scope = And [
+                Source
+                ContainedBy And [
+                    System 
+                    Contains Planet type = Asteroids
+                ]
+            ]
+            activation = Random probability = 0.03
+            effects = [
+                CreateShip "SM_JUGGERNAUT_2" Source.Owner
+                Destroy
+                GenerateSitRepMessage
+                    message = "EFFECT_TAME_MONSTER_MATURED"
+                    icon = "icons/monsters/juggernaut-2.png"
+                    parameters = [
+                        tag = "system" data = Source.SystemID
+                        tag = "predefinedshipdesign" data = "SM_JUGGERNAUT_2"
+                    ]
+                    empire = Source.Owner
+            ]
+        [[GOOD_VISION]]
+    ]
+    icon = ""
+    graphic = "icons/monsters/juggernaut-1.png"
+    
+Hull
+    name = "SH_JUGGERNAUT_2_BODY"
+    description = "SH_JUGGERNAUT_2_BODY_DESC"
+    speed = 20
+    starlaneSpeed = 25
+    fuel = 2
+    stealth = 10
+    structure = 200
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.40, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = Internal position = (0.50, 0.65)
+    ]
+    buildCost = 1
+    buildTime = 1
+    Unproducible
+    location = All
+    effectsgroups = [
+        [[MONSTER_MOVE_ALWAYS]]
+        [[INFINITE_FUEL]]
+
+        EffectsGroup
+            scope = And [
+                Source
+                ContainedBy And [
+                    System 
+                    Contains Planet type = Asteroids
+                ]
+            ]
+            activation = Random probability = 0.02
+            effects = [
+                CreateShip "SM_JUGGERNAUT_3" Source.Owner
+                Destroy
+                GenerateSitRepMessage
+                    message = "EFFECT_TAME_MONSTER_MATURED"
+                    icon = "icons/monsters/juggernaut-3.png"
+                    parameters = [
+                        tag = "system" data = Source.SystemID
+                        tag = "predefinedshipdesign" data = "SM_JUGGERNAUT_3"
+                    ]
+                    empire = Source.Owner
+            ]
+            
+        [[GOOD_VISION]]
+        
+    ]
+    icon = ""
+    graphic = "icons/monsters/juggernaut-2.png"
+    
+Hull
+    name = "SH_JUGGERNAUT_3_BODY"
+    description = "SH_JUGGERNAUT_3_BODY_DESC"
+    speed = 20
+    starlaneSpeed = 25
+    fuel = 5
+    stealth = 10
+    structure = 1000
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.40, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = Internal position = (0.50, 0.65)
+    ]
+    buildCost = 1
+    buildTime = 1
+    Unproducible
+    location = All
+    effectsgroups = [
+        [[MONSTER_MOVE_ALWAYS]]
+        [[INFINITE_FUEL]]
+        [[EXCELLENT_VISION]]
+
+    ]
+    icon = ""
+    graphic = "icons/monsters/juggernaut-3.png"
+
+Hull
+    name = "SH_NEBULOUS_BODY"
+    description = "SH_NEBULOUS_BODY"
+    speed = 50
+    starlaneSpeed = 100
+    fuel = 1
+    stealth = 80
+    structure = 5000
+    slots = [
+        Slot type = External position = (0.60, 0.45)
+        Slot type = Internal position = (0.40, 0.55)
+    ]
+    buildcost = 1
+    buildtime = 1
+    Unproducible
+    location = All
+    effectsgroups = [
+        [[INFINITE_FUEL]]
+
+        [[MONSTER_MOVE_PRE]]1[[MONSTER_MOVE_POST]]
+    ]
+    icon = ""
+    graphic = ""
+
+Hull
+    name = "SH_EXP_OUTPOST_HULL"
+    description = "SH_EXP_OUTPOST_HULL_DESC"
+    speed = 0
+    starlaneSpeed = 0
+    fuel = 1
+    stealth = 50
+    structure = 1
+    slots = [
+        Slot type = External position = (0.60, 0.45)
+    ]
+    buildcost = 1
+    buildtime = 1
+    Unproducible
+    location = All
+    effectsgroups = [
+        EffectsGroup
+            scope = NumberOf 1 And [
+                Planet
+                Not Planet type = [Asteroids GasGiant]
+                InSystem Source.SystemID
+            ]
+            effects = [
+                SetSpecies "SP_EXPERIMENTOR"
+                SetPopulation Target.TargetPopulation
+                CreateBuilding "BLD_EXPERIMENTOR_OUTPOST"
+            ]
+
+        EffectsGroup
+            scope = Source
+            effects = Destroy
+    ]
+    icon = ""
+    graphic = ""
+
+Hull
+    name = "SH_BLACK_KRAKEN_BODY"
+    description = "SH_BLACK_KRAKEN_BODY_DESC"
+    speed = 120
+    starlaneSpeed = 200
+    fuel = 100
+    stealth = 20
+    structure = 4000
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.40, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = External position = (0.80, 0.15)
+        Slot type = Internal position = (0.40, 0.75)
+    ]
+    buildcost = 1
+    buildtime = 1
+    Unproducible
+    location = All
+    effectsgroups = [
+        [[HUNT_BUILDINGS]]
+        [[MONSTER_MOVE_ALWAYS]]
+        [[EXCELLENT_VISION]]
+        [[INFINITE_FUEL]]
+    ]
+    icon = ""
+    graphic = ""
+
+Hull
+    name = "SH_BLOATED_JUGGERNAUT_BODY"
+    description = "SH_BLOATED_JUGGERNAUT_BODY_DESC"
+    speed = 20
+    starlaneSpeed = 160
+    fuel = 100
+    stealth = 10
+    structure = 7000
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.40, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = External position = (0.80, 0.15)
+        Slot type = External position = (0.80, 0.75)
+        Slot type = External position = (0.20, 0.75)
+        Slot type = Internal position = (0.40, 0.75)
+    ]
+    buildcost = 1
+    buildtime = 1
+    Unproducible
+    location = All
+    effectsgroups = [
+        [[HUNT_BUILDINGS]]
+        [[MONSTER_MOVE_ALWAYS]]
+        [[EXCELLENT_VISION]]
+        [[INFINITE_FUEL]]
+    ]
+    icon = ""
+    graphic = ""
+
+Hull
+    name = "SH_PSIONIC_SNOWFLAKE_BODY"
+    description = "SH_PSIONIC_SNOWFLAKE_BODY_DESC"
+    speed = 300
+    starlaneSpeed = 300
+    fuel = 100
+    stealth = 20
+    structure = 1800
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.40, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = Internal position = (0.50, 0.65)
+    ]
+    buildCost = 1
+    buildTime = 1
+    Unproducible
+    location = All
+    effectsgroups = [
+        [[HUNT_SHIPS]]
+        [[MONSTER_MOVE_ALWAYS]]
+        [[INFINITE_FUEL]]
+        [[EXCELLENT_VISION]]
+
+        EffectsGroup
+            scope = NumberOf 4 And [
+                Ship
+                WithinStarlaneJumps 1 Source
+                HasTag "ORGANIC"
+            ]
+            activation = Random 0.2
+            effects = SetOwner Source.Owner
+
+        EffectsGroup
+            scope = NumberOf 12 And [
+                Ship
+                WithinStarlaneJumps 1 Source
+                HasTag "ORGANIC"
+                Not HasTag "TELEPATHIC"
+                Not OwnerHasTech "LRN_PSY_DOM"
+            ]
+            activation = Random 0.8
+            effects = SetOwner Source.Owner
+    ]
+    icon = ""
+    graphic = ""
+
+Hull
+    name = "SH_COSMIC_DRAGON_BODY"
+    description = "SH_COSMIC_DRAGON_BODY_DESC"
+    speed = 140
+    starlaneSpeed = 30
+    fuel = 100
+    stealth = 10
+    structure = 50000
+    slots = [
+        Slot type = External position = (0.20, 0.15)
+        Slot type = External position = (0.40, 0.15)
+        Slot type = External position = (0.60, 0.15)
+        Slot type = Internal position = (0.50, 0.65)
+    ]
+    buildcost = 1
+    buildtime = 1
+    Unproducible
+    location = All
+    effectsgroups = [
+        [[HUNT_PLANETS]]
+        [[MONSTER_MOVE_ALWAYS]]
+        [[INFINITE_FUEL]]
+
+        EffectsGroup
+            scope = NumberOf 1 And [
+                Planet
+                InSystem Source.SystemID
+                OwnedBy AnyEmpire
+                Stealth high = Source.Detection
+            ]
+            effects = [
+                AddSpecial "NOVA_BOMB_ACTIVATOR_SPECIAL"
+                RemoveSpecial "SUPERNOVA_SPECIAL"
+            ]
+
+        [[GOOD_VISION]]
+    ]
+    icon = ""
+    graphic = ""
+
+Hull
+    name = "SH_DAMPENING_CLOUD_BODY"
+    description = "SH_DAMPENING_CLOUD_BODY_DESC"
+    speed = 50
+    starlaneSpeed = 20
+    fuel = 1
+    stealth = 40
+    structure = 5000
+    slots = [
+        Slot type = External position = (0.60, 0.45)
+    ]
+    buildcost = 1
+    buildtime = 1
+    Unproducible
+    location = All
+    effectsgroups = [
+        [[INFINITE_FUEL]]
+        [[MONSTER_MOVE_PRE]]0.05[[MONSTER_MOVE_POST_NOT_OWNED]]
+        EffectsGroup
+            scope = NumberOf 1 And [
+                Ship
+                InSystem Source.SystemID
+                OwnedBy AnyEmpire
+            ]
+            effects = [
+                SetFuel value - 99
+            ]
+    ]
+    icon = ""
+    graphic = ""
+
+REGULAR_HULL_DETECTION
+'''EffectsGroup
+        scope = Source
+        activation = Source
+        effects = SetDetection Value + 25
+'''
+
+WEAK_VISION
+'''EffectsGroup
+        scope = Source
+        activation = Source
+        accountinglabel = "WEAK_VISION_LABEL"
+        effects = SetDetection Value + 50
+'''
+
+MODERATE_VISION
+'''EffectsGroup
+        scope = Source
+        activation = Source
+        accountinglabel = "MODERATE_VISION_LABEL"
+        effects = SetDetection Value + 75
+'''
+
+GOOD_VISION
+'''EffectsGroup
+        scope = Source
+        activation = Source
+        accountinglabel = "GOOD_VISION_LABEL"
+        effects = SetDetection Value + 100
+'''
+
+EXCELLENT_VISION
+'''EffectsGroup
+        scope = Source
+        activation = Source
+        accountinglabel = "EXCELLENT_VISION_LABEL"
+        effects = SetDetection Value + 150
+'''
+
+UNOWNED_GOOD_VISION
+'''EffectsGroup
+        scope = Source
+        activation = And [
+            Source
+            Not OwnedBy AnyEmpire
+        ]
+        accountinglabel = "GOOD_VISION_LABEL"
+        effects = SetDetection Value + 100
+'''
+
+
+UNOWNED_MOVE
+'''EffectsGroup
+            scope = And [
+                Fleet
+                Object id = Source.FleetID
+            ]
+            activation = And [
+                Turn low = 10
+                Stationary
+                Not OwnedBy AnyEmpire
+                Random probability = 0.9
+                Not And [
+                    DesignHasHull name = "SH_ASTEROID"
+                    Monster
+                ]
+            ]
+            stackinggroup = "MONSTER_FLEET_MOVE_STACK"
+            effects = SetDestination destination = And [
+                System
+                Not InSystem Source.SystemID
+                WithinStarlaneJumps 1 Source
+                Not Contains Building "BLD_EXPERIMENTOR_OUTPOST"
+            ]
+'''
+
+
+MONSTER_MOVE_ALWAYS
+'''EffectsGroup
+            scope = And [
+                Object id = Source.FleetID
+                Fleet
+            ]
+            activation = And [
+                Turn low = 10
+                Stationary
+                Not OwnedBy AnyEmpire
+            ]
+            stackinggroup = "MONSTER_FLEET_MOVE_STACK"
+            effects = SetDestination destination = And [
+                System
+                Not InSystem Source.SystemID
+                WithinStarlaneJumps 1 Source
+                Not Contains Building "BLD_EXPERIMENTOR_OUTPOST"
+            ]
+'''
+
+MONSTER_MOVE_PRE
+'''EffectsGroup
+            scope = And [
+                Object id = Source.FleetID
+                Fleet
+            ]
+            activation = And [
+                Stationary
+                Not OwnedBy AnyEmpire
+                Random probability = 
+'''
+
+MONSTER_MOVE_POST_NOT_OWNED
+'''
+]
+            stackinggroup = "MONSTER_FLEET_MOVE_STACK"
+            effects = SetDestination destination = And [
+                System
+                Not InSystem Source.SystemID
+                WithinStarlaneJumps 1 Source
+                Not Contains And [
+                    Planet
+                    OwnedBy AnyEmpire
+                ]
+            ]
+'''
+
+MONSTER_MOVE_POST
+'''
+]
+            stackinggroup = "MONSTER_FLEET_MOVE_STACK"
+            effects = SetDestination destination = And [
+                System
+                Not InSystem Source.SystemID
+                WithinStarlaneJumps 1 Source
+            ]
+'''
+
+INFINITE_FUEL
+'''EffectsGroup
+            scope = Source
+            effects = SetFuel Value + 1
+'''
+
+SCAVANGE_FUEL_UNOWNED
+'''EffectsGroup
+            scope = Source
+            activation = And [
+                Stationary
+                Not OwnedBy AnyEmpire
+                Random probability = 0.6
+            ]
+            effects = SetFuel Value + 1
+'''
+
+HUNT_BUILDINGS
+'''EffectsGroup
+            scope = And [
+                Fleet
+                Object id = Source.FleetID
+                Number low = 1 And [
+                    System
+                    Contains And [
+                        Building
+                        OwnedBy AnyEmpire
+                        Stealth high = Source.Detection
+                        WithinDistance Source.Detection Source
+                    ]
+                ]
+            ]
+            activation = Not OwnedBy AnyEmpire
+            stackinggroup = "MONSTER_FLEET_MOVE_STACK"
+            effects = SetDestination destination = And [
+                System
+                Contains And [
+                    Building
+                    OwnedBy AnyEmpire
+                    Stealth high = Source.Detection
+                    WithinDistance Source.Detection Source
+                ]
+            ]
+'''
+
+HUNT_SHIPS
+'''EffectsGroup
+            scope = And [
+                Fleet
+                Object id = Source.FleetID
+                Number low = 1 And [
+                    Ship
+                    OwnedBy AnyEmpire
+                    Stealth high = Source.Detection
+                    WithinDistance Source.Detection Source
+                ]
+            ]
+            activation = Not OwnedBy AnyEmpire
+            stackinggroup = "MONSTER_FLEET_MOVE_STACK"
+            effects = SetDestination destination = And [
+                System
+                Contains And [
+                    Ship
+                    OwnedBy AnyEmpire
+                    Stealth high = Source.Detection
+                    WithinDistance Source.Detection Source
+                ]
+            ]
+'''
+
+HUNT_PLANETS
+'''EffectsGroup
+            scope = And [
+                Fleet
+                Object id = Source.FleetID
+                Number low = 1 And [
+                    Planet
+                    OwnedBy AnyEmpire
+                    Stealth high = Source.Detection
+                    WithinDistance Source.Detection Source
+                ]
+            ]
+            activation = Not OwnedBy AnyEmpire
+            stackinggroup = "MONSTER_FLEET_MOVE_STACK"
+            effects = SetDestination destination = And [
+                System
+                Contains And [
+                    Planet
+                    OwnedBy AnyEmpire
+                    Stealth high = Source.Detection
+                    WithinDistance Source.Detection Source
+                ]
+            ]
+'''
+
+STRUCTURE_MULTIPLICATOR
+'''2.0'''

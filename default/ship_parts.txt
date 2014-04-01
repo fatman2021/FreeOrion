@@ -1,0 +1,1163 @@
+include "shared_macros.txt"
+
+
+Part
+    name = "ROBOTIC_INTERFACE_SHIELDS"
+    description = "ROBOTIC_INTERFACE_SHIELDS_DESC"
+    class = Shield
+    capacity = 0
+    mountableSlotTypes = [Internal]
+    buildcost = 70 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 4
+    location = And [
+        OwnedBy TheEmpire Source.Owner
+        HasTag "ROBOTIC"
+    ]
+    effectsgroups =
+        EffectsGroup
+            scope = And [
+                Source
+                HasTag "ROBOTIC"
+                Or [
+                    DesignHasHull name = "SH_ROBOTIC"
+                    DesignHasHull name = "SH_SELF_GRAVITATING"
+                    DesignHasHull name = "SH_NANOROBOTIC"
+                    DesignHasHull name = "SH_LOGISTICS_FACILITATOR"
+                    DesignHasHull name = "SH_TITANIC"
+                ]
+            ]
+            stackinggroup = "SHIELD_PART_STACK"
+            effects = SetMaxShield Value + min(min(
+                (([[COUNT_OF_LOCAL_ROBOTIC_INTERFACE_SHIELDS]])),            
+                ((([[COUNT_OF_LOCAL_ROBOTIC_INTERFACE_SHIELDS]]) * 7 ) ^ 0.5 )), 20)
+    icon = "icons/ship_parts/robotic-interface-shields.png"
+
+
+Part
+    name = "GT_TROOP_POD"
+    description = "GT_TROOP_POD_DESC"
+    class = Troops
+    capacity = 2
+    mountableSlotTypes = [External Internal]
+    buildcost = 3 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 1
+    tags = "COMFORTABLE"
+    location = OwnedBy TheEmpire Source.Owner
+    icon = "icons/ship_parts/troops.png"
+
+Part
+    name = "SR_WEAPON_1_1"
+    description = "SR_WEAPON_1_1_DESC"
+    class = ShortRange
+    damage = 3
+    ROF = 1
+    range = 50
+    mountableSlotTypes = External
+    buildcost = 20 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 1
+    location = OwnedBy TheEmpire Source.Owner
+    icon = "icons/ship_parts/mass-driver-1.png"
+    
+Part
+    name = "SR_WEAPON_1_2"
+    description = "SR_WEAPON_1_2_DESC"
+    class = ShortRange
+    damage = 4
+    ROF = 1
+    range = 50
+    mountableSlotTypes = External
+    buildcost = 20 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 1
+    location = OwnedBy TheEmpire Source.Owner
+    icon = "icons/ship_parts/mass-driver-2.png"
+
+Part
+    name = "SR_WEAPON_1_3"
+    description = "SR_WEAPON_1_3_DESC"
+    class = ShortRange
+    damage = 5
+    ROF = 1
+    range = 50
+    mountableSlotTypes = External
+    buildcost = 20 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 1
+    location = OwnedBy TheEmpire Source.Owner
+    icon = "icons/ship_parts/mass-driver-3.png"
+    
+Part
+    name = "SR_WEAPON_1_4"
+    description = "SR_WEAPON_1_4_DESC"
+    class = ShortRange
+    damage = 6
+    ROF = 1
+    range = 50
+    mountableSlotTypes = External
+    buildcost = 20 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 1
+    location = OwnedBy TheEmpire Source.Owner
+    icon = "icons/ship_parts/mass-driver-4.png"
+    
+Part
+    name = "SR_WEAPON_2_1"
+    description = "SR_WEAPON_2_1_DESC"
+    class = ShortRange
+    damage = 5
+    ROF = 1
+    range = 50
+    mountableSlotTypes = External
+    buildcost = 30 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 2
+    location = OwnedBy TheEmpire Source.Owner
+    icon = "icons/ship_parts/laser-1.png"
+
+Part
+    name = "SR_WEAPON_2_2"
+    description = "SR_WEAPON_2_2_DESC"
+    class = ShortRange
+    damage = 7
+    ROF = 1
+    range = 50
+    mountableSlotTypes = External
+    buildcost = 30 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 2
+    location = OwnedBy TheEmpire Source.Owner
+    icon = "icons/ship_parts/laser-2.png"
+
+Part
+    name = "SR_WEAPON_2_3"
+    description = "SR_WEAPON_2_3_DESC"
+    class = ShortRange
+    damage = 9
+    ROF = 1
+    range = 50
+    mountableSlotTypes = External
+    buildcost = 30 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 2
+    location = OwnedBy TheEmpire Source.Owner
+    icon = "icons/ship_parts/laser-3.png"
+
+Part
+    name = "SR_WEAPON_2_4"
+    description = "SR_WEAPON_2_4_DESC"
+    class = ShortRange
+    damage = 11
+    ROF = 1
+    range = 50
+    mountableSlotTypes = External
+    buildcost = 30 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 2
+    location = OwnedBy TheEmpire Source.Owner
+    icon = "icons/ship_parts/laser-4.png"
+    
+Part
+    name = "SR_WEAPON_3_1"
+    description = "SR_WEAPON_3_1_DESC"
+    class = ShortRange
+    damage = 9
+    ROF = 1
+    range = 50
+    mountableSlotTypes = External
+    buildcost = 40 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 3
+    location = OwnedBy TheEmpire Source.Owner
+    icon = "icons/ship_parts/plasma-1.png"
+    
+Part
+    name = "SR_WEAPON_3_2"
+    description = "SR_WEAPON_3_2_DESC"
+    class = ShortRange
+    damage = 12
+    ROF = 1
+    range = 50
+    mountableSlotTypes = External
+    buildcost = 40 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 3
+    location = OwnedBy TheEmpire Source.Owner
+    icon = "icons/ship_parts/plasma-2.png"
+    
+Part
+    name = "SR_WEAPON_3_3"
+    description = "SR_WEAPON_3_3_DESC"
+    class = ShortRange
+    damage = 15
+    ROF = 1
+    range = 50
+    mountableSlotTypes = External
+    buildcost = 40 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 3
+    location = OwnedBy TheEmpire Source.Owner
+    icon = "icons/ship_parts/plasma-3.png" 
+
+Part
+    name = "SR_WEAPON_3_4"
+    description = "SR_WEAPON_3_4_DESC"
+    class = ShortRange
+    damage = 18
+    ROF = 1
+    range = 50
+    mountableSlotTypes = External
+    buildcost = 40 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 3
+    location = OwnedBy TheEmpire Source.Owner
+    icon = "icons/ship_parts/plasma-4.png"
+
+Part
+    name = "SR_WEAPON_4_1"
+    description = "SR_WEAPON_4_1_DESC"
+    class = ShortRange
+    damage = 15
+    ROF = 1
+    range = 50
+    mountableSlotTypes = External
+    buildcost = 60 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 4
+    location = OwnedBy TheEmpire Source.Owner
+    icon = "icons/ship_parts/death-ray-1.png"    
+
+Part
+    name = "SR_WEAPON_4_2"
+    description = "SR_WEAPON_4_2_DESC"
+    class = ShortRange
+    damage = 20
+    ROF = 1
+    range = 50
+    mountableSlotTypes = External
+    buildcost = 60 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 4
+    location = OwnedBy TheEmpire Source.Owner
+    icon = "icons/ship_parts/death-ray-2.png"
+
+Part
+    name = "SR_WEAPON_4_3"
+    description = "SR_WEAPON_4_3_DESC"
+    class = ShortRange
+    damage = 25
+    ROF = 1
+    range = 60
+    mountableSlotTypes = External
+    buildcost = 60 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 4
+    location = OwnedBy TheEmpire Source.Owner
+    icon = "icons/ship_parts/death-ray-3.png"
+
+Part
+    name = "SR_WEAPON_4_4"
+    description = "SR_WEAPON_4_4_DESC"
+    class = ShortRange
+    damage = 30
+    ROF = 1
+    range = 50
+    mountableSlotTypes = External
+    buildcost = 60 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 4
+    location = OwnedBy TheEmpire Source.Owner
+    icon = "icons/ship_parts/death-ray-4.png"
+
+Part
+    name = "AR_STD_PLATE"
+    description = "AR_STD_PLATE_DESC"
+    class = Armour
+    capacity = 6
+    mountableSlotTypes = External
+    buildcost = 4 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 1
+    location = OwnedBy TheEmpire Source.Owner
+    icon = "icons/ship_parts/std_armor_plating.png"
+
+Part
+    name = "AR_ZORTRIUM_PLATE"
+    description = "AR_ZORTRIUM_PLATE_DESC"
+    class = Armour
+    capacity = 11
+    mountableSlotTypes = External
+    buildcost = 6 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 1
+    location = OwnedBy TheEmpire Source.Owner
+    icon = "icons/ship_parts/zortrium_plating.png"
+
+Part
+    name = "AR_DIAMOND_PLATE"
+    description = "AR_DIAMOND_PLATE_DESC"
+    class = Armour
+    capacity = 18
+    mountableSlotTypes = External
+    buildcost = 8 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 1
+    location = OwnedBy TheEmpire Source.Owner
+    icon = "icons/ship_parts/diamond_plating.png"
+
+Part
+    name = "AR_XENTRONIUM_PLATE"
+    description = "AR_XENTRONIUM_PLATE_DESC"
+    class = Armour
+    capacity = 30
+    mountableSlotTypes = External
+    buildcost = 12 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 1
+    location = OwnedBy TheEmpire Source.Owner
+    icon = "icons/ship_parts/xentronium_plating.png"
+
+Part
+    name = "AR_ROCK_PLATE"
+    description = "AR_ROCK_PLATE_DESC"
+    class = Armour
+    capacity = 18
+    mountableSlotTypes = External
+    buildcost = 6 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 2
+    location = And [
+        Number low = 1 high = 999 And [
+            Building "BLD_SHIPYARD_AST_REF"
+            Or [
+                OwnedBy TheEmpire Source.Owner
+                OwnedBy AllyOf Source.Owner
+            ]
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    icon = "icons/ship_parts/rock_plating.png"
+
+Part
+    name = "AR_CRYSTAL_PLATE"
+    description = "AR_CRYSTAL_PLATE_DESC"
+    class = Armour
+    capacity = 30
+    mountableSlotTypes = External
+    buildcost = 8 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 3
+    location = And [
+        Number low = 1 high = 999 And [
+            Building "BLD_SHIPYARD_AST_REF"
+            Or [
+                OwnedBy TheEmpire Source.Owner
+                OwnedBy AllyOf Source.Owner
+            ]
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    icon = "icons/ship_parts/crystal_plating.png"
+
+Part
+    name = "AR_NEUTRONIUM_PLATE"
+    description = "AR_NEUTRONIUM_PLATE_DESC"
+    class = Armour
+    capacity = 40
+    mountableSlotTypes = External
+    buildcost = 15 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 5
+    location = And [
+        OwnedBy TheEmpire Source.Owner
+        Contains Building name = "BLD_NEUTRONIUM_FORGE"
+        Number low = 1 high = 999 condition = And [
+            OwnedBy TheEmpire Source.Owner
+            Or [
+                Building name = "BLD_NEUTRONIUM_EXTRACTOR"
+                Building name = "BLD_NEUTRONIUM_SYNTH"
+            ]
+        ]
+    ]
+    icon = "icons/ship_parts/neutronium_plating.png"
+    
+Part
+    name = "AR_PRECURSOR_PLATE"
+    description = "AR_PRECURSOR_PLATE_DESC"
+    class = Armour
+    capacity = 400
+    mountableSlotTypes = External
+    buildcost = 1 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 1
+    location = All
+    icon = ""
+
+Part
+    name = "SH_DEFENSE_GRID"
+    description = "SH_DEFENSE_GRID_DESC"
+    class = Shield
+    capacity = 0
+    mountableSlotTypes = Internal
+    buildcost = 40 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 2
+    location = OwnedBy TheEmpire Source.Owner
+    effectsgroups =
+        EffectsGroup
+            scope = Source
+            activation = Source
+            stackinggroup = "SHIELD_PART_STACK"
+            effects = SetMaxShield Value + 4
+    icon = "icons/ship_parts/defense_grid.png"
+
+Part
+    name = "SH_DEFLECTOR"
+    description = "SH_DEFLECTOR_DESC"
+    class = Shield
+    capacity = 0
+    mountableSlotTypes = Internal
+    buildcost = 70 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 4
+    location = OwnedBy TheEmpire Source.Owner
+    effectsgroups =
+        EffectsGroup
+            scope = Source
+            activation = Source
+            stackinggroup = "SHIELD_PART_STACK"
+            effects = SetMaxShield Value + 7
+    icon = "icons/ship_parts/deflector_shield.png"
+
+Part
+    name = "SH_PLASMA"
+    description = "SH_PLASMA_DESC"
+    class = Shield
+    capacity = 0
+    mountableSlotTypes = Internal
+    buildcost = 120 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 6
+    location = OwnedBy TheEmpire Source.Owner
+    effectsgroups =
+        EffectsGroup
+            scope = Source
+            activation = Source
+            stackinggroup = "SHIELD_PART_STACK"
+            effects = SetMaxShield Value + 12
+    icon = "icons/ship_parts/plasma_shield.png"
+
+Part
+    name = "SH_BLACK"
+    description = "SH_BLACK_DESC"
+    class = Shield
+    capacity = 0
+    mountableSlotTypes = Internal
+    buildcost = 200 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 8
+    location = OwnedBy TheEmpire Source.Owner
+    effectsgroups =
+        EffectsGroup
+            scope = Source
+            activation = Source
+            stackinggroup = "SHIELD_PART_STACK"
+            effects = SetMaxShield Value + 20
+    icon = "icons/ship_parts/blackshield.png"
+
+Part
+    name = "SH_MULTISPEC"
+    description = "SH_MULTISPEC_DESC"
+    class = Shield
+    capacity = 0
+    mountableSlotTypes = Internal
+    buildcost = 120 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 10
+    location = OwnedBy TheEmpire Source.Owner
+    effectsgroups = [
+        EffectsGroup
+            scope = Source
+            activation = Star type = [Red Orange Yellow White Blue]
+            stackinggroup = "STEALTH_SOLAR_STACK"
+            effects = SetStealth Value + 60
+        EffectsGroup
+            scope = Source
+            activation = Source
+            stackinggroup = "SHIELD_PART_STACK"
+            effects = SetMaxShield Value + 15
+    ]
+    icon = "icons/ship_parts/multi-spectral.png"
+
+Part
+    name = "DT_DETECTOR_4"
+    description = "DT_DETECTOR_4_DESC"
+    class = Detection
+    capacity = 0
+    mountableSlotTypes = External
+    buildcost = 6 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 5
+    location = OwnedBy TheEmpire Source.Owner
+    effectsgroups =
+        EffectsGroup
+            scope = Source
+            activation = Source
+            stackinggroup = "DETECTION_PART_STACK"
+            effects = SetDetection Value + 200
+    icon = "icons/ship_parts/detector-4.png"
+
+Part
+    name = "DT_DETECTOR_3"
+    description = "DT_DETECTOR_3_DESC"
+    class = Detection
+    capacity = 0
+    mountableSlotTypes = External
+    buildcost = 5 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 5
+    location = OwnedBy TheEmpire Source.Owner
+    effectsgroups =
+        EffectsGroup
+            scope = Source
+            activation = Source
+            stackinggroup = "DETECTION_PART_STACK"
+            effects = SetDetection Value + 150
+    icon = "icons/ship_parts/detector-3.png"
+
+Part
+    name = "DT_DETECTOR_2"
+    description = "DT_DETECTOR_2_DESC"
+    class = Detection
+    capacity = 0
+    mountableSlotTypes = External
+    buildcost = 3 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 4
+    location = OwnedBy TheEmpire Source.Owner
+    effectsgroups =
+        EffectsGroup
+            scope = Source
+            activation = Source
+            stackinggroup = "DETECTION_PART_STACK"
+            effects = SetDetection Value + 75
+    icon = "icons/ship_parts/detector-2.png"
+
+Part
+    name = "DT_DETECTOR_1"
+    description = "DT_DETECTOR_1_DESC"
+    class = Detection
+    capacity = 0
+    mountableSlotTypes = External
+    buildcost = 2 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 2
+    location = OwnedBy TheEmpire Source.Owner
+    effectsgroups =
+        EffectsGroup
+            scope = Source
+            activation = Source
+            stackinggroup = "DETECTION_PART_STACK"
+            effects = SetDetection Value + 25
+    icon = "icons/ship_parts/detector-1.png"
+
+Part
+    name = "FU_IMPROVED_ENGINE_COUPLINGS"
+    description = "FU_IMPROVED_ENGINE_COUPLINGS_DESC"
+    class = General
+    mountableSlotTypes = Internal
+    buildcost = 40 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 3
+    location = OwnedBy TheEmpire Source.Owner
+    effectsgroups =
+        EffectsGroup
+            scope = Source
+            activation = Source
+            effects = SetStarlaneSpeed Value + 10
+    icon = "icons/ship_parts/engine-1.png"
+    
+    
+Part
+    name = "FU_N_DIMENSIONAL_ENGINE_MATRIX"
+    description = "FU_N_DIMENSIONAL_ENGINE_MATRIX_DESC"
+    class = General
+    mountableSlotTypes = Internal
+    buildcost = 100 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 4
+    location = OwnedBy TheEmpire Source.Owner
+    effectsgroups =
+        EffectsGroup
+            scope = Source
+            activation = Source
+            effects = SetStarlaneSpeed Value + 15
+    icon = "icons/ship_parts/engine-2.png"
+    
+Part
+    name = "FU_SINGULARITY_ENGINE_CORE"
+    description = "FU_SINGULARITY_ENGINE_CORE_DESC"
+    class = General
+    mountableSlotTypes = Core
+    buildcost = 200 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 5
+    location = OwnedBy TheEmpire Source.Owner
+    effectsgroups =
+        EffectsGroup
+            scope = Source
+            activation = Source
+            effects = SetStarlaneSpeed Value + 20
+    icon = "icons/ship_parts/engine-3.png"
+    
+Part
+    name = "FU_BASIC_TANK"
+    description = "FU_BASIC_TANK_DESC"
+    class = Fuel
+    capacity = 1
+    mountableSlotTypes = Internal
+    buildcost = 1 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 1
+    location = OwnedBy TheEmpire Source.Owner
+    icon = "icons/ship_parts/basic-tank.png"
+
+Part
+    name = "FU_DEUTERIUM_TANK"
+    description = "FU_DEUTERIUM_TANK_DESC"
+    class = Fuel
+    capacity = 2
+    mountableSlotTypes = Internal
+    buildcost = 2 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 1
+    location = OwnedBy TheEmpire Source.Owner
+    icon = "icons/ship_parts/deuterium_tank.png"
+
+Part
+    name = "FU_ANTIMATTER_TANK"
+    description = "FU_ANTIMATTER_TANK_DESC"
+    class = Fuel
+    capacity = 5
+    mountableSlotTypes = Internal
+    buildcost = 3 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 6
+    location = OwnedBy TheEmpire Source.Owner
+    icon = "icons/ship_parts/antimatter_tank.png"
+
+Part
+    name = "FU_RAMSCOOP"
+    description = "FU_RAMSCOOP_DESC"
+    class = Fuel
+    capacity = 0
+    mountableSlotTypes = External
+    buildcost = 10 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 6
+    location = OwnedBy TheEmpire Source.Owner
+    effectsgroups =
+        EffectsGroup
+            scope = Source
+            activation = Stationary
+            stackinggroup = "RAMSCOOP_STACK"
+            effects = SetFuel Value + 0.1
+    icon = "icons/ship_parts/antimatter_tank.png"
+
+Part
+    name = "FU_ZERO_FUEL"
+    description = "FU_ZERO_FUEL_DESC"
+    class = Fuel
+    capacity = 0
+    mountableSlotTypes = [Core Internal]
+    buildcost = 40 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 5
+    location = OwnedBy TheEmpire Source.Owner
+    effectsgroups =
+        EffectsGroup
+            scope = Source
+            activation = Source
+            effects = SetFuel Target.MaxFuel
+    icon = "icons/tech/zero_point_energy.png"
+
+Part
+    name = "ST_CLOAK_4"
+    description = "ST_CLOAK_4_DESC"
+    class = Stealth
+    capacity = 0
+    mountableSlotTypes = Internal
+    buildcost = 40 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 10
+    location = OwnedBy TheEmpire Source.Owner
+    effectsgroups =
+        EffectsGroup
+            scope = Source
+            activation = Source
+            stackinggroup = "STEALTH_PART_STACK"
+            effects = SetStealth Value + 80
+    icon = "icons/ship_parts/cloak-4.png"
+
+Part
+    name = "ST_CLOAK_3"
+    description = "ST_CLOAK_3_DESC"
+    class = Stealth
+    capacity = 0
+    mountableSlotTypes = Internal
+    buildcost = 15 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 7
+    location = OwnedBy TheEmpire Source.Owner
+    effectsgroups =
+        EffectsGroup
+            scope = Source
+            activation = Source
+            stackinggroup = "STEALTH_PART_STACK"
+            effects = SetStealth Value + 60
+    icon = "icons/ship_parts/cloak-3.png"
+
+Part
+    name = "ST_CLOAK_2"
+    description = "ST_CLOAK_2_DESC"
+    class = Stealth
+    capacity = 0
+    mountableSlotTypes = Internal
+    buildcost = 5 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 5
+    location = OwnedBy TheEmpire Source.Owner
+    effectsgroups =
+        EffectsGroup
+            scope = Source
+            activation = Source
+            stackinggroup = "STEALTH_PART_STACK"
+            effects = SetStealth Value + 40
+    icon = "icons/ship_parts/cloak-2.png"
+
+Part
+    name = "ST_CLOAK_1"
+    description = "ST_CLOAK_1_DESC"
+    class = Stealth
+    capacity = 0
+    mountableSlotTypes = Internal
+    buildcost = 2 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 3
+    location = OwnedBy TheEmpire Source.Owner
+    effectsgroups =
+        EffectsGroup
+            scope = Source
+            activation = Source
+            stackinggroup = "STEALTH_PART_STACK"
+            effects = SetStealth Value + 20
+    icon = "icons/ship_parts/cloak-1.png"
+
+Part
+    name = "CO_COLONY_POD"
+    description = "CO_COLONY_POD_DESC"
+    class = Colony
+    capacity = 1
+    mountableSlotTypes = Internal
+    buildcost = 120 * [[COLONY_UPKEEP_MULTIPLICATOR]]
+    buildtime = 8
+    location = And [
+        OwnedBy TheEmpire Source.Owner
+        Population low = 3 high = 999
+    ]
+    icon = "icons/ship_parts/colony_pod.png"
+
+Part
+    name = "CO_SUSPEND_ANIM_POD"
+    description = "CO_SUSPEND_ANIM_POD_DESC"
+    class = Colony
+    capacity = 3
+    mountableSlotTypes = Internal
+    buildcost = 120 * [[COLONY_UPKEEP_MULTIPLICATOR]]
+    buildtime = 10
+    location = And [
+        OwnedBy TheEmpire Source.Owner
+        Population low = 3 high = 999
+    ]
+    icon = "icons/ship_parts/cryonic_colony_pod.png"
+
+Part
+    name = "CO_OUTPOST_POD"
+    description = "CO_OUTPOST_POD_DESC"
+    class = Colony
+    capacity = 0
+    mountableSlotTypes = Internal
+    buildcost = 80 * [[COLONY_UPKEEP_MULTIPLICATOR]]
+    buildtime = 3
+    location = OwnedBy TheEmpire Source.Owner
+    icon = "icons/tech/habitation_domes.png"
+    
+Part
+    name = "SP_DISTORTION_MODULATOR"
+    description = "SP_DISTORTION_MODULATOR_DESC"
+    class = General
+    mountableSlotTypes = Internal
+    buildcost = 15 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 10
+    location = OwnedBy TheEmpire Source.Owner
+    effectsgroups =
+        EffectsGroup
+            scope = WithinDistance 0 Source
+            activation = Source
+            stackinggroup = "SP_DISTORTION_MODULATOR_STACK"
+            effects = SetStealth Value - 20
+    icon = "icons/ship_parts/distortion_modulator.png"
+
+Part
+    name = "SP_CLOUD"
+    description = "SP_CLOUD"
+    class = General
+    mountableSlotTypes = Internal
+    buildcost = 1
+    buildtime = 1
+    location = All
+    effectsgroups = [
+        EffectsGroup
+            scope = NumberOf 1 And [
+                Planet
+                InSystem Source.SystemID
+                Not Planet type = [Asteroids GasGiant Barren Desert]
+            ]
+            activation = And [
+                            Random 0.15
+                            InSystem
+                        ]
+            effects = AddSpecial "CLOUD_COVER_MASTER_SPECIAL"
+
+        EffectsGroup
+            scope = Source
+            activation = Number low = 1 OwnerHasTech "SPY_STEALTH_2"
+            effects = [
+                CreateShip "SM_ASH" Source.Owner
+                Destroy
+            ]
+
+        EffectsGroup
+            scope = Source
+            activation = Number low = 1 OwnerHasTech "SPY_STEALTH_3"
+            effects = [
+                CreateShip "SM_DIM" Source.Owner
+                Destroy
+            ]
+
+        EffectsGroup
+            scope = Source
+            activation = Number low = 1 OwnerHasTech "SPY_STEALTH_4"
+            effects = [
+                CreateShip "SM_VOID" Source.Owner
+                Destroy
+            ]
+    ]
+    icon = ""
+
+Part
+    name = "SP_ASH"
+    description = "SP_ASH"
+    class = General
+    mountableSlotTypes = Internal
+    buildcost = 1
+    buildtime = 1
+    location = All
+    effectsgroups = [
+        EffectsGroup
+            scope = NumberOf 1 And [
+                Planet
+                InSystem Source.SystemID
+            ]
+            activation = And [
+                            Random 0.15
+                            InSystem
+                        ]
+            effects = AddSpecial "VOLCANIC_ASH_MASTER_SPECIAL"
+
+        EffectsGroup
+            scope = Source
+            activation = Number low = 1 OwnerHasTech "SPY_STEALTH_3"
+            effects = [
+                CreateShip "SM_DIM" Source.Owner
+                Destroy
+            ]
+
+        EffectsGroup
+            scope = Source
+            activation = Number low = 1 OwnerHasTech "SPY_STEALTH_4"
+            effects = [
+                CreateShip "SM_VOID" Source.Owner
+                Destroy
+            ]
+
+        EffectsGroup
+            scope = HasSpecial "CLOUD_COVER_MASTER_SPECIAL"
+            activation = Source
+            effects = [
+                RemoveSpecial "CLOUD_COVER_MASTER_SPECIAL"
+                AddSpecial "VOLCANIC_ASH_MASTER_SPECIAL"
+            ]
+    ]
+    icon = ""
+
+Part
+    name = "SP_DIM"
+    description = "SP_DIM"
+    class = General
+    mountableSlotTypes = Internal
+    buildcost = 1
+    buildtime = 1
+    location = All
+    effectsgroups = [
+        EffectsGroup
+            scope = NumberOf 1 And [
+                Planet
+                InSystem Source.SystemID
+            ]
+            activation = And [
+                            Random 0.15
+                            InSystem
+                        ]
+            effects = AddSpecial "DIM_RIFT_MASTER_SPECIAL"
+
+        EffectsGroup
+            scope = Source
+            activation = Number low = 1 OwnerHasTech "SPY_STEALTH_4"
+            effects = [
+                CreateShip "SM_VOID" Source.Owner
+                Destroy
+            ]
+
+        EffectsGroup
+            scope = HasSpecial "VOLCANIC_ASH_MASTER_SPECIAL"
+            activation = Source
+            effects = [
+                RemoveSpecial "VOLCANIC_ASH_MASTER_SPECIAL"
+                AddSpecial "DIM_RIFT_MASTER_SPECIAL"
+            ]
+
+        EffectsGroup
+            scope = HasSpecial "CLOUD_COVER_MASTER_SPECIAL"
+            activation = Source
+            effects = [
+                RemoveSpecial "CLOUD_COVER_MASTER_SPECIAL"
+                AddSpecial "DIM_RIFT_MASTER_SPECIAL"
+            ]
+    ]
+    icon = ""
+
+Part
+    name = "SP_VOID"
+    description = "SP_VOID"
+    class = General
+    mountableSlotTypes = Internal
+    buildcost = 1
+    buildtime = 1
+    location = All
+    effectsgroups = [
+        EffectsGroup
+            scope = NumberOf 1 And [
+                Planet
+                InSystem Source.SystemID
+            ]
+            activation = And [
+                            Random 0.15
+                            InSystem
+                        ]
+            effects = AddSpecial "VOID_MASTER_SPECIAL"
+
+        EffectsGroup
+            scope = HasSpecial "DIM_RIFT_MASTER_SPECIAL"
+            activation = Source
+            effects = [
+                RemoveSpecial "DIM_RIFT_MASTER_SPECIAL"
+                AddSpecial "VOID_MASTER_SPECIAL"
+            ]
+
+        EffectsGroup
+            scope = HasSpecial "VOLCANIC_ASH_MASTER_SPECIAL"
+            activation = Source
+            effects = [
+                RemoveSpecial "VOLCANIC_ASH_MASTER_SPECIAL"
+                AddSpecial "VOID_MASTER_SPECIAL"
+            ]
+
+        EffectsGroup
+            scope = HasSpecial "CLOUD_COVER_MASTER_SPECIAL"
+            activation = Source
+            effects = [
+                RemoveSpecial "CLOUD_COVER_MASTER_SPECIAL"
+                AddSpecial "VOID_MASTER_SPECIAL"
+            ]
+    ]
+    icon = ""
+
+Part
+    name = "SP_DEATH_SPORE"
+    description = "SP_DEATH_SPORE_DESC"
+    class = Bombard
+    mountableSlotTypes = External
+    buildcost = 5 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 3
+    location = All
+    effectsgroups = [
+        EffectsGroup    // players can order death spores used on enemies
+            scope = And [
+                Planet
+                InSystem Source.SystemID
+                OrderedBombardedBy condition = Source
+                Or [
+                    OwnedBy EnemyOf Source.Owner
+                    Not OwnedBy AnyEmpire
+                ]
+                VisibleToEmpire Source.Owner
+                HasTag "ORGANIC"
+            ]
+            effects = [
+                SetPopulation Value - 0.5
+                GenerateSitRepMessage
+                    message = "EFFECT_BIOWEAPON"
+                    parameters = [
+                        tag = "system" data = Source.System.ID
+                    ]
+                    empire = Target.Owner
+            ]
+
+        EffectsGroup    // monsters use death spores on player planets
+            scope = And [
+                Planet
+                InSystem Source.SystemID
+                OwnedBy AnyEmpire
+                Stealth high = Source.Detection
+                HasTag "ORGANIC"
+            ]
+            activation = And [
+                            Not OwnedBy AnyEmpire
+                            InSystem
+                         ]
+            effects = [
+                SetPopulation Value - 0.5
+                GenerateSitRepMessage
+                    message = "EFFECT_BIOWEAPON"
+                    parameters = [
+                        tag = "system" data = Source.System.ID
+                    ]
+                    empire = Target.Owner
+            ]
+    ]
+    icon = "icons/ship_parts/death-spore.png"
+
+Part
+    name = "SP_BIOTERM"
+    description = "SP_BIOTERM_DESC"
+    class = Bombard
+    mountableSlotTypes = External
+    buildcost = 5 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 3
+    location = All
+    effectsgroups = [
+        EffectsGroup    // players can order terminators used on enemies
+            scope = And [
+                Planet
+                InSystem Source.SystemID
+                OrderedBombardedBy condition = Source
+                Or [
+                    OwnedBy EnemyOf Source.Owner
+                    Not OwnedBy AnyEmpire
+                ]
+                VisibleToEmpire Source.Owner
+                HasTag "ORGANIC"
+            ]
+            effects = [
+                SetPopulation Value - 1
+                GenerateSitRepMessage
+                    message = "EFFECT_BIOWEAPON"
+                    parameters = [
+                        tag = "system" data = Source.System.ID
+                    ]
+                    empire = Target.Owner
+            ]
+
+        EffectsGroup    // monsters use terminators on player planets
+            scope = And [
+                Planet
+                InSystem Source.SystemID
+                OwnedBy AnyEmpire
+                Stealth high = Source.Detection
+                HasTag "ORGANIC"
+            ]
+            activation = And [
+                            Not OwnedBy AnyEmpire
+                            InSystem
+                         ]
+            effects = [
+                SetPopulation Value - 1
+                GenerateSitRepMessage
+                    message = "EFFECT_BIOWEAPON"
+                    parameters = [
+                        tag = "system" data = Source.System.ID
+                    ]
+                    empire = Target.Owner
+            ]
+    ]
+    icon = "icons/ship_parts/bioterm.png"
+
+Part
+    name = "SP_NOVA_BOMB"
+    description = "SP_NOVA_BOMB_DESC"
+    class = General
+    mountableSlotTypes = External
+    buildcost = 5000 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 12
+    location = All
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                Object Source.SystemID
+                System
+            ]
+            activation = Number 1 And [
+                Building "BLD_NOVA_BOMB_ACTIVATOR"
+                OwnedBy TheEmpire Source.Owner
+                WithinStarlaneJumps 1 Source
+            ]
+            effects = [
+                SetStarType NoStar
+                AddSpecial "SUPERNOVA_SPECIAL"
+            ]
+
+        EffectsGroup
+            scope = ContainedBy And [
+                Object Source.SystemID
+                System
+            ]
+            activation = Or [
+                Number 1 And [
+                    Building "BLD_NOVA_BOMB_ACTIVATOR"
+                    OwnedBy TheEmpire Source.Owner
+                    WithinStarlaneJumps 1 Source
+                ]
+                ContainedBy And [
+                    System 
+                    Contains HasSpecial "NOVA_BOMB_ACTIVATOR_SPECIAL"
+                ]
+            ]
+            effects = Destroy
+    ]
+    icon = ""
+
+Part
+    name = "SP_KRILL_SPAWNER"
+    description = "SP_KRILL_SPAWNER_DESC"
+    class = General
+    mountableSlotTypes = Internal
+    buildcost = 100 * [[FLEET_UPKEEP_MULTIPLICATOR]]
+    buildtime = 9
+    location = All
+    effectsgroups =
+        EffectsGroup
+            scope = And [
+                Planet
+                Planet type = Asteroids
+                InSystem Source.SystemID
+                Not OwnedBy AnyEmpire
+            ]
+            activation = And [
+                InSystem
+                Not ContainedBy And [
+                    Object Source.SystemID
+                    System
+                    Contains And [
+                        Ship
+                        InSystem Source.SystemID
+                        Or [
+                            DesignHasHull name = "SH_KRILL_1_BODY"
+                            DesignHasHull name = "SH_KRILL_2_BODY"
+                            DesignHasHull name = "SH_KRILL_3_BODY"
+                            DesignHasHull name = "SH_KRILL_4_BODY"
+                        ]
+                    ]
+                ]
+            ]
+            stackinggroup = "SP_KRILL_SPAWN_STACK"
+            effects = CreateShip "SM_KRILL_1"
+            
+    icon = ""
+
+
+
+COUNT_OF_LOCAL_ROBOTIC_INTERFACE_SHIELDS
+'''
+Count condition = And [
+                Ship
+                OwnedBy TheEmpire Source.Owner
+                VisibleToEmpire Source.Owner
+                HasTag "ROBOTIC"
+                Not Source
+                DesignHasPart 1 999 "ROBOTIC_INTERFACE_SHIELDS"
+                Or [
+                    DesignHasHull name = "SH_ROBOTIC"
+                    DesignHasHull name = "SH_SELF_GRAVITATING"
+                    DesignHasHull name = "SH_NANOROBOTIC"
+                    DesignHasHull name = "SH_LOGISTICS_FACILITATOR"
+                    DesignHasHull name = "SH_TITANIC"
+                ]
+                WithinStarlaneJumps 0 Source
+            ]
+'''

@@ -1,0 +1,1660 @@
+include "shared_macros.txt"
+
+BuildingType
+    name = "BLD_CULTURE_ARCHIVES"
+    description = "BLD_CULTURE_ARCHIVES_DESC"
+    buildcost = 200
+    buildtime = 1
+    tags = "ANTIQUATED"
+    location = Not All
+    effectsgroups = [
+/*  // testing effects
+        EffectsGroup
+            scope = And [
+                Object Source.PlanetID
+                Planet
+                OwnedBy TheEmpire Source.Owner
+            ]
+            effects = SetEmpireTechProgress
+                name = Source.OwnerTopPriorityEnqueuedTech
+                progress = Value + 10
+
+        EffectsGroup
+            scope = And [
+                Planet
+                OwnedBy TheEmpire Source.Owner
+                ValueTest
+                    high = 5
+                    value = LocalCandidate.Population
+            ]
+            effects = SetTargetPopulation Value + 100
+
+        EffectsGroup
+            scope = Object Source.PlanetID
+            effects = SetTargetConstruction 99
+*/
+
+        EffectsGroup          // These bonuses given to anyone
+            scope = And [
+                Object Source.PlanetID
+                Planet
+                OwnedBy TheEmpire Source.Owner
+            ]
+            effects = [
+                SetTargetResearch Value + 5
+                SetTargetIndustry Value + Target.Population / 2
+            ]
+            
+        EffectsGroup
+            scope = And [
+                Object Source.PlanetID
+                Planet
+                OwnedBy TheEmpire Source.Owner
+                Not HasSpecial "HEAD_ON_A_SPIKE_SPECIAL"
+            ]
+            activation = Not ProducedByEmpire Source.Owner                
+            effects = [
+                AddSpecial "HEAD_ON_A_SPIKE_SPECIAL"
+                GenerateSitRepMessage
+                    message = "HEAD_ON_A_SPIKE_MESSAGE"
+                    icon = "icons/sitrep/empire_eliminated.png"
+                    parameters = [
+                        tag = "empire" data = Source.ProducedByEmpireID                        
+                    ]
+            ]
+            
+        EffectsGroup
+            scope = Source
+            activation = Random probability = 0.02
+            effects = CreateField type = "FLD_ION_STORM"
+                    x = UniverseCentreX + Random(1.25,1.5)*UniverseCentreX*sin(CurrentTurn)
+                    y = UniverseCentreY + Random(1.25,1.5)*UniverseCentreY*cos(CurrentTurn)
+                    size = 50
+                    
+        EffectsGroup
+            scope = Source
+            activation = Random probability = 0.01
+            effects = CreateField type = "FLD_MOLECULAR_CLOUD"
+                    x = UniverseCentreX + Random(1.25,1.5)*UniverseCentreX*sin(CurrentTurn)
+                    y = UniverseCentreY + Random(1.25,1.5)*UniverseCentreY*cos(CurrentTurn)
+                    size = 120
+    ]
+    icon = "icons/building/archive.png"
+
+BuildingType
+    name = "BLD_IMPERIAL_PALACE"
+    description = "BLD_IMPERIAL_PALACE_DESC"
+    buildcost = 10
+    buildtime = 8
+    captureresult = destroy
+    location = And [
+        Planet
+        OwnedBy TheEmpire Source.Owner
+        Not Contains Building "BLD_IMPERIAL_PALACE"
+        TargetPopulation low = 1
+        Number 0 0 And [
+            Building name = "BLD_IMPERIAL_PALACE"
+            OwnedBy Source.Owner
+            ProducedByEmpire empire = Source.Owner
+        ]
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                Object Source.PlanetID
+                Planet
+                OwnedBy TheEmpire Source.ProducedByEmpireID
+            ]
+            effects = SetEmpireCapital
+
+        EffectsGroup
+            scope = And [
+                Object Source.PlanetID
+                Planet
+                OwnedBy TheEmpire Source.ProducedByEmpireID
+            ]
+            stackinggroup = "IMPERIAL_PALACE_SUPPLY_EFFECT"
+            effects = SetMaxSupply Value + 1
+
+        EffectsGroup
+            scope = And [
+                Object Source.PlanetID
+                Planet
+                OwnedBy TheEmpire Source.ProducedByEmpireID
+            ]
+            activation = Not Number low = 1 And [
+                Building "BLD_MEGALITH"
+                OwnedBy TheEmpire Source.Owner
+            ]
+            stackinggroup = "IMPERIAL_PALACE_EFFECT"
+            effects =
+                SetTargetConstruction Value + 20
+
+        EffectsGroup
+            scope = And [
+                Planet
+                OwnedBy TheEmpire Source.Owner
+                Species Source.Planet.Species
+            ]
+            activation = And [
+                OwnedBy Source.ProducedByEmpireID
+                ContainedBy And [
+                    Object Source.PlanetID
+                    Planet
+                    Species
+                ]
+            ]
+            stackinggroup = "IMPERIAL_PALACE_HAPPINESS"
+            effects =
+                SetTargetHappiness Value + 5 // min(10, max(0, 10 - Target.DistanceToSource/20))
+        ]
+    icon = "icons/building/palace.png"
+
+BuildingType
+    name = "BLD_OBSERVATORY"
+    description = "BLD_OBSERVATORY_DESC"
+    buildcost = 60
+    buildtime = 3
+    location = AND [
+        Planet
+        OwnedBy TheEmpire Source.Owner
+        Not Contains Building "BLD_OBSERVATORY"
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = NumberOf 1 System
+            effects = SetStealth Value - 1
+            
+        EffectsGroup
+            scope = And [ 
+                Planet 
+                Object Source.PlanetID
+            ]
+            effects = SetTargetConstruction Value - 10
+    ]
+    icon = "icons/building/lighthouse.png"
+
+BuildingType
+    name = "BLD_SHIPYARD_BASE"
+    description = "BLD_SHIPYARD_BASE_DESC"
+    buildcost = 10
+    buildtime = 4
+    tags = "ORBITAL"
+    location = And [
+        Planet
+        TargetPopulation low = 1
+        Not Contains Building "BLD_SHIPYARD_BASE"
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups =
+        EffectsGroup
+            scope = And [ 
+                Object Source.PlanetID
+                Planet
+            ]
+            effects = SetTargetConstruction Value - 10
+    icon = "icons/building/shipyard.png"
+
+BuildingType
+    name = "BLD_SHIPYARD_ORBITAL_DRYDOCK"
+    description = "BLD_SHIPYARD_ORBITAL_DRYDOCK_DESC"
+    buildcost = 20
+    buildtime = 5
+    tags = "ORBITAL"
+    location = And [
+        Planet
+        Not Contains Building "BLD_SHIPYARD_ORBITAL_DRYDOCK"
+        Contains And [
+            Building name = "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                Ship
+                InSystem id = Source.SystemID
+                OwnedBy Source.Owner
+                Structure high = LocalCandidate.MaxStructure - 0.001
+            ]
+            activation = Turn low = Source.System.LastTurnBattleHere + 1
+            effects = [
+                SetStructure Value + 10
+                GenerateSitRepMessage
+                    message = "EFFECT_DRYDOCK_SHIP_REPAIR"
+                    icon = "icons/sitrep/ship-repair.png"
+                    parameters = [
+                        tag = "ship" data = Target.ID
+                        tag = "building" data = Source.ID
+                        tag = "planet" data = Source.PlanetID
+                    ]
+                    empire = Source.Owner
+            ]
+            
+        EffectsGroup
+            scope = And [
+                Object Source.PlanetID
+                Planet
+            ]
+            effects = SetTargetConstruction Value - 15
+        ]
+    icon = "icons/building/shipyard-1.png"
+
+BuildingType
+    name = "BLD_SHIPYARD_CON_NANOROBO"
+    description = "BLD_SHIPYARD_CON_NANOROBO_DESC"
+    buildcost = 250
+    buildtime = 5
+    tags = "ORBITAL"
+    location = And [
+        Planet
+        Not Contains Building "BLD_SHIPYARD_CON_NANOROBO"
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_ORBITAL_DRYDOCK"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    icon = "icons/building/shipyard-2.png"
+
+BuildingType
+    name = "BLD_SHIPYARD_CON_GEOINT"
+    description = "BLD_SHIPYARD_CON_GEOINT_DESC"
+    buildcost = 750
+    buildtime = 5
+    tags = "ORBITAL"
+    location = And [
+        Planet
+        Not Contains Building "BLD_SHIPYARD_CON_GEOINT"
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_ORBITAL_DRYDOCK"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    icon = "icons/building/shipyard-3.png"
+
+BuildingType
+    name = "BLD_SHIPYARD_CON_ADV_ENGINE"
+    description = "BLD_SHIPYARD_CON_ADV_ENGINE_DESC"
+    buildcost = 2000
+    buildtime = 5
+    tags = "ORBITAL"
+    location = And [
+        Planet
+        Not Contains Building "BLD_SHIPYARD_CON_ADV_ENGINE"
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_ORBITAL_DRYDOCK"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    icon = "icons/building/shipyard-4.png"
+
+BuildingType
+    name = "BLD_SHIPYARD_AST"
+    description = "BLD_SHIPYARD_AST_DESC"
+    buildcost = 75
+    buildtime = 5
+    location = And [
+        Planet
+        Not Contains Building "BLD_SHIPYARD_AST"
+        Planet type = Asteroids
+        OwnedBy TheEmpire Source.Owner
+        Not Contains And [
+            Building "BLD_SHIPYARD_AST"
+            OwnedBy TheEmpire Source.Owner
+        ]
+    ]
+    icon = "icons/building/shipyard-5.png"
+
+BuildingType
+    name = "BLD_SHIPYARD_AST_REF"
+    description = "BLD_SHIPYARD_AST_REF_DESC"
+    buildcost = 500
+    buildtime = 5
+    location = And [
+        Planet
+        Not Contains Building "BLD_SHIPYARD_AST_REF"
+        Planet type = Asteroids
+        OwnedBy TheEmpire Source.Owner
+        Contains And [
+            Building "BLD_SHIPYARD_AST"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Not Contains And [
+            Building "BLD_SHIPYARD_AST_REF"
+            OwnedBy TheEmpire Source.Owner
+        ]
+    ]
+    icon = "icons/building/shipyard-6.png"
+
+BuildingType
+    name = "BLD_SHIPYARD_ORG_ORB_INC"
+    description = "BLD_SHIPYARD_ORG_ORB_INC_DESC"
+    buildcost = 40
+    buildtime = 8
+    tags = "ORBITAL"
+    location = And [
+        Planet
+        Not Contains Building "BLD_SHIPYARD_ORG_ORB_INC"
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    icon = "icons/building/shipyard-7.png"
+
+BuildingType
+    name = "BLD_SHIPYARD_ORG_CELL_GRO_CHAMB"
+    description = "BLD_SHIPYARD_ORG_CELL_GRO_CHAMB_DESC"
+    buildcost = 50
+    buildtime = 10
+    tags = "ORBITAL"
+    location = And [
+        Planet
+        Not Contains Building "BLD_SHIPYARD_ORG_CELL_GRO_CHAMB"
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_ORG_ORB_INC"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    icon = "icons/building/shipyard-8.png"
+
+BuildingType
+    name = "BLD_SHIPYARD_ORG_XENO_FAC"
+    description = "BLD_SHIPYARD_ORG_XENO_FAC_DESC"
+    buildcost = 100
+    buildtime = 10
+    tags = "ORBITAL"
+    location = And [
+        Planet
+        Not Contains Building "BLD_SHIPYARD_ORG_XENO_FAC"
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_ORG_ORB_INC"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    icon = "icons/building/shipyard-9.png"
+
+BuildingType
+    name = "BLD_SHIPYARD_ENRG_COMP"
+    description = "BLD_SHIPYARD_ENRG_COMP_DESC"
+    buildcost = 200
+    buildtime = 5
+    tags = "ORBITAL"
+    location = And [
+        Planet
+        Not Contains Building "BLD_SHIPYARD_ENRG_COMP"
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    icon = "icons/building/shipyard-10.png"
+
+BuildingType
+    name = "BLD_SHIPYARD_ENRG_SOLAR"
+    description = "BLD_SHIPYARD_ENRG_SOLAR_DESC"
+    buildcost = 1200
+    buildtime = 5
+    tags = "ORBITAL"
+    location = And [
+        Planet
+        Not Contains Building "BLD_SHIPYARD_ENRG_SOLAR"
+        Contains And [
+            Building "BLD_SHIPYARD_ENRG_COMP"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        Contains And [
+            Building "BLD_SHIPYARD_BASE"
+            OwnedBy TheEmpire Source.Owner
+        ]
+        OwnedBy TheEmpire Source.Owner
+    ]
+    icon = "icons/building/shipyard-16.png"
+
+BuildingType
+    name = "BLD_BIOTERROR_PROJECTOR"
+    description = "BLD_BIOTERROR_PROJECTOR_DESC"
+    buildcost = 75
+    buildtime = 15
+    location = And [
+        Planet
+        Not Contains Building "BLD_BIOTERROR_PROJECTOR"
+        OwnedBy TheEmpire Source.Owner
+        HasSpecial name = "RESONANT_MOON_SPECIAL"
+        Not Contains Or [
+            Building "BLD_CLONING_CENTER"
+            Building "BLD_BIOTERROR_PROJECTOR"
+        ]
+    ]
+    icon = "icons/building/bioterror_projector.png"
+
+BuildingType
+    name = "BLD_LIGHTHOUSE"
+    description = "BLD_LIGHTHOUSE_DESC"
+    buildcost = 25
+    buildtime = 10
+    location = AND [
+        Planet
+        Not Contains Building "BLD_LIGHTHOUSE"
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = WithinDistance 0.00001 Source
+            stackinggroup = "LIGHTHOUSE_STEALTH_STACK"
+            effects = SetStealth Value - 30
+
+        EffectsGroup
+            scope = And [
+                Ship
+                OwnedBy TheEmpire Source.Owner
+                WithinDistance 50 Source
+                StarlaneSpeed low = 1 // Immobile objects do not get the starlane speed boost.
+            ]
+            stackinggroup = "LIGHTHOUSE_SPEED_STACK"
+            effects = SetStarlaneSpeed Value + 20
+    ]
+    icon = "icons/building/lighthouse.png"
+
+BuildingType
+    name = "BLD_SCANNING_FACILITY"
+    description = "BLD_SCANNING_FACILITY_DESC"
+    buildcost = 25
+    buildtime = 5
+    location = AND [
+        Planet
+        Not Contains Building "BLD_SCANNING_FACILITY"
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                Object Source.PlanetID
+                Planet
+            ]
+            SetDetection Value + 75
+    ]
+    icon = "icons/building/lighthouse.png"
+
+BuildingType
+    name = "BLD_HEAVY_MINE_PROCESSOR"
+    description = "BLD_HEAVY_MINE_PROCESSOR_DESC"
+    buildcost = 75
+    buildtime = 1
+    location = And [
+        Planet
+        Not Contains Building "BLD_HEAVY_MINE_PROCESSOR"
+        OwnedBy TheEmpire Source.Owner
+        TargetPopulation low = 1
+    ]
+    icon = "icons/building/heavy_mining_processor.png"
+
+BuildingType
+    name = "BLD_INDUSTRY_CENTER"
+    description = "BLD_INDUSTRY_CENTER_DESC"
+    buildcost = 75
+    buildtime = 5
+    location = And [
+        Planet
+        Not Contains Building "BLD_INDUSTRY_CENTER"
+        OwnedBy TheEmpire Source.Owner
+        TargetPopulation low = 1
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                PopulationCenter
+                OwnedBy TheEmpire Source.Owner
+                ResourceSupplyConnected Source.Owner Source
+                Focus "FOCUS_INDUSTRY"
+            ]
+            activation = And [
+                OwnerHasTech "PRO_INDUSTRY_CENTER_I"
+                Not OwnerHasTech "PRO_INDUSTRY_CENTER_II"
+            ]
+            stackinggroup = "INDUSTRY_CENTER_STACK"
+            effects = SetTargetIndustry Value + Target.Population * 1.0 * [[INDUSTRY_PER_POP]]
+
+        EffectsGroup
+            scope = And [
+                PopulationCenter
+                OwnedBy TheEmpire Source.Owner
+                ResourceSupplyConnected Source.Owner Source
+                Focus "FOCUS_INDUSTRY"
+            ]
+            activation = And [
+                OwnerHasTech "PRO_INDUSTRY_CENTER_II"
+                Not OwnerHasTech "PRO_INDUSTRY_CENTER_III"
+            ]
+            stackinggroup = "INDUSTRY_CENTER_STACK"
+            effects = SetTargetIndustry Value + Target.Population * 2 * [[INDUSTRY_PER_POP]]
+
+        EffectsGroup
+            scope = And [
+                PopulationCenter
+                OwnedBy TheEmpire Source.Owner
+                ResourceSupplyConnected Source.Owner Source
+                Focus "FOCUS_INDUSTRY"
+            ]
+            activation = OwnerHasTech "PRO_INDUSTRY_CENTER_III"
+            stackinggroup = "INDUSTRY_CENTER_STACK"
+            effects = SetTargetIndustry Value + Target.Population * 3 * [[INDUSTRY_PER_POP]]
+    ]
+    icon = ""
+
+BuildingType
+    name = "BLD_EXOBOT_SHIP"
+    description = "BLD_EXOBOT_SHIP_DESC"
+    buildcost = 140 * [[COLONY_UPKEEP_MULTIPLICATOR]]
+    buildtime = 12
+    location = And [
+        Planet
+        OwnedBy TheEmpire Source.Owner
+        TargetPopulation low = 1
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                Object Source.PlanetID
+                Planet
+            ]
+            effects = [
+                CreateShip "SD_COLONY_SHIP" Source.Owner "SP_EXOBOT"
+                GenerateSitRepMessage
+                    message = "EFFECT_EXOBOT"
+                    icon = "icons/species/robotic-01.png"
+                    parameters = tag = "planet" data = Target.ID
+                    empire = Source.Owner
+            ]
+
+        EffectsGroup
+            scope = Source
+            effects = Destroy
+    ]
+    icon = "icons/species/robotic-01.png"
+
+BuildingType
+    name = "BLD_MEGALITH"
+    description = "BLD_MEGALITH_DESC"
+    buildcost = 250
+    buildtime = 10
+    location = And [
+        Planet
+        Not Contains Building "BLD_MEGALITH"
+        OwnedBy TheEmpire Source.Owner
+        TargetPopulation low = 1
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                Object Source.PlanetID
+                Planet
+            ]
+            activation = Source
+            stackinggroup = "BLD_MEGALITH_EFFECT"
+            effects = [
+                SetTargetConstruction Value + 30
+                SetEmpireCapital
+                SetIndustry Target.TargetIndustry
+                SetTrade Target.TargetTrade
+                SetResearch Target.TargetResearch
+            ]
+
+        EffectsGroup
+            scope = And [
+                PopulationCenter
+                OwnedBy TheEmpire Source.Owner
+                TargetPopulation low = 1
+            ]
+            activation = Source
+            stackinggroup = "BLD_MEGALITH_EFFECT"
+            effects = SetMaxSupply Value + 2
+    ]
+    icon = "icons/building/megalith.png"
+
+BuildingType
+    name = "BLD_COLLECTIVE_NET"
+    description = "BLD_COLLECTIVE_NET_DESC"
+    buildcost = 250
+    buildtime = 10
+    location = And [
+        Planet
+        Not Contains Building "BLD_COLLECTIVE_NET"
+        OwnedBy TheEmpire Source.Owner
+        TargetPopulation low = 1
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                PopulationCenter
+                OwnedBy TheEmpire Source.Owner
+                Focus "FOCUS_INDUSTRY"
+            ]
+            activation = Not WithinDistance 200 And [
+                Ship
+                Not Stationary
+            ]
+            stackinggroup = "BLD_COLLECTIVE_NET_INDUSTRY_EFFECT"
+            effects = SetTargetIndustry Value + Target.Population * 2.5 * [[INDUSTRY_PER_POP]]
+
+        EffectsGroup
+            scope = And [
+                PopulationCenter
+                OwnedBy TheEmpire Source.Owner
+                Focus "FOCUS_RESEARCH"
+            ]
+            activation = Not WithinDistance 200 And [
+                Ship
+                Not Stationary
+            ]
+            stackinggroup = "BLD_COLLECTIVE_NET_RESEARCH_EFFECT"
+            effects = SetTargetResearch Value + Target.Population * 2.5 * [[RESEARCH_PER_POP]]
+    ]
+    icon = ""
+
+BuildingType
+    name = "BLD_GENOME_BANK"
+    description = "BLD_GENOME_BANK_DESC"
+    buildcost = 15
+    buildtime = 16
+    location = And [
+        Planet
+        Not Contains Building "BLD_GENOME_BANK"
+        OwnedBy TheEmpire Source.Owner
+        TargetPopulation low = 1
+    ]
+    icon = "icons/building/genome_bank.png"
+
+BuildingType
+    name = "BLD_SPACE_ELEVATOR"
+    description = "BLD_SPACE_ELEVATOR_DESC"
+    buildcost = 150
+    buildtime = 6
+    location = And [
+        Planet
+        Not Contains Building "BLD_SPACE_ELEVATOR"
+        OwnedBy TheEmpire Source.Owner
+        TargetPopulation low = 1
+    ]
+    effectsgroups =
+        EffectsGroup
+            scope = And [
+                Object Source.PlanetID
+                Planet
+            ]
+            activation = Source
+            effects = SetMaxSupply Value * 2
+    icon = ""
+
+BuildingType
+    name = "BLD_GAIA_TRANS"
+    description = "BLD_GAIA_TRANS_DESC"
+    buildcost = 500
+    buildtime = 12
+    location = And [
+        Planet
+        Not Contains Building "BLD_GAIA_TRANS"
+        OwnedBy TheEmpire Source.Owner
+        Planet environment = Good
+        Not Planet type = [Asteroids GasGiant]
+        Not HasSpecial name = "GAIA_SPECIAL"
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                Object Source.PlanetID
+                Planet
+            ]
+            activation = Source
+            effects = AddSpecial "GAIA_SPECIAL"
+
+        EffectsGroup
+            scope = Source
+            activation = Source
+            effects = Destroy
+    ]
+    icon = ""
+    
+BuildingType
+    name = "BLD_ART_BLACK_HOLE"
+    description = "BLD_ART_BLACK_HOLE_DESC"
+    buildcost = 40
+    buildtime = 10
+    location = And [
+        Planet
+        Not Contains Building "BLD_ART_BLACK_HOLE"
+        OwnedBy TheEmpire Source.Owner
+        Star type = Red
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                Object Source.SystemID
+                System
+            ]
+            activation = Star type = Red
+            effects = SetStarType BlackHole
+
+        EffectsGroup
+            scope = Source
+            activation = Source
+            effects = Destroy
+    ]
+    icon = "icons/building/blackhole.png"
+
+BuildingType
+    name = "BLD_HYPER_DAM"
+    description = "BLD_HYPER_DAM_DESC"
+    buildcost = 250
+    buildtime = 10
+    tags = "ORBITAL"
+    location = And [
+        Planet
+        Not Contains Building "BLD_HYPER_DAM"
+        OwnedBy TheEmpire Source.Owner
+        TargetPopulation low = 1
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                PopulationCenter
+                Focus "FOCUS_INDUSTRY"
+                OwnedBy TheEmpire Source.Owner
+                ResourceSupplyConnected Source.Owner Source
+            ]
+            activation = Source
+            stackinggroup = "BLD_HYPER_DAM_BONUS"
+            effects = SetTargetIndustry Value + Target.Population * 2 * [[INDUSTRY_PER_POP]]
+
+        EffectsGroup
+            scope = And [
+                PopulationCenter
+                OwnedBy TheEmpire Source.Owner
+                ResourceSupplyConnected Source.Owner Source
+                Not Star type = BlackHole
+                Focus "FOCUS_INDUSTRY"
+            ]
+            activation = Source
+            effects = SetTargetPopulation Value - 5
+    ]
+    icon = "icons/building/blackhole.png"
+
+BuildingType
+    name = "BLD_SOL_ORB_GEN"
+    description = "BLD_SOL_ORB_GEN_DESC"
+    buildcost = 75
+    buildtime = 6
+    tags = "ORBITAL"
+    location = AND [
+        Not Contains Building "BLD_SOL_ORB_GEN"
+        OwnedBy TheEmpire Source.Owner
+        ]
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                PopulationCenter
+                Focus "FOCUS_INDUSTRY"
+                OwnedBy TheEmpire Source.Owner
+                ResourceSupplyConnected Source.Owner Source
+            ]
+            activation = Star type = [Blue White]
+            stackinggroup = "BLD_SOL_ORB_GEN_EFFECT"
+            effects = SetTargetIndustry Value + Target.Population * 2 * [[INDUSTRY_PER_POP]]
+
+        EffectsGroup
+            scope = And [
+                PopulationCenter
+                Focus "FOCUS_INDUSTRY"
+                OwnedBy TheEmpire Source.Owner
+                ResourceSupplyConnected Source.Owner Source
+            ]
+            activation = And [
+                Star type = [Yellow Orange]
+                Not ResourceSupplyConnected Source.Owner And [
+                    Building "BLD_SOL_ORB_GEN"
+                    OwnedBy TheEmpire Source.Owner
+                    Star type = [Blue White]
+                ]
+            ]
+            stackinggroup = "BLD_SOL_ORB_GEN_EFFECT"
+            effects = SetTargetIndustry Value + Target.Population * 1.0 * [[INDUSTRY_PER_POP]]
+
+        EffectsGroup
+            scope = And [
+                PopulationCenter
+                Focus "FOCUS_INDUSTRY"
+                OwnedBy TheEmpire Source.Owner
+                ResourceSupplyConnected Source.Owner Source
+            ]
+            activation = And [
+                Star type = Red
+                Not ResourceSupplyConnected Source.Owner And [
+                    Building "BLD_SOL_ORB_GEN"
+                    OwnedBy TheEmpire Source.Owner
+                    Star type = [Yellow Orange Blue White]
+                ]
+            ]
+            stackinggroup = "BLD_SOL_ORB_GEN_EFFECT"
+            effects = SetTargetIndustry Value + Target.Population * 0.5 * [[INDUSTRY_PER_POP]]
+    ]
+    icon = "icons/building/miniature_sun.png"
+/*
+BuildingType
+    name = "BLD_CLONING_CENTER"
+    description = "BLD_CLONING_CENTER_DESC"
+    buildcost = 100
+    buildtime = 5
+    location = And [
+        Planet
+        Not Contains Building "BLD_CLONING_CENTER"
+        OwnedBy TheEmpire Source.Owner
+        Not Contains Or [
+            Building "BLD_CLONING_CENTER"
+            Building "BLD_BIOTERROR_PROJECTOR"
+        ]
+    ]
+    icon = ""
+*/
+BuildingType
+    name = "BLD_TERRAFORM"
+    description = "BLD_TERRAFORM_DESC"
+    buildcost = 200 * (1 + Target.DistanceFromOriginalType)
+    buildtime = 8
+    location = And [
+        Planet
+        Not Contains Building "BLD_TERRAFORM"
+        Not Contains Building "BLD_TERRAFORM_REVERT"
+        OwnedBy TheEmpire Source.Owner
+        TargetPopulation low = 1
+        Not Planet type = [Asteroids GasGiant]
+        Not Planet environment = [Uninhabitable Good]
+        Not And [
+            Species "SP_EXOBOT"
+            Planet environment = Adequate
+        ]
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                Object Source.PlanetID
+                Planet
+            ]
+            effects = [
+                SetPlanetType Target.NextBetterPlanetType
+                GenerateSitRepMessage
+                    message = "EFFECT_TERRAFORM"
+                    icon = "icons/building/terraform.png"
+                    parameters = tag = "planet" data = Target.ID
+                    empire = Source.Owner
+            ]
+
+        EffectsGroup
+            scope = Source
+            effects = Destroy
+    ]
+    icon = "icons/building/terraform.png"
+
+BuildingType
+    name = "BLD_TERRAFORM_REVERT"
+    description = "BLD_TERRAFORM_REVERT_DESC"
+    buildcost = 150
+    buildtime = 6
+    location = And [
+        Planet
+        Not Contains Building "BLD_TERRAFORM"
+        Not Contains Building "BLD_TERRAFORM_REVERT"
+        OwnedBy TheEmpire Source.Owner
+        Not Planet type = [Asteroids GasGiant]
+        Not Planet type = LocalCandidate.OriginalType
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                Object Source.PlanetID
+                Planet
+            ]
+            effects = [
+                SetPlanetType Target.NextCloserToOriginalPlanetType
+                GenerateSitRepMessage
+                    message = "EFFECT_TERRAFORM"
+                    icon = "icons/building/terraform.png"
+                    parameters = tag = "planet" data = Target.ID
+                    empire = Source.Owner
+            ]
+
+        EffectsGroup
+            scope = Source
+            effects = Destroy
+    ]
+    icon = "icons/building/terraform.png"
+
+/*  Remote Terraforming is broken badly so hidden
+BuildingType
+    name = "BLD_REMOTE_TERRAFORM"
+    description = "BLD_REMOTE_TERRAFORM_DESC"
+    buildcost = 6
+    buildtime = 16
+    location = And [
+        Planet
+        Not Contains Building "BLD_REMOTE_TERRAFORM"
+        OwnedBy TheEmpire Source.Owner
+        Not Planet environment = [Uninhabitable Good]
+        Not Planet type = [Asteroids GasGiant]
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                Object Source.PlanetID
+                Planet
+            ]
+            effects = SetPlanetType Target.NextBetterPlanetType
+
+        EffectsGroup
+            scope = Source
+            effects = Destroy
+    ]
+    icon = ""
+*/
+BuildingType
+    name = "BLD_NEUTRONIUM_EXTRACTOR"
+    description = "BLD_NEUTRONIUM_EXTRACTOR_DESC"
+    buildcost = 25
+    buildtime = 8
+    tags = "ORBITAL"
+    location = AND [
+        Planet
+        Not Contains Building "BLD_NEUTRONIUM_EXTRACTOR"
+        OwnedBy TheEmpire Source.Owner
+        Star type = Neutron
+        ]
+    icon = "icons/building/neutronium-forge.png"
+
+BuildingType
+    name = "BLD_NEUTRONIUM_FORGE"
+    description = "BLD_NEUTRONIUM_FORGE_DESC"
+    buildcost = 100
+    buildtime = 3
+    tags = "ORBITAL"
+    location = And [
+        Planet
+        Not Contains Building "BLD_NEUTRONIUM_FORGE"
+        OwnedBy TheEmpire Source.Owner
+        TargetPopulation low = 1
+    ]
+    icon = "icons/building/neutronium-forge.png"
+
+BuildingType
+    name = "BLD_NEUTRONIUM_SYNTH"
+    description = "BLD_NEUTRONIUM_SYNTH_DESC"
+    buildcost = 1200
+    buildtime = 10
+    location = AND [
+        Planet
+        Not Contains Building "BLD_NEUTRONIUM_SYNTH"
+        OwnedBy TheEmpire Source.Owner
+        ]
+    icon = "icons/building/neutronium-forge.png"
+
+BuildingType
+    name = "BLD_CONC_CAMP"
+    description = "BLD_CONC_CAMP_DESC"
+    buildcost = 5
+    buildtime = 1
+    location = AND [
+        Not Contains Building "BLD_CONC_CAMP"
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                Object Source.PlanetID
+                Planet
+            ]
+            activation = ContainedBy And [
+                PopulationCenter
+                OwnedBy TheEmpire Source.Owner
+            ]
+            effects = SetTargetIndustry Value + Target.Population * 10 * [[INDUSTRY_PER_POP]]
+        EffectsGroup
+            scope = And [
+                Object Source.PlanetID
+                Planet
+            ]
+            activation = ContainedBy And [
+                PopulationCenter
+                OwnedBy TheEmpire Source.Owner
+                Population low = 0.0001
+                Not HasSpecial "CONC_CAMP_MASTER_SPECIAL"
+            ]
+            effects = AddSpecial "CONC_CAMP_MASTER_SPECIAL"
+        EffectsGroup
+            scope = Source
+            activation =    ContainedBy And [
+                                Object Source.PlanetID
+                                Population high = 0
+                            ]
+            effects = [
+                Destroy
+                GenerateSitRepMessage
+                    message = "EFFECT_CONC_CAMP_COMLETE"
+                    icon = "icons/building/concentration-camp.png"
+                    parameters = tag = "planet" data = Source.PlanetID
+                    empire = Source.Owner
+                ]
+        EffectsGroup
+            scope = And [
+                Object Source.PlanetID
+                Planet
+            ]
+            activation = ContainedBy And [
+                PopulationCenter
+                OwnedBy TheEmpire Source.Owner
+                HasSpecial "CONC_CAMP_MASTER_SPECIAL"
+            ]
+            effects = [
+                SetPopulation Value + 0.5*(101+Target.TargetPopulation-2*Value - ((101+Target.TargetPopulation-2*Value)^2 -4*(Value*(Value-1-Target.TargetPopulation)-3*100))^0.5)
+                SetIndustry Target.TargetIndustry
+            ]
+        EffectsGroup
+            scope = Source
+            activation = Not ProducedByEmpire Source.Owner
+            effects = Destroy
+    ]
+    icon = "icons/building/concentration-camp.png"
+
+BuildingType
+    name = "BLD_CONC_CAMP_REMNANT"
+    description = "BLD_CONC_CAMP_REMNANT_DESC"
+    buildcost = 1
+    buildtime = 1
+    location = NOT ALL
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                Object Source.PlanetID
+                Planet
+            ]
+            activation = ContainedBy And [
+                PopulationCenter
+                Not Contains Building "BLD_CONC_CAMP"
+            ]
+            effects = SetIndustry Target.TargetIndustry
+        EffectsGroup
+            scope = Source
+            activation =  ContainedBy AND [
+                Not HasSpecial "CONC_CAMP_MASTER_SPECIAL"
+                Not HasSpecial "CONC_CAMP_SLAVE_SPECIAL"
+                Industry High = Source.Planet.TargetIndustry + 2 
+            ]
+            effects = Destroy
+    ]
+    icon = "icons/building/concentration-camp.png"
+
+BuildingType
+    name = "BLD_BLACK_HOLE_POW_GEN"
+    description = "BLD_BLACK_HOLE_POW_GEN_DESC"
+    buildcost = 250
+    buildtime = 8
+    tags = "ORBITAL"
+    location = And [
+        Planet
+        Not Contains Building "BLD_BLACK_HOLE_POW_GEN"
+        OwnedBy TheEmpire Source.Owner
+        Star type = BlackHole
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                PopulationCenter
+                Focus "FOCUS_INDUSTRY"
+                OwnedBy TheEmpire Source.Owner
+                ResourceSupplyConnected Source.Owner Source
+            ]
+            activation = Star type = BlackHole
+            stackinggroup = "BLD_BLACK_HOLE_POW_GEN_PRIMARY_EFFECT"
+            effects = SetTargetIndustry Value + Target.Population * 6 * [[INDUSTRY_PER_POP]]
+    ]
+    icon = "icons/building/blackhole.png"
+
+BuildingType
+    name = "BLD_REPLICATORS"
+    description = "BLD_REPLICATORS_DESC"
+    buildcost = 125
+    buildtime = 4
+    location = AND [
+        Not Contains Building "BLD_REPLICATORS"
+        OwnedBy TheEmpire Source.Owner
+    ]
+    icon = ""
+
+BuildingType
+    name = "BLD_PLANET_DRIVE"
+    description = "BLD_PLANET_DRIVE_DESC"
+    buildcost = 125
+    buildtime = 5
+    location = And [
+        Planet
+        Not Contains Building "BLD_PLANET_DRIVE"
+        OwnedBy TheEmpire Source.Owner
+        Not Planet type = Asteroids
+    ]
+    icon = ""
+
+BuildingType
+    name = "BLD_PLANET_BEACON"
+    description = "BLD_PLANET_BEACON_DESC"
+    buildcost = 1
+    buildtime = 1
+    location = AND [
+        Not Contains Building "BLD_PLANET_BEACON"
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups =
+        EffectsGroup
+            scope = Source
+            activation = WithinStarlaneJumps 1 Building name = "BLD_PLANET_DRIVE"
+            effects = Destroy
+    icon = "icons/building/beacon.png"
+
+BuildingType
+    name = "BLD_ART_PLANET"
+    description = "BLD_ART_PLANET_DESC"
+    buildcost = 2000
+    buildtime = 15
+    location = And [
+        Planet
+        Not Contains Building "BLD_ART_PLANET"
+        OwnedBy TheEmpire Source.Owner
+        Planet type = [Asteroids GasGiant]
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                Object Source.PlanetID
+                Planet
+            ]
+            activation = Source
+            effects = SetPlanetType Barren
+
+        EffectsGroup
+            scope = Source
+            activation = Source
+            effects = Destroy
+    ]
+    icon = ""
+
+BuildingType
+    name = "BLD_ART_MOON"
+    description = "BLD_ART_MOON_DESC"
+    buildcost = 250
+    buildtime = 5
+    location = And [
+        Planet
+        Not Contains Building "BLD_ART_MOON"
+        OwnedBy TheEmpire Source.Owner
+        Not Planet type = [Asteroids GasGiant]
+    ]
+    effectsgroups =
+        EffectsGroup
+            scope = And [
+                Object Source.PlanetID
+                Planet
+            ]
+            activation = Source
+            effects = AddSpecial "RESONANT_MOON_SPECIAL"
+    icon = ""
+
+BuildingType
+    name = "BLD_TRANSFORMER"
+    description = "BLD_TRANSFORMER_DESC"
+    buildcost = 100
+    buildtime = 8
+    location = AND [
+        Not Contains Building "BLD_TRANSFORMER"
+        OwnedBy TheEmpire Source.Owner
+    ]
+    icon = ""
+
+BuildingType
+    name = "BLD_GATEWAY_VOID"
+    description = "BLD_GATEWAY_VOID_DESC"
+    buildcost = 200
+    buildtime = 10
+    location = AND [
+        Not Contains Building "BLD_GATEWAY_VOID"
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                Fleet
+                InSystem Source.SystemID
+            ]
+            activation = Source
+            effects = [
+                Destroy
+                GenerateSitRepMessage
+                    message = "EFFECT_GATEWAY_VOID_DESTROY"
+                    parameters = [
+                        tag = "buildingtype" data = "BLD_GATEWAY_VOID"
+                        tag = "planet" data = Source.PlanetID
+                        tag = "fleet" data = Target.ID
+                    ]
+                    empire = Source.Owner
+            ]
+        EffectsGroup
+            scope = And [
+                PopulationCenter
+                InSystem Source.SystemID
+            ]
+            activation = Source
+            effects = SetTargetPopulation 0.1
+
+        EffectsGroup
+            scope = InSystem Source.SystemID
+            activation = Source
+            effects = SetStealth Value + 1000
+    ]
+    icon = ""
+
+BuildingType
+    name = "BLD_ENCLAVE_VOID"
+    description = "BLD_ENCLAVE_VOID_DESC"
+    buildcost = 100
+    buildtime = 3
+    location = AND [
+        Not Contains Building "BLD_ENCLAVE_VOID"
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                PopulationCenter
+                OwnedBy TheEmpire Source.Owner
+                Focus "FOCUS_RESEARCH"
+            ]
+            activation = Source
+            stackinggroup = "BLD_ENCLAVE_VOID_STACK"
+            effects = SetTargetResearch Value + Target.Population * 3.75 *  [[RESEARCH_PER_POP]]
+    ]
+    icon = ""
+
+BuildingType
+    name = "BLD_PLANET_CLOAK"
+    description = "BLD_PLANET_CLOAK_DESC"
+    buildcost = 150
+    buildtime = 8
+    location = AND [
+        Not Contains Building "BLD_PLANET_CLOAK"
+        OwnedBy TheEmpire Source.Owner
+    ]
+    icon = ""
+
+BuildingType
+    name = "BLD_SPATIAL_DISTORT_GEN"
+    description = "BLD_SPATIAL_DISTORT_GEN_DESC"
+    buildcost = 30
+    buildtime = 10
+    location = AND [
+        Not Contains Building "BLD_SPATIAL_DISTORT_GEN"
+        OwnedBy TheEmpire Source.Owner
+    ]
+    icon = ""
+
+BuildingType
+    name = "BLD_STARGATE"
+    description = "BLD_STARGATE_DESC"
+    buildcost = 500 + 50 *
+                    Count condition = And [
+                        Building "BLD_STARGATE"
+                        OwnedBy TheEmpire Source.Owner
+                    ]
+    buildtime = 10
+    tags = "ORBITAL"
+    location = AND [
+        TargetPopulation low = 1
+        Not Contains Building "BLD_STARGATE"
+        OwnedBy TheEmpire Source.Owner
+    ]
+    icon = ""
+
+BuildingType
+    name = "BLD_GAS_GIANT_GEN"
+    description = "BLD_GAS_GIANT_GEN_DESC"
+    buildcost = 25
+    buildtime = 3
+    tags = "ORBITAL"
+    location = And [
+        Planet
+        Not Contains Building "BLD_GAS_GIANT_GEN"
+        OwnedBy TheEmpire Source.Owner
+        Planet type = GasGiant
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                Planet
+                InSystem Source.SystemID
+                Focus "FOCUS_INDUSTRY"
+                NOT Population high = 0
+                OwnedBy TheEmpire Source.Owner
+            ]
+            stackinggroup = "GAS_GIANT_GEN_STACK"
+            effects = SetTargetIndustry Value + 10
+        EffectsGroup
+            scope = Source
+            activation = Not Planet type = GasGiant
+            effects = Destroy
+    ]
+    icon = ""
+
+BuildingType
+    name = "BLD_COLONY_BASE"
+    description = "BLD_COLONY_BASE_DESC"
+    buildcost = 45
+    buildtime = 1
+    location = And [
+        Planet
+        Not Contains Building "BLD_COLONY_BASE"
+        Population low = 3
+        OwnedBy TheEmpire Source.Owner
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = Source
+            activation = Source
+            effects = CreateShip "SD_COLONY_BASE" Source.Owner Source.Planet.Species
+
+        EffectsGroup
+            scope = Source
+            activation = Source
+            effects = Destroy
+    ]
+    icon = ""
+
+BuildingType
+    name = "BLD_EXPERIMENTOR_OUTPOST"
+    description = "BLD_EXPERIMENTOR_OUTPOST_DESC"
+    buildcost = 1
+    buildtime = 1
+    captureresult = destroy
+    location = All
+    effectsgroups = [
+        EffectsGroup
+            scope = Or [
+                Source
+                And [
+                    Object Source.PlanetID
+                    Planet
+                ]
+            ]
+            effects = SetStealth Value + 60
+
+        EffectsGroup
+            scope = Or [
+                And [
+                    Object Source.SystemID
+                    System
+                ]
+                And [
+                    Planet
+                    InSystem Source.SystemID
+                    Not Source
+                ]
+            ]
+            effects = SetStealth Value + 40
+
+/*        EffectsGroup
+            scope = And [
+                Object Source.SystemID
+                System
+            ]
+            effects = AddSpecial "EXPERIMENTOR_OUTPOST_SPECIAL"
+*/
+
+        EffectsGroup
+            scope = Source
+            activation = Or [
+                Not ContainedBy Contains Monster
+                Turn high = 200     // always remove lanes before turn 200
+            ]
+            effects = RemoveStarlanes WithinStarlaneJumps 1 Source
+
+        EffectsGroup
+            scope = Source
+            activation = And [
+                ContainedBy Contains Monster
+                Turn low = 200      // don't create lanes before turn 200
+            ]
+            effects = AddStarlanes NumberOf 1 And [
+                WithinDistance 100 Source
+                System
+            ]
+
+        EffectsGroup
+            scope = Source
+            activation = And [
+                Turn low = 200 high = 235
+                Random 0.2
+            ]
+            effects = [
+                CreateShip "SM_BLACK_KRAKEN" Source.Owner
+                CreateShip "SM_BLACK_KRAKEN" Source.Owner
+                CreateShip "SM_BLACK_KRAKEN" Source.Owner
+                CreateShip "SM_BLACK_KRAKEN" Source.Owner
+                CreateShip "SM_BLACK_KRAKEN" Source.Owner
+            ]
+
+        EffectsGroup
+            scope = Source
+            activation = And [
+                Turn low = 235
+                Random 0.1
+            ]
+            effects = [
+                CreateShip "SM_BLACK_KRAKEN" Source.Owner
+                CreateShip "SM_BLACK_KRAKEN" Source.Owner
+            ]
+
+        EffectsGroup
+            scope = Source
+            activation = And [
+                Turn low = 230 high = 270
+                Random 0.2
+            ]
+            effects = [
+                CreateShip "SM_BLOATED_JUGGERNAUT" Source.Owner
+                CreateShip "SM_BLOATED_JUGGERNAUT" Source.Owner
+                CreateShip "SM_BLOATED_JUGGERNAUT" Source.Owner
+                CreateShip "SM_BLOATED_JUGGERNAUT" Source.Owner
+                CreateShip "SM_BLOATED_JUGGERNAUT" Source.Owner
+            ]
+
+        EffectsGroup
+            scope = Source
+            activation = And [
+                Turn low = 270
+                Random 0.1
+            ]
+            effects = [
+                CreateShip "SM_BLOATED_JUGGERNAUT" Source.Owner
+                CreateShip "SM_BLOATED_JUGGERNAUT" Source.Owner
+            ]
+
+        EffectsGroup
+            scope = Source
+            activation = And [
+                Turn low = 265 high = 290
+                Random 0.2
+            ]
+            effects = [
+                CreateShip "SM_PSIONIC_SNOWFLAKE" Source.Owner
+                CreateShip "SM_PSIONIC_SNOWFLAKE" Source.Owner
+                CreateShip "SM_PSIONIC_SNOWFLAKE" Source.Owner
+                CreateShip "SM_PSIONIC_SNOWFLAKE" Source.Owner
+                CreateShip "SM_PSIONIC_SNOWFLAKE" Source.Owner
+            ]
+
+        EffectsGroup
+            scope = Source
+            activation = And [
+                Turn low = 330
+                Random 0.1
+            ]
+            effects = [
+                CreateShip "SM_PSIONIC_SNOWFLAKE" Source.Owner
+                CreateShip "SM_PSIONIC_SNOWFLAKE" Source.Owner
+            ]
+
+        EffectsGroup
+            scope = Source
+            activation = And [
+                Turn low = 310
+                Random 0.2
+            ]
+            effects = [
+                CreateShip "SM_COSMIC_DRAGON" Source.Owner
+                CreateShip "SM_COSMIC_DRAGON" Source.Owner
+                CreateShip "SM_COSMIC_DRAGON" Source.Owner
+            ]
+    ]
+    icon = ""
+
+BuildingType
+    name = "BLD_NOVA_BOMB_ACTIVATOR"
+    description = "BLD_NOVA_BOMB_ACTIVATOR_DESC"
+    buildcost = 25
+    buildtime = 1
+    location = All
+    effectsgroups =
+        EffectsGroup
+            scope = Source
+            effects = Destroy
+    icon = ""
+
+BuildingType
+    name = "BLD_EVACUATION"
+    description = "BLD_EVACUATION_DESC"
+    buildcost = 10
+    buildtime = 1
+    location = AND [
+        Planet
+        OwnedBy TheEmpire Source.Owner
+        Not Contains Building "BLD_EVACUATION"
+        Not Contains Building "BLD_CONC_CAMP"
+        Not HasSpecial "CONC_CAMP_SLAVE_SPECIAL"
+        Enqueued type = Building name = "BLD_CONC_CAMP" high = 0
+        TargetPopulation low = 1
+    ]
+    effectsgroups = [
+        EffectsGroup            // add population to connected plants with room and suitable species
+            scope = NumberOf number = 1 condition = And [
+                PopulationCenter
+                Species name = Source.Planet.Species
+                Not Object Source.PlanetID
+                ResourceSupplyConnected Source.Owner Source
+                Population low = 1 high = LocalCandidate.TargetPopulation - 1
+                Not Contains Building "BLD_EVACUATION"
+                Not Contains Building "BLD_CONC_CAMP"
+            ]
+            activation = Number low = 1 condition = And [
+                PopulationCenter
+                Species name = Source.Planet.Species
+                Not Object Source.PlanetID
+                ResourceSupplyConnected Source.Owner Source
+                Population low = 1 high = LocalCandidate.TargetPopulation - 1
+            ]
+            effects = [
+                SetPopulation Value + 2
+                GenerateSitRepMessage
+                    message = "EFFECT_EVACUEES"
+                    icon = "icons/building/evacuation.png"
+                    parameters = tag = "planet" data = Target.ID
+                    empire = Source.Owner
+                ]
+    
+        EffectsGroup            // remove population from location
+            scope = And [
+                Object Source.PlanetID
+                Planet            
+            ]
+            activation = ContainedBy And [
+                PopulationCenter
+                OwnedBy TheEmpire Source.Owner
+            ]
+            effects = [ //complicated population formula necessary to actually peg pop reduction at -2, not just 2 less growth than it would have been
+                // the fixed amount for pop change per turn is 'k' towards the end of the comment line immediately below, which is 2 in the functional line that follows it
+                //SetPopulation Value + 0.5*(101+Target.TargetPopulation-2*Value - ((101+Target.TargetPopulation-2*Value)^2 -4*(Value*(Value-1-Target.TargetPopulation)-k*100))^0.5)
+                SetPopulation Value + 0.5*(101+Target.TargetPopulation-2*Value - ((101+Target.TargetPopulation-2*Value)^2 -4*(Value*(Value-1-Target.TargetPopulation)-2*100))^0.5)
+                SetIndustry Value = 0
+                SetTargetIndustry Value = 0
+                SetResearch Value = 0
+                SetTargetResearch Value = 0
+                ]
+
+        EffectsGroup            // remove evacuation when planet is depopulated or no longer owned by empire that produced this building
+            scope = Source
+            activation = OR [
+                NOT OwnedBy TheEmpire Source.Owner
+                ContainedBy Or [
+                    And [
+                        Object Source.PlanetID
+                        Population high = 0
+                    ]
+                    Contains Building "BLD_CONC_CAMP"
+                    HasSpecial "CONC_CAMP_SLAVE_SPECIAL"
+                ]
+            ]
+            effects = Destroy
+    ]
+    icon = "icons/building/evacuation.png"
+
+
+BuildingType
+    name = "BLD_SUPER_TESTERS"
+    description = "BLD_SUPER_TESTERS_DESC"
+    buildcost = 1
+    buildtime = 1
+    location = Planet
+    effectsgroups = [
+        Effectsgroup
+        scope = And [
+            Object Source.PlanetID
+            Planet
+        ]
+        effects = SetSpecies name = "SP_SUPER_TEST"
+        
+        EffectsGroup            // remove building when done
+            scope = Source
+            activation = Species name = "SP_SUPER_TEST"
+            effects = Destroy
+    ]
+    icon = "icons/species/other-04.png"

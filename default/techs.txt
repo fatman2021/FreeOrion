@@ -1,0 +1,3109 @@
+include "shared_macros.txt"
+
+Category
+    name = "LEARNING_CATEGORY"
+    graphic = "learning.png"
+    colour = (54, 202, 229)
+
+Category 
+    name = "GROWTH_CATEGORY"
+    graphic = "growth.png"
+    colour = (116, 225, 107)
+
+Category 
+    name = "PRODUCTION_CATEGORY"
+    graphic = "production.png"
+    colour = (240, 106, 106, 255)
+
+Category 
+    name = "CONSTRUCTION_CATEGORY"
+    graphic = "construction.png"
+    colour = (241, 233, 87, 255)
+    
+Category 
+    name = "DEFENSE_CATEGORY"
+    graphic = "defense.png"
+    colour = (70, 80, 215, 255)
+
+Category 
+    name = "SHIPS_CATEGORY"
+    graphic = "ships.png"
+    colour = (255, 139, 85, 255)
+    
+Category 
+    name = "SPY_CATEGORY"
+    graphic = "spy.png"
+    colour = (168, 0, 255, 255)
+
+//########################################################
+//#     D E F E N S E
+//########################################################
+//CORRESPONDING MAX TROOP, DEFENSE, & SHIELD VALUES ARE SPECIFIED IN SPECIES.TXT
+
+Tech
+    Name = "DEF_ROOT_DEFENSE"
+    description = "DEF_ROOT_DEFENSE_DESC"
+    short_description = "TROOPS_SHORT_DESC"
+    techtype = Application
+    category = "DEFENSE_CATEGORY"
+    researchcost = 1
+    researchturns = 1
+    graphic = ""
+
+Tech
+    Name = "DEF_GARRISON_1"
+    description = "DEF_GARRISON_1_DESC"
+    short_description = "TROOPS_SHORT_DESC"
+    techtype = Application
+    category = "DEFENSE_CATEGORY"
+    researchcost = 5 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 3
+    prerequisites = "DEF_ROOT_DEFENSE"
+    graphic = "icons/tech/troops.png"
+    
+Tech
+    Name = "DEF_GARRISON_2"
+    description = "DEF_GARRISON_2_DESC"
+    short_description = "TROOPS_SHORT_DESC"
+    techtype = Refinement
+    category = "DEFENSE_CATEGORY"
+    researchcost = 15 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = "DEF_GARRISON_1"
+    graphic = "icons/tech/troops.png"
+    
+Tech
+    Name = "DEF_GARRISON_3"
+    description = "DEF_GARRISON_3_DESC"
+    short_description = "TROOPS_SHORT_DESC"
+    techtype = Refinement
+    category = "DEFENSE_CATEGORY"
+    researchcost = 50 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 7
+    prerequisites = "DEF_GARRISON_2"
+    graphic = "icons/tech/troops.png"
+    
+Tech
+    Name = "DEF_GARRISON_4"
+    description = "DEF_GARRISON_4_DESC"
+    short_description = "TROOPS_SHORT_DESC"
+    techtype = Refinement
+    category = "DEFENSE_CATEGORY"
+    researchcost = 150 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 9
+    prerequisites = "DEF_GARRISON_3"
+    graphic = "icons/tech/troops.png"
+
+Tech
+    name = "DEF_DEFENSE_NET_1"
+    description = "DEF_DEFENSE_NET_1_DESC"
+    short_description = "DEFENSE_SHORT_DESC"
+    techtype = Application
+    category = "DEFENSE_CATEGORY"
+    researchcost = 16 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 3
+    prerequisites = "DEF_ROOT_DEFENSE"
+            
+Tech
+    name = "DEF_DEFENSE_NET_2"
+    description = "DEF_DEFENSE_NET_2_DESC"
+    short_description = "DEFENSE_SHORT_DESC"
+    techtype = Refinement
+    category = "DEFENSE_CATEGORY"
+    researchcost = 80 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 4
+    prerequisites = "DEF_DEFENSE_NET_1"
+
+Tech
+    name = "DEF_DEFENSE_NET_3"
+    description = "DEF_DEFENSE_NET_3_DESC"
+    short_description = "DEFENSE_SHORT_DESC"
+    techtype = Refinement
+    category = "DEFENSE_CATEGORY"
+    researchcost = 160 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 6
+    prerequisites = "DEF_DEFENSE_NET_2"
+
+Tech
+    name = "DEF_DEFENSE_NET_REGEN_1"
+    description = "DEF_DEFENSE_NET_REGEN_1_DESC"
+    short_description = "DEFENSE_SHORT_DESC"
+    techtype = Refinement
+    category = "DEFENSE_CATEGORY"
+    researchcost = 60 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 6
+    prerequisites = "DEF_DEFENSE_NET_2"
+    effectsgroups =
+        EffectsGroup
+            scope = And [
+                Planet
+                OwnedBy TheEmpire Source.Owner
+            ]
+            effects = SetDefense Value + 0.1*Target.MaxDefense
+
+Tech
+    name = "DEF_DEFENSE_NET_REGEN_2"
+    description = "DEF_DEFENSE_NET_REGEN_2_DESC"
+    short_description = "DEFENSE_SHORT_DESC"
+    techtype = Refinement
+    category = "DEFENSE_CATEGORY"
+    researchcost = 160 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 8
+    prerequisites = "DEF_DEFENSE_NET_REGEN_1"
+    effectsgroups =
+        EffectsGroup
+            scope = And [
+                Planet
+                OwnedBy TheEmpire Source.Owner
+            ]
+            effects = SetDefense Value + 0.25*Target.Construction
+
+Tech
+    name = "DEF_PLAN_BARRIER_SHLD_1"
+    description = "DEF_PLAN_BARRIER_SHLD_1_DESC"
+    short_description = "SHIELD_SHORT_DESC"
+    techtype = Application
+    category = "DEFENSE_CATEGORY"
+    researchcost = 80 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = "LRN_FORCE_FIELD"
+    effectsgroups =
+        EffectsGroup
+            scope = And [
+                Planet
+                OwnedBy TheEmpire Source.Owner
+            ]
+            effects = [
+//                SetMaxShield Value + 30
+                SetShield Value + 0.25*Target.Construction
+            ]
+
+Tech
+    name = "DEF_PLAN_BARRIER_SHLD_2"
+    description = "DEF_PLAN_BARRIER_SHLD_2_DESC"
+    short_description = "SHIELD_SHORT_DESC"
+    techtype = Refinement
+    category = "DEFENSE_CATEGORY"
+    researchcost = 120 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 6
+    prerequisites = "DEF_PLAN_BARRIER_SHLD_1"
+    effectsgroups =
+        EffectsGroup
+            scope = And [
+                Planet
+                OwnedBy TheEmpire Source.Owner
+            ]
+            effects = [
+//                SetMaxShield Value + 60
+                SetShield Value + 0.75*Target.Construction
+            ]
+
+Tech
+    name = "DEF_PLAN_BARRIER_SHLD_3"
+    description = "DEF_PLAN_BARRIER_SHLD_3_DESC"
+    short_description = "SHIELD_SHORT_DESC"
+    techtype = Refinement
+    category = "DEFENSE_CATEGORY"
+    researchcost = 240 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 8
+    prerequisites = "DEF_PLAN_BARRIER_SHLD_2"
+    effectsgroups =
+        EffectsGroup
+            scope = And [
+                Planet
+                OwnedBy TheEmpire Source.Owner
+            ]
+            effects = [
+//                SetMaxShield Value + 90
+                SetShield Value + 1.0*Target.Construction
+            ]
+
+Tech
+    name = "DEF_PLAN_BARRIER_SHLD_4"
+    description = "DEF_PLAN_BARRIER_SHLD_4_DESC"
+    short_description = "SHIELD_SHORT_DESC"
+    techtype = Refinement
+    category = "DEFENSE_CATEGORY"
+    researchcost = 500 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 10
+    prerequisites = "DEF_PLAN_BARRIER_SHLD_3"
+    effectsgroups =
+        EffectsGroup
+            scope = And [
+                Planet
+                OwnedBy TheEmpire Source.Owner
+            ]
+            effects = [
+//                SetMaxShield Value + 150
+                SetShield Value + 1.5*Target.Construction
+            ]
+
+Tech
+    name = "DEF_PLAN_BARRIER_SHLD_5"
+    description = "DEF_PLAN_BARRIER_SHLD_5_DESC"
+    short_description = "SHIELD_SHORT_DESC"
+    techtype = Refinement
+    category = "DEFENSE_CATEGORY"
+    researchcost = 1200* [[TECH_COST_MULTIPLIER]]
+    researchturns = 12
+    prerequisites = "DEF_PLAN_BARRIER_SHLD_4"
+    effectsgroups =
+        EffectsGroup
+            scope = And [
+                Planet
+                OwnedBy TheEmpire Source.Owner
+            ]
+            effects = [
+//                SetMaxShield Value + 150
+                SetShield Value + 2.5*Target.Construction
+            ]
+
+Tech
+    name = "DEF_PLANET_CLOAK"
+    description = "DEF_PLANET_CLOAK_DESC"
+    short_description = "BUILDING_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "DEFENSE_CATEGORY"
+    researchcost = 9999
+    researchturns = 9999
+    Unresearchable
+    prerequisites = "SPY_STEALTH_3"
+    unlock = Item type = Building name = "BLD_PLANET_CLOAK"
+    
+Tech
+    name = "DEF_SYST_DEF_MINE_1"
+    description = "DEF_SYST_DEF_MINE_1_DESC"
+    short_description = "DEFENSE_SHORT_DESC"
+    techtype = Application
+    category = "DEFENSE_CATEGORY"
+    researchcost = 120 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 4
+    prerequisites = "DEF_DEFENSE_NET_1"
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                Ship
+                ContainedBy And [
+                    System 
+                    Contains And [
+                        Planet
+                        OwnedBy TheEmpire Source.Owner
+                    ]
+                ]
+                OwnedBy EnemyOf Source.Owner
+            ]
+            activation = Not OwnerHasTech "DEF_SYST_DEF_MINE_2"
+            effects = SetStructure Value - 2
+        EffectsGroup
+            scope = And [
+                Fleet
+                ContainedBy And [
+                    System 
+                    Contains And [
+                        Planet
+                        OwnedBy TheEmpire Source.Owner
+                    ]
+                ]
+                OwnedBy EnemyOf Source.Owner
+            ]
+            activation = Not OwnerHasTech "DEF_SYST_DEF_MINE_2"
+            effects = [
+                GenerateSitRepMessage
+                    message = "EFFECT_MINES"
+                    icon = "icons/sitrep/combat_damage.png"
+                    parameters = [
+                        tag = "empire" data = Target.Owner
+                        tag = "fleet" data = Target.ID
+                        tag = "rawtext" data = "2"
+                        tag = "system" data = Target.SystemID
+                    ]
+                    empire = Target.Owner
+            ]
+        EffectsGroup
+            scope = And [
+                Ship
+                ContainedBy And [
+                    System 
+                    Contains And [
+                        Planet
+                        OwnedBy TheEmpire Source.Owner
+                    ]
+                ]
+                OwnedBy EnemyOf Source.Owner
+                Structure high = 2
+            ]
+            activation = Not OwnerHasTech "DEF_SYST_DEF_MINE_2"
+            effects = [
+                GenerateSitRepMessage
+                    message = "EFFECT_MINES_SHIP_DESTROYED"
+                    icon = "icons/sitrep/combat_destroyed.png"
+                    parameters = [
+                        tag = "empire" data = Target.Owner
+                        tag = "ship" data = Target.ID
+                        tag = "system" data = Target.SystemID
+                    ]
+                    empire = Target.Owner
+                Destroy
+            ]
+    ]
+
+Tech
+    name = "DEF_SYST_DEF_MINE_2"
+    description = "DEF_SYST_DEF_MINE_2_DESC"
+    short_description = "DEFENSE_SHORT_DESC"
+    techtype = Refinement
+    category = "DEFENSE_CATEGORY"
+    researchcost = 240 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 6
+    prerequisites = "DEF_SYST_DEF_MINE_1"
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                Ship
+                ContainedBy And [
+                    System 
+                    Contains And [
+                        Planet
+                        OwnedBy TheEmpire Source.Owner
+                    ]
+                ]
+                OwnedBy EnemyOf Source.Owner
+            ]
+            activation = Not OwnerHasTech "DEF_SYST_DEF_MINE_3"
+            effects = SetStructure Value - 6
+        EffectsGroup
+            scope = And [
+                Fleet
+                ContainedBy And [
+                    System 
+                    Contains And [
+                        Planet
+                        OwnedBy TheEmpire Source.Owner
+                    ]
+                ]
+                OwnedBy EnemyOf Source.Owner
+            ]
+            activation = Not OwnerHasTech "DEF_SYST_DEF_MINE_3"
+            effects = [
+                GenerateSitRepMessage
+                    message = "EFFECT_MINES"
+                    icon = "icons/sitrep/combat_damage.png"
+                    parameters = [
+                        tag = "empire" data = Target.Owner
+                        tag = "fleet" data = Target.ID
+                        tag = "rawtext" data = "6"
+                        tag = "system" data = Target.SystemID
+                    ]
+                    empire = Target.Owner
+            ]
+        EffectsGroup
+            scope = And [
+                Ship
+                ContainedBy And [
+                    System 
+                    Contains And [
+                        Planet
+                        OwnedBy TheEmpire Source.Owner
+                    ]
+                ]
+                OwnedBy EnemyOf Source.Owner
+                Structure high = 6
+            ]
+            activation = Not OwnerHasTech "DEF_SYST_DEF_MINE_3"
+            effects = [
+                GenerateSitRepMessage
+                    message = "EFFECT_MINES_SHIP_DESTROYED"
+                    icon = "icons/sitrep/combat_destroyed.png"
+                    parameters = [
+                        tag = "empire" data = Target.Owner
+                        tag = "ship" data = Target.ID
+                        tag = "system" data = Target.SystemID
+                    ]
+                    empire = Target.Owner
+                Destroy
+            ]
+    ]
+
+Tech
+    name = "DEF_SYST_DEF_MINE_3"
+    description = "DEF_SYST_DEF_MINE_3_DESC"
+    short_description = "DEFENSE_SHORT_DESC"
+    techtype = Refinement
+    category = "DEFENSE_CATEGORY"
+    researchcost = 500 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 8
+    prerequisites = "DEF_SYST_DEF_MINE_2"
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                Ship
+                ContainedBy And [
+                    System 
+                    Contains And [
+                        Planet
+                        OwnedBy TheEmpire Source.Owner
+                    ]
+                ]
+                OwnedBy EnemyOf Source.Owner
+            ]
+            effects = SetStructure Value - 14
+        EffectsGroup
+            scope = And [
+                Fleet
+                ContainedBy And [
+                    System 
+                    Contains And [
+                        Planet
+                        OwnedBy TheEmpire Source.Owner
+                    ]
+                ]
+                OwnedBy EnemyOf Source.Owner
+            ]
+            effects = [
+                GenerateSitRepMessage
+                    message = "EFFECT_MINES"
+                    icon = "icons/sitrep/combat_damage.png"
+                    parameters = [
+                        tag = "empire" data = Target.Owner
+                        tag = "fleet" data = Target.ID
+                        tag = "rawtext" data = "14"
+                        tag = "system" data = Target.SystemID
+                    ]
+                    empire = Target.Owner
+            ]
+        EffectsGroup
+            scope = And [
+                Ship
+                ContainedBy And [
+                    System 
+                    Contains And [
+                        Planet
+                        OwnedBy TheEmpire Source.Owner
+                    ]
+                ]
+                OwnedBy EnemyOf Source.Owner
+                Structure high = 14
+            ]
+            effects = [
+                GenerateSitRepMessage
+                    message = "EFFECT_MINES_SHIP_DESTROYED"
+                    icon = "icons/sitrep/combat_destroyed.png"
+                    parameters = [
+                        tag = "empire" data = Target.Owner
+                        tag = "ship" data = Target.ID
+                        tag = "system" data = Target.SystemID
+                    ]
+                    empire = Target.Owner
+                Destroy
+            ]
+    ]
+
+
+//########################################################
+//#     L E A R N I N G
+//########################################################
+
+
+Tech
+    name = "LRN_PHYS_BRAIN"
+    description = "LRN_PHYS_BRAIN_DESC"
+    short_description = "THEORY_SHORT_DESC"
+    techtype = Theory
+    category = "LEARNING_CATEGORY"
+    researchcost = 4 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 2
+    graphic = "icons/tech/the_physical_brain.png"
+
+Tech
+    name = "LRN_ALGO_ELEGANCE"
+    description = "LRN_ALGO_ELEGANCE_DESC"
+    short_description = "RESEARCH_SHORT_DESC"
+    techtype = Application
+    category = "LEARNING_CATEGORY"
+    researchcost = 12 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 3
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                ProductionCenter
+                OwnedBy TheEmpire Source.Owner
+                Focus "FOCUS_RESEARCH"
+            ]
+            effects = SetTargetResearch Value + Target.Population * 0.5 * [[RESEARCH_PER_POP]]
+    ]
+    graphic = "icons/tech/algorithmic_elegance.png"
+
+Tech
+    name = "LRN_TRANSLING_THT"
+    description = "LRN_TRANSLING_THT_DESC"
+    short_description = "THEORY_SHORT_DESC"
+    techtype = Theory
+    category = "LEARNING_CATEGORY"
+    researchcost = 16 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 4
+    prerequisites = [
+        "LRN_PHYS_BRAIN"
+        "LRN_ALGO_ELEGANCE"
+    ]
+    graphic = "icons/tech/translingustic_thought.png"
+
+Tech
+    name = "LRN_PSIONICS"
+    description = "LRN_PSIONICS_DESC"
+    short_description = "THEORY_SHORT_DESC"
+    techtype = Theory
+    category = "LEARNING_CATEGORY"
+    researchcost = 300 * [[TECH_COST_MULTIPLIER]] - (250 * [[TECH_COST_MULTIPLIER]] * If condition = AND [
+        OwnedBy TheEmpire Source.Owner
+        HasTag "TELEPATHIC"
+    ])
+    researchturns = 4
+    prerequisites = "LRN_TRANSLING_THT"
+    graphic = "icons/tech/psionics.png"
+
+Tech
+    name = "LRN_XENOARCH"
+    description = "LRN_XENOARCH_DESC"
+    short_description = "XENOARCH_SHORT_DESC"
+    techtype = Application
+    category = "LEARNING_CATEGORY"
+    researchcost = 36 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = "LRN_TRANSLING_THT"
+    graphic = "icons/tech/xenoarchaeology.png"
+
+Tech
+    name = "LRN_GRAVITONICS"
+    description = "LRN_GRAVITONICS_DESC"
+    short_description = "THEORY_SHORT_DESC"
+    techtype = Theory
+    category = "LEARNING_CATEGORY"
+    researchcost = 80 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = "LRN_FORCE_FIELD"
+    graphic = "icons/tech/gravitonics.png"
+
+Tech
+    name = "LRN_FORCE_FIELD"
+    description = "LRN_FORCE_FIELD_DESC"
+    short_description = "SHIELD_SHORT_DESC"
+    techtype = Application
+    category = "LEARNING_CATEGORY"
+    researchcost = 50 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = "LRN_ARTIF_MINDS"
+    unlock = Item type = ShipPart name = "SH_DEFENSE_GRID"
+    graphic = "icons/ship_parts/defense_grid.png"
+
+Tech
+    name = "LRN_EVERYTHING"
+    description = "LRN_EVERYTHING_DESC"
+    short_description = "THEORY_SHORT_DESC"
+    techtype = Theory
+    category = "LEARNING_CATEGORY"
+    researchcost = 400 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 6
+    prerequisites = "LRN_GRAVITONICS"
+    graphic = "icons/tech/the_theory_of_everything.png"
+
+Tech
+    name = "LRN_MIND_VOID"
+    description = "LRN_MIND_VOID_DESC"
+    short_description = "THEORY_SHORT_DESC"
+    techtype = Theory
+    category = "LEARNING_CATEGORY"
+    researchcost = 75 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 10
+    prerequisites = "LRN_XENOARCH"
+    graphic = "icons/tech/mind_of_the_void.png"
+
+Tech
+    name = "LRN_NDIM_SUBSPACE"
+    description = "LRN_NDIM_SUBSPACE_DESC"
+    short_description = "THEORY_SHORT_DESC"
+    techtype = Theory
+    category = "LEARNING_CATEGORY"
+    researchcost = 80 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = "LRN_FORCE_FIELD"
+    graphic = "icons/tech/n-dimensional_subspace.png"
+
+Tech
+    name = "LRN_TIME_MECH"
+    description = "LRN_TIME_MECH_DESC"
+    short_description = "THEORY_SHORT_DESC"
+    techtype = Theory
+    category = "LEARNING_CATEGORY"
+    researchcost = 75 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 10
+    prerequisites = "LRN_EVERYTHING"
+    graphic = "icons/tech/temporal_mechanics.png"
+
+Tech
+    name = "LRN_ARTIF_MINDS"
+    description = "LRN_ARTIF_MINDS_DESC"
+    short_description = "RESEARCH_SHORT_DESC"
+    techtype = Application
+    category = "LEARNING_CATEGORY"
+    researchcost = 25 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 4
+    prerequisites = "LRN_ALGO_ELEGANCE"
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                ProductionCenter
+                OwnedBy TheEmpire Source.Owner
+                NOT TargetPopulation low = 0 high = 0
+            ]
+            effects = SetTargetResearch Value + 10 * [[RESEARCH_PER_POP]]
+    ]
+    graphic = "icons/tech/basic_autolabs.png"
+
+Tech
+    name = "LRN_DISTRIB_THOUGHT"
+    description = "LRN_DISTRIB_THOUGHT_DESC"
+    short_description = "RESEARCH_SHORT_DESC"
+    techtype = Application
+    category = "LEARNING_CATEGORY"
+    researchcost = 75 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = "LRN_PSIONICS"
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                ProductionCenter
+                OwnedBy TheEmpire Source.Owner
+                // Focus "FOCUS_RESEARCH"  //Does not require research Focus
+            ]
+            effects = SetTargetResearch Value + Target.Population * 0.5 * [[RESEARCH_PER_POP]]
+    ]
+
+Tech
+    name = "LRN_OBSERVATORY_I"
+    description = "LRN_OBSERVATORY_I_DESC"
+    short_description = "BUILDING_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "LEARNING_CATEGORY"
+    researchcost = 75 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 4
+    prerequisites = "LRN_FORCE_FIELD"
+    unlock = Item type = Building name = "BLD_OBSERVATORY"
+
+/*
+Tech
+    name = "LRN_SOLAR_MAN"
+    description = "LRN_SOLAR_MAN_DESC"
+    short_description = "BUILDING_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "LEARNING_CATEGORY"
+    researchcost = 750 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 1
+    prerequisites = "LRN_GRAVITONICS"
+    unlock = [
+        Item type = Building name = "BLD_SOL_ACCEL"
+        Item type = Building name = "BLD_SOL_REJUV"
+    ]
+*/
+
+Tech
+    name = "LRN_SPATIAL_DISTORT_GEN"
+    description = "LRN_SPATIAL_DISTORT_GEN_DESC"
+    short_description = "BUILDING_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "LEARNING_CATEGORY"
+    researchcost = 125 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = "LRN_NDIM_SUBSPACE"
+    unlock = Item type = Building name = "BLD_SPATIAL_DISTORT_GEN"
+
+Tech
+    name = "LRN_QUANT_NET"
+    description = "LRN_QUANT_NET_DESC"
+    short_description = "RESEARCH_SHORT_DESC"
+    techtype = Application
+    category = "LEARNING_CATEGORY"
+    researchcost = 200 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 6
+    prerequisites = "LRN_NDIM_SUBSPACE"
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                ProductionCenter
+                OwnedBy TheEmpire Source.Owner
+                Focus "FOCUS_RESEARCH"
+            ]
+            effects = SetTargetResearch Value + Target.Population * 2.5 * [[RESEARCH_PER_POP]]
+    ]
+
+Tech
+    name = "LRN_STELLAR_TOMOGRAPHY"
+    description = "LRN_STELLAR_TOMOGRAPHY_DESC"
+    short_description = "RESEARCH_SHORT_DESC"
+    techtype = Application
+    category = "LEARNING_CATEGORY"
+    researchcost = 125 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 6
+    prerequisites = "LRN_EVERYTHING"
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                ProductionCenter
+                OwnedBy TheEmpire Source.Owner
+                Star type = BlackHole
+                Focus "FOCUS_RESEARCH"
+            ]
+            effects = SetTargetResearch Value + Target.Population * 5 * [[RESEARCH_PER_POP]]
+
+        EffectsGroup
+            scope = And [
+                ProductionCenter
+                OwnedBy TheEmpire Source.Owner
+                Star type = Neutron
+                Focus "FOCUS_RESEARCH"
+            ]
+            effects = SetTargetResearch Value + Target.Population * 3.75 * [[RESEARCH_PER_POP]]
+
+        EffectsGroup
+            scope = And [
+                ProductionCenter
+                OwnedBy TheEmpire Source.Owner
+                Star type = [Blue White]
+                Focus "FOCUS_RESEARCH"
+            ]
+            effects = SetTargetResearch Value + Target.Population * 2.5 * [[RESEARCH_PER_POP]]
+
+        EffectsGroup
+            scope = And [
+                ProductionCenter
+                OwnedBy TheEmpire Source.Owner
+                Star type = [Red Orange Yellow]
+                Focus "FOCUS_RESEARCH"
+            ]
+            effects = SetTargetResearch Value + Target.Population * 1 * [[RESEARCH_PER_POP]]
+    ]
+    graphic = "icons/tech/stellar_tomography.png"
+
+Tech
+    name = "LRN_GATEWAY_VOID"
+    description = "LRN_GATEWAY_VOID_DESC"
+    short_description = "BUILDING_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "LEARNING_CATEGORY"
+    researchcost = 150 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = [
+        "LRN_MIND_VOID"
+        "LRN_NDIM_SUBSPACE"
+    ]
+    unlock = Item type = Building name = "BLD_GATEWAY_VOID"
+
+Tech
+    name = "LRN_ENCLAVE_VOID"
+    description = "LRN_ENCLAVE_VOID_DESC"
+    short_description = "BUILDING_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "LEARNING_CATEGORY"
+    researchcost = 150 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = [
+        "LRN_GATEWAY_VOID"
+        "LRN_EVERYTHING"
+    ]
+    unlock = Item type = Building name = "BLD_ENCLAVE_VOID"
+    graphic = "icons/tech/enclave_of_the_void.png"
+
+Tech
+    name = "LRN_PSY_DOM"
+    description = "LRN_PSY_DOM_DESC"
+    short_description = "MIND_CONTROL_SHORT_DESC"
+    techtype = Application
+    category = "LEARNING_CATEGORY"
+    researchcost = 750 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 7
+    prerequisites = [
+        "LRN_UNIF_CONC"
+        "LRN_TIME_MECH"
+    ]
+    effectsgroups =
+        EffectsGroup
+            scope = And [
+                Ship
+                WithinStarlaneJumps 1 And [
+                    Planet
+                    OwnedBy TheEmpire Source.Owner
+                    TargetPopulation low = 1
+                ]
+                Not OwnedBy TheEmpire Source.Owner
+                VisibleToEmpire Source.Owner
+                Random .1
+                Not Monster
+                Not HasTag "TELEPATHIC"
+                Not OwnerHasTech "LRN_PSY_DOM"
+            ]
+            effects = [
+                GenerateSitRepMessage
+                    message = "EFFECT_PSY_DOM"
+                    icon = "icons/sitrep/ship_produced.png"
+                    parameters = [
+                        tag = "empire" data = Target.Owner
+                        tag = "ship" data = Target.ID
+                    ]
+                    empire = Target.Owner
+                GenerateSitRepMessage
+                    message = "EFFECT_PSY_DOM"
+                    icon = "icons/sitrep/ship_produced.png"
+                    parameters = [
+                        tag = "empire" data = Target.Owner
+                        tag = "ship" data = Target.ID
+                    ]
+                    empire = Source.Owner
+                SetOwner Source.Owner
+                MoveTo NumberOf 1 And [ 
+                    System And [ 
+                        WithinStarlaneJumps 1 Target
+                        WithinStarlaneJumps 1 And [
+                            Planet
+                            OwnedBy TheEmpire Source.Owner
+                            TargetPopulation low = 1
+                        ]
+                    ]
+                ]
+            ]
+Tech
+    name = "LRN_ART_BLACK_HOLE"
+    description = "LRN_ART_BLACK_HOLE_DESC"
+    short_description = "BUILDING_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "LEARNING_CATEGORY"
+    researchcost = 350 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 8
+    prerequisites = "LRN_TIME_MECH"
+    unlock = Item type = Building name = "BLD_ART_BLACK_HOLE"
+
+Tech
+    name = "LRN_UNIF_CONC"
+    description = "LRN_UNIF_CONC_DESC"
+    short_description = "BUILDING_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "LEARNING_CATEGORY"
+    researchcost = 400 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 7
+    prerequisites = [
+        "LRN_GATEWAY_VOID"
+        "LRN_QUANT_NET"
+    ]
+    unlock = Item type = Building name = "BLD_COLLECTIVE_NET"
+    graphic = "icons/tech/unified_conscious.png"
+
+Tech
+    name = "LRN_TRANSCEND"
+    description = "LRN_TRANSCEND_DESC"
+    short_description = "VICTORY_SHORT_DESC"
+    techtype = Application
+    category = "LEARNING_CATEGORY"
+    researchcost = 25000 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 20
+    prerequisites = [
+        "CON_TRANS_ARCH"
+        "LRN_PSY_DOM"
+        "PRO_ZERO_GEN"
+        "GRO_ENERGY_META"
+    ]
+    effectsgroups =
+        EffectsGroup
+            scope = Source
+            effects = [
+                GenerateSitRepMessage
+                    message = "SITREP_VICTORY_TECH"
+                    icon = "icons/sitrep/victory.png"
+                    empire = Source.Owner
+                Victory "TECH_VICTORY"
+            ]
+    graphic = "icons/tech/singularity_of_transcendence.png"
+
+
+
+//########################################################
+//#     G R O W T H
+//########################################################
+    
+Tech
+    name = "GRO_PLANET_ECOL"
+    description = "GRO_PLANET_ECOL_DESC"
+    short_description = "THEORY_SHORT_DESC"
+    techtype = Theory
+    category = "GROWTH_CATEGORY"
+    researchcost = 4 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 2
+    graphic = "icons/tech/planetary_ecology.png"
+
+Tech
+    name = "GRO_GENETIC_ENG"
+    description = "GRO_GENETIC_ENG_DESC"
+    short_description = "THEORY_SHORT_DESC"
+    techtype = Theory
+    category = "GROWTH_CATEGORY"
+    researchcost = 4 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 3
+    graphic = "icons/tech/genetic_engineering.png"
+
+Tech
+    name = "CON_ENV_ENCAPSUL"
+    description = "CON_ENV_ENCAPSUL_DESC"
+    short_description = "SUPPLY_SHORT_DESC"
+    techtype = Application
+    category = "CONSTRUCTION_CATEGORY"
+    researchcost = 3 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 2
+    unlock = Item type = ShipPart name = "CO_OUTPOST_POD"
+    EffectsGroup
+        scope = And [
+            OwnedBy TheEmpire Source.Owner
+            Planet Population high = 0
+        ] 
+        accountinglabel = "STANDARD_OUTPOST_SUPPLY_LABEL"
+        effects = SetMaxSupply Value + 1
+    graphic = "icons/tech/habitation_domes.png"
+
+Tech
+    name = "GRO_SYMBIOTIC_BIO"
+    description = "GRO_SYMBIOTIC_BIO_DESC"
+    short_description = "POPULATION_SHORT_DESC"
+    techtype = Application
+    category = "GROWTH_CATEGORY"
+    researchcost = 50 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 6
+    prerequisites = "GRO_PLANET_ECOL"
+    // Effects are located in species.txt
+    graphic = "icons/tech/symbiosis_biology.png"
+
+Tech
+    name = "GRO_ADV_ECOMAN"
+    description = "GRO_ADV_ECOMAN_DESC"
+    short_description = "THEORY_SHORT_DESC"
+    techtype = Theory
+    category = "GROWTH_CATEGORY"
+    researchcost = 50 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 3
+    prerequisites = "GRO_SUBTER_HAB"
+
+Tech
+    name = "GRO_XENO_GENETICS"
+    description = "GRO_XENO_GENETICS_DESC"
+    short_description = "POPULATION_SHORT_DESC"
+    techtype = Application
+    category = "GROWTH_CATEGORY"
+    researchcost = 75 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 8
+    prerequisites = [
+        "GRO_SYMBIOTIC_BIO"
+        "GRO_GENETIC_MED"
+    ]
+    // Effects are located in species.txt
+    graphic = "icons/tech/xenological_genetics.png"
+
+Tech
+    name = "GRO_NANOTECH_MED"
+    description = "GRO_NANOTECH_MED_DESC"
+    short_description = "THEORY_SHORT_DESC"
+    techtype = Theory
+    category = "GROWTH_CATEGORY"
+    researchcost = 40 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = [
+        "GRO_GENETIC_MED"
+        "PRO_NANOTECH_PROD"
+    ]
+    graphic = "icons/tech/nanotech_medicine.png"
+
+Tech
+    name = "GRO_XENO_HYBRIDS"
+    description = "GRO_XENO_HYBRIDS_DESC"
+    short_description = "POPULATION_SHORT_DESC"
+    techtype = Application
+    category = "GROWTH_CATEGORY"
+    researchcost = 150 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 10
+    prerequisites = "GRO_XENO_GENETICS"
+    // Effects are located in species.txt
+    graphic = "icons/tech/xenological_hybridization.png"
+    
+Tech
+    name = "GRO_CYBORG"
+    description = "GRO_CYBORG_DESC"
+    short_description = "POPULATION_SHORT_DESC"
+    techtype = Application
+    category = "GROWTH_CATEGORY"
+    researchcost = 250 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 10
+    prerequisites = "GRO_NANO_CYBERNET"
+    // Effects are located in species.txt
+
+Tech
+    name = "GRO_GENETIC_MED"
+    description = "GRO_GENETIC_MED_DESC"
+    short_description = "BUILDING_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "GROWTH_CATEGORY"
+    researchcost = 12 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 4
+    prerequisites = "GRO_GENETIC_ENG"
+    unlock = Item type = Building name = "BLD_GENOME_BANK"
+    graphic = "icons/tech/genetic_medicine.png"
+
+Tech
+    name = "GRO_LIFECYCLE_MAN"
+    description = "GRO_LIFECYCLE_MAN_DESC"
+    short_description = "SHIP_PART_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "GROWTH_CATEGORY"
+    researchcost = 150 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 6
+    prerequisites = "GRO_GENETIC_ENG"
+    unlock = Item type = ShipPart name = "CO_SUSPEND_ANIM_POD"
+    graphic = "icons/tech/lifecycle_manipulation.png"
+
+Tech
+    name = "GRO_NANO_CYBERNET"
+    description = "GRO_NANO_CYBERNET_DESC"
+    short_description = "THEORY_SHORT_DESC"
+    techtype = Theory
+    category = "GROWTH_CATEGORY"
+    researchcost = 50 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = "GRO_NANOTECH_MED"
+    graphic = "icons/tech/nanotech_cybernetics.png"
+
+Tech
+    name = "GRO_TRANSORG_SENT"
+    description = "GRO_TRANSORG_SENT_DESC"
+    short_description = "THEORY_SHORT_DESC"
+    techtype = Theory
+    category = "GROWTH_CATEGORY"
+    researchcost = 75 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 7
+    prerequisites = [
+        "GRO_TERRAFORM"
+    ]
+
+Tech
+    name = "GRO_ENERGY_META"
+    description = "GRO_ENERGY_META_DESC"
+    short_description = "VARIOUS_SHORT_DESC"
+    techtype = Application
+    category = "GROWTH_CATEGORY"
+    researchcost = 200 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 15
+    prerequisites = [
+        "GRO_CYBORG"
+        "LRN_EVERYTHING"
+        "GRO_TRANSORG_SENT"
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                Ship
+                OwnedBy TheEmpire Source.Owner
+            ]
+            effects = SetMaxFuel Value + 2
+
+//Shield & defense now adjusted in Species.txt
+
+        EffectsGroup
+            scope = And [
+                ProductionCenter
+                OwnedBy TheEmpire Source.Owner
+                Focus "FOCUS_INDUSTRY"
+
+            ]
+            effects = SetTargetIndustry Value + Target.Population * 1.0 * [[INDUSTRY_PER_POP]]
+
+        EffectsGroup
+            scope = And [
+                ProductionCenter
+                OwnedBy TheEmpire Source.Owner
+                Focus "FOCUS_RESEARCH"
+
+            ]
+            effects = SetTargetResearch Value  + Target.Population * 2.5 * [[RESEARCH_PER_POP]]
+    ]
+    graphic = "icons/tech/pure-energy_metabolism.png"
+
+Tech
+    name = "GRO_SUBTER_HAB"
+    description = "GRO_SUBTER_HAB_DESC"
+    short_description = "POPULATION_SHORT_DESC"
+    techtype = Application
+    category = "GROWTH_CATEGORY"
+    researchcost = 12 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 2
+    prerequisites = "GRO_PLANET_ECOL"
+    // Effect is specified in species.txt
+    graphic = "icons/tech/subterranean_construction.png"
+
+/*
+Tech
+    name = "GRO_GENOME_BANK"
+    description = "GRO_GENOME_BANK_DESC"
+    short_description = "BUILDING_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "GROWTH_CATEGORY"
+    researchcost = 35 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 4
+    prerequisites = "GRO_GENETIC_MED"
+    unlock = Item type = Building name = "BLD_GENOME_BANK"
+    graphic = "icons/tech/genome_bank.png"
+
+Tech
+    name = "GRO_INDUSTRY_CLONE"
+    description = "GRO_INDUSTRY_CLONE_DESC"
+    short_description = "BUILDING_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "GROWTH_CATEGORY"
+    researchcost = 8 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 3
+    prerequisites = "GRO_LIFECYCLE_MAN"
+    unlock = Item type = Building name = "BLD_CLONING_CENTER"
+    graphic = "icons/tech/industrial_cloning.png"
+*/
+
+Tech
+    name = "GRO_TERRAFORM"
+    description = "GRO_TERRAFORM_DESC"
+    short_description = "GRO_TERRAFORM_SHORT_DESC"
+    techtype = Application
+    category = "GROWTH_CATEGORY"
+    researchcost = 100 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 4
+    prerequisites = "GRO_ADV_ECOMAN"
+    unlock = [
+        Item type = Building name = "BLD_TERRAFORM"
+        Item type = Building name = "BLD_TERRAFORM_REVERT"
+    ]
+    graphic = "icons/tech/terraform.png"
+
+Tech
+    name = "GRO_BIOTERROR"
+    description = "GRO_BIOTERROR_DESC"
+    short_description = "BUILDING_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "GROWTH_CATEGORY"
+    researchcost = 50 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = "GRO_NANOTECH_MED"
+    unlock = Item type = Building name = "BLD_BIOTERROR_PROJECTOR"
+    graphic = "icons/tech/bioterror_facilities.png"
+    
+/*  Remote Terraforming is broken badly so hidden
+Tech
+    name = "GRO_REMOTE_TERRAFORM"
+    description = "GRO_REMOTE_TERRAFORM_DESC"
+    short_description = "GRO_REMOTE_TERRAFORM_SHORT_DESC"
+    techtype = Application
+    category = "GROWTH_CATEGORY"
+    researchcost = 16 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = "GRO_ECO_METAMORPH"
+    unlock = Item type = Building name = "BLD_REMOTE_TERRAFORM"
+    graphic = "icons/tech/terraform_rapid.png"
+    */
+
+Tech
+    name = "GRO_GAIA_TRANS"
+    description = "GRO_GAIA_TRANS_DESC"
+    short_description = "GRO_GAIA_TRANS_SHORT_DESC"
+    techtype = Application
+    category = "GROWTH_CATEGORY"
+    researchcost = 250 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 7
+    prerequisites = "GRO_TRANSORG_SENT"
+    unlock = Item type = Building name = "BLD_GAIA_TRANS"
+    graphic = "icons/tech/the_living_planet.png"
+
+
+//########################################################
+//#     P R O D U C T I O N
+//########################################################
+
+
+Tech
+    name = "PRO_MICROGRAV_MAN"
+    description = "PRO_MICROGRAV_MAN_DESC"
+    short_description = "INDUSTRY_SHORT_DESC"
+    techtype = Application
+    category = "PRODUCTION_CATEGORY"
+    researchcost = 50 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = "CON_ORBITAL_CON"
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                ProductionCenter
+                OwnedBy TheEmpire Source.Owner
+                ContainedBy And [
+                    System 
+                    Contains And [
+                        Planet
+                        Planet type = Asteroids
+                        OwnedBy TheEmpire Source.Owner
+                    ]
+                ]
+                Focus "FOCUS_INDUSTRY"
+            ]
+            effects = SetTargetIndustry Value + 5
+    ]
+    graphic = "icons/tech/microgravity_manufacturing.png"
+
+Tech
+    name = "PRO_ROBOTIC_PROD"
+    description = "PRO_ROBOTIC_PROD_DESC"
+    short_description = "INDUSTRY_SHORT_DESC"
+    techtype = Application
+    category = "PRODUCTION_CATEGORY"
+    researchcost = 12 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 3
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                ProductionCenter
+                OwnedBy TheEmpire Source.Owner
+                Focus "FOCUS_INDUSTRY"
+            ]
+            effects = SetTargetIndustry Value + Target.Population * 0.5 * [[INDUSTRY_PER_POP]]
+        ]
+    graphic = "icons/tech/robotic_production.png"
+    
+Tech
+    name = "PRO_EXOBOTS"
+    description = "PRO_EXOBOTS_DESC"
+    short_description = "EXOBOT_SHORT_DESC"
+    techtype = Application
+    category = "PRODUCTION_CATEGORY"
+    researchcost = 50 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = "PRO_SENTIENT_AUTOMATION"
+    unlock = Item type = Building name = "BLD_EXOBOT_SHIP"
+    
+    graphic = "icons/species/robotic-01.png"
+
+Tech
+    name = "PRO_FUSION_GEN"
+    description = "PRO_FUSION_GEN_DESC"
+    short_description = "INDUSTRY_SHORT_DESC"
+    techtype = Application
+    category = "PRODUCTION_CATEGORY"
+    researchcost = 18 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 3
+    prerequisites = "PRO_ROBOTIC_PROD"
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                ProductionCenter
+                OwnedBy TheEmpire Source.Owner
+                Focus "FOCUS_INDUSTRY"
+            ]
+            effects = SetTargetIndustry Value + Target.Population * 1.0 * [[INDUSTRY_PER_POP]]
+    ]
+    graphic = "icons/tech/fusion_generation.png"
+
+Tech
+    name = "PRO_NANOTECH_PROD"
+    description = "PRO_NANOTECH_PROD_DESC"
+    short_description = "THEORY_SHORT_DESC"
+    techtype = Theory
+    category = "PRODUCTION_CATEGORY"
+    researchcost = 45 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 4
+    prerequisites = "PRO_ROBOTIC_PROD"
+    graphic = "icons/tech/nanotech_production.png"
+
+Tech
+    name = "PRO_ORBITAL_GEN"
+    description = "PRO_ORBITAL_GEN_DESC"
+    short_description = "BUILDING_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "PRODUCTION_CATEGORY"
+    researchcost = 60 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 4
+    prerequisites = [
+        "PRO_FUSION_GEN"
+        "CON_ORBITAL_CON"
+    ]
+    unlock = Item type = Building name = "BLD_GAS_GIANT_GEN"
+    graphic = "icons/tech/orbital_generation.png"
+
+Tech
+    name = "PRO_SENTIENT_AUTOMATION"
+    description = "PRO_SENTIENT_AUTOMATION_DESC"
+    short_description = "INDUSTRY_SHORT_DESC"
+    techtype = Application
+    category = "PRODUCTION_CATEGORY"
+    researchcost = 125 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = [
+        "LRN_ARTIF_MINDS"
+        "PRO_NANOTECH_PROD"
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                ProductionCenter
+                OwnedBy TheEmpire Source.Owner
+                NOT TargetPopulation low = 0 high = 0
+             ]
+             effects = SetTargetIndustry Value + 5
+    ]
+    graphic = "icons/tech/basic_autofactories.png"
+
+Tech
+    name = "PRO_NDIM_ASSMB"
+    description = "PRO_NDIM_ASSMB_DESC"
+    short_description = "BUILDING_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "PRODUCTION_CATEGORY"
+    researchcost = 200 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = "LRN_NDIM_SUBSPACE"
+    unlock = Item type = Building name = "BLD_HYPER_DAM"
+    graphic = "icons/tech/n-dimensional_assembly.png"
+
+Tech
+    name = "PRO_SINGULAR_GEN"
+    description = "PRO_SINGULAR_GEN_DESC"
+    short_description = "BUILDING_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "PRODUCTION_CATEGORY"
+    researchcost = 150 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 4
+    prerequisites = [
+        "LRN_GRAVITONICS"
+        "PRO_SOL_ORB_GEN"
+    ]
+    unlock = Item type = Building name = "BLD_BLACK_HOLE_POW_GEN"
+    graphic = "icons/tech/artificial_black_hole.png"
+
+Tech
+    name = "PRO_ZERO_GEN"
+    description = "PRO_ZERO_GEN_DESC"
+    short_description = "THEORY_SHORT_DESC"
+    techtype = Theory
+    category = "PRODUCTION_CATEGORY"
+    researchcost = 500 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 7
+    prerequisites = [
+        "PRO_NDIM_ASSMB"
+        "PRO_SINGULAR_GEN"
+        "LRN_EVERYTHING"
+    ]
+    graphic = "icons/tech/zero_point_energy.png"
+
+Tech
+    name = "PRO_INDUSTRY_CENTER_I"
+    description = "PRO_INDUSTRY_CENTER_I_DESC"
+    short_description = "BUILDING_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "PRODUCTION_CATEGORY"
+    researchcost = 30 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 4
+    prerequisites = "PRO_ROBOTIC_PROD"
+    unlock = Item type = Building name = "BLD_INDUSTRY_CENTER"
+    graphic = "icons/tech/industrial_centre_i.png"
+
+Tech
+    name = "PRO_INDUSTRY_CENTER_II"
+    description = "PRO_INDUSTRY_CENTER_II_DESC"
+    short_description = "BUILDING_REFINE_SHORT_DESC"
+    techtype = Refinement
+    category = "PRODUCTION_CATEGORY"
+    researchcost = 150 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = "PRO_INDUSTRY_CENTER_I"
+    graphic = "icons/tech/industrial_centre_ii.png"
+
+Tech
+    name = "PRO_INDUSTRY_CENTER_III"
+    description = "PRO_INDUSTRY_CENTER_III_DESC"
+    short_description = "BUILDING_REFINE_SHORT_DESC"
+    techtype = Refinement
+    category = "PRODUCTION_CATEGORY"
+    researchcost = 500 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 7
+    prerequisites = "PRO_INDUSTRY_CENTER_II"
+    graphic = "icons/tech/industrial_centre_iii.png"
+
+Tech
+    name = "PRO_SOL_ORB_GEN"
+    description = "PRO_SOL_ORB_GEN_DESC"
+    short_description = "BUILDING_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "PRODUCTION_CATEGORY"
+    researchcost = 100 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 8
+    prerequisites = "PRO_ORBITAL_GEN"
+    unlock = Item type = Building name = "BLD_SOL_ORB_GEN"
+
+Tech
+    name = "PRO_NEUTRONIUM_EXTRACTION"
+    description = "PRO_NEUTRONIUM_EXTRACTION_DESC"
+    short_description = "BUILDING_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "PRODUCTION_CATEGORY"
+    researchcost = 150 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = [
+        "PRO_ZERO_GEN"
+        "LRN_STELLAR_TOMOGRAPHY"
+    ]
+    unlock = [
+        Item type = Building name = "BLD_NEUTRONIUM_EXTRACTOR"
+        Item type = Building name = "BLD_NEUTRONIUM_FORGE"
+        Item type = ShipPart name = "AR_NEUTRONIUM_PLATE"
+    ]
+
+
+//########################################################
+//#     C O N S T R U C T I O N
+//########################################################
+
+
+Tech
+    name = "CON_ASYMP_MATS"
+    description = "CON_ASYMP_MATS_DESC"
+    short_description = "THEORY_SHORT_DESC"
+    techtype = Theory
+    category = "CONSTRUCTION_CATEGORY"
+    researchcost = 10 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 2
+    graphic = "icons/tech/asymptotic_materials.png"
+
+Tech
+    name = "CON_ARCH_PSYCH"
+    description = "CON_ARCH_PSYCH_DESC"
+    short_description = "THEORY_SHORT_DESC"
+    techtype = Theory
+    category = "CONSTRUCTION_CATEGORY"
+    researchcost = 100 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 4
+    prerequisites = "CON_ASYMP_MATS"
+    graphic = "icons/tech/architecture_psychology.png"
+
+Tech
+    name = "CON_ARCH_MONOFILS"
+    description = "CON_ARCH_MONOFILS_DESC"
+    short_description = "SUPPLY_SHORT_DESC"
+    techtype = Application
+    category = "CONSTRUCTION_CATEGORY"
+    researchcost = 75 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = "CON_ASYMP_MATS"
+    unlock = Item type = Building name = "BLD_SPACE_ELEVATOR"
+    graphic = "icons/tech/architectural_monofilaments.png"
+
+Tech
+    name = "CON_GAL_INFRA"
+    description = "CON_GAL_INFRA_DESC"
+    short_description = "SUPPLY_SHORT_DESC"
+    techtype = Application
+    category = "CONSTRUCTION_CATEGORY"
+    researchcost = 750 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 7
+    prerequisites = "SHP_INTSTEL_LOG"
+    effectsgroups =
+        EffectsGroup
+            scope = And [
+                Planet
+                OwnedBy TheEmpire Source.Owner
+            ]
+            effects = SetMaxSupply Value + 1
+
+Tech
+    name = "CON_FRC_ENRG_STRC"
+    description = "CON_FRC_ENRG_STRC_DESC"
+    short_description = "METER_GROWTH_SHORT_DESC"
+    techtype = Application
+    category = "CONSTRUCTION_CATEGORY"
+    researchcost = 200 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = [
+        "LRN_FORCE_FIELD"
+        "CON_ARCH_PSYCH"
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                ProductionCenter
+                OwnedBy TheEmpire Source.Owner
+                Industry high = RootCandidate.TargetIndustry - 3
+            ]
+            effects = SetIndustry Value + 2
+
+        EffectsGroup
+            scope = And [
+                ProductionCenter
+                OwnedBy TheEmpire Source.Owner
+                Research high = RootCandidate.TargetResearch - 3
+            ]
+            effects = SetResearch Value + 2
+
+        EffectsGroup
+            scope = And [
+                ProductionCenter
+                OwnedBy TheEmpire Source.Owner
+                Construction high = RootCandidate.TargetConstruction - 3
+            ]
+            effects = SetConstruction Value + 2
+
+        EffectsGroup
+            scope = And [
+                ProductionCenter
+                OwnedBy TheEmpire Source.Owner
+                Industry low = RootCandidate.TargetIndustry - 3 high = RootCandidate.TargetIndustry
+            ]
+            effects = SetIndustry Target.TargetIndustry
+
+        EffectsGroup
+            scope = And [
+                ProductionCenter
+                OwnedBy TheEmpire Source.Owner
+                Research low = RootCandidate.TargetResearch - 3 high = RootCandidate.TargetResearch
+            ]
+            effects = SetResearch Target.TargetResearch
+
+        EffectsGroup
+            scope = And [
+                ProductionCenter
+                OwnedBy TheEmpire Source.Owner
+                Construction low = RootCandidate.TargetConstruction - 3 high = RootCandidate.TargetConstruction
+            ]
+            effects = SetConstruction Target.TargetConstruction
+
+        EffectsGroup
+            scope = And [
+                ProductionCenter
+                OwnedBy TheEmpire Source.Owner
+                Industry low = RootCandidate.TargetIndustry + 5
+            ]
+            effects = SetIndustry Value - 3
+
+        EffectsGroup
+            scope = And [
+                ProductionCenter
+                OwnedBy TheEmpire Source.Owner
+                Research low = RootCandidate.TargetResearch + 5
+            ]
+            effects = SetResearch Value - 3
+
+        EffectsGroup
+            scope = And [
+                ProductionCenter
+                OwnedBy TheEmpire Source.Owner
+                Construction low = RootCandidate.TargetConstruction + 5
+            ]
+            effects = SetConstruction Value - 3
+
+        EffectsGroup
+            scope = And [
+                ProductionCenter
+                OwnedBy TheEmpire Source.Owner
+                Industry low = RootCandidate.TargetIndustry high = RootCandidate.TargetIndustry + 5
+            ]
+            effects = SetIndustry Target.TargetIndustry
+
+        EffectsGroup
+            scope = And [
+                ProductionCenter
+                OwnedBy TheEmpire Source.Owner
+                Research low = RootCandidate.TargetResearch high = RootCandidate.TargetResearch + 5
+            ]
+            effects = SetResearch Target.TargetResearch
+
+        EffectsGroup
+            scope = And [
+                ProductionCenter
+                OwnedBy TheEmpire Source.Owner
+                Construction low = RootCandidate.TargetConstruction high = RootCandidate.TargetConstruction + 5
+            ]
+            effects = SetConstruction Target.TargetConstruction
+    ]
+    graphic = "icons/tech/force_energy_structures.png"
+
+Tech
+    name = "CON_ORBITAL_HAB"
+    description = "CON_ORBITAL_HAB_DESC"
+    short_description = "POPULATION_SHORT_DESC"
+    techtype = Application
+    category = "GROWTH_CATEGORY"
+    researchcost = 250 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 7
+    prerequisites = "PRO_MICROGRAV_MAN"
+    graphic = "icons/tech/orbital_gardens.png"
+
+Tech
+    name = "CON_NDIM_STRC"
+    description = "CON_NDIM_STRC_DESC"
+    short_description = "POPULATION_SHORT_DESC"
+    techtype = Application
+    category = "CONSTRUCTION_CATEGORY"
+    researchcost = 450 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 9
+    prerequisites = [
+        "CON_FRC_ENRG_STRC"
+        "LRN_NDIM_SUBSPACE"
+    ]
+    effectsgroups = 
+        EffectsGroup
+            scope = OwnedBy TheEmpire Source.Owner
+            effects = SetTargetConstruction Value + 10
+    graphic = "icons/tech/n-dimensional_structures.png"
+
+Tech
+    name = "CON_TRANS_ARCH"
+    description = "CON_TRANS_ARCH_DESC"
+    short_description = "BUILDING_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "CONSTRUCTION_CATEGORY"
+    researchcost = 1000 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 10
+    prerequisites = [
+        "CON_ORGANIC_STRC"
+        "CON_NDIM_STRC"
+    ]
+    unlock = Item type = Building name = "BLD_MEGALITH"
+    graphic = "icons/tech/transcendent_architecture.png"
+
+Tech
+    name = "CON_ORGANIC_STRC"
+    description = "CON_ORGANIC_STRC_DESC"
+    short_description = "BUILDING_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "CONSTRUCTION_CATEGORY"
+    researchcost = 150 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 8
+    prerequisites = [
+        "CON_CONTGRAV_ARCH"
+        "CON_FRC_ENRG_STRC"
+    ]
+    unlock = Item type = Building name = "BLD_TRANSFORMER"
+    graphic = "icons/tech/transforming_structures.png"
+
+Tech
+    name = "CON_CONTGRAV_ARCH"
+    description = "CON_CONTGRAV_ARCH_DESC"
+    short_description = "SUPPLY_SHORT_DESC"
+    techtype = Application
+    category = "CONSTRUCTION_CATEGORY"
+    researchcost = 100 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 4
+    prerequisites = "CON_ARCH_MONOFILS"
+    effectsgroups =
+        EffectsGroup
+            scope = And [
+                Planet
+                OwnedBy TheEmpire Source.Owner
+            ]
+            effects = SetMaxSupply Value + 1
+    graphic = "icons/tech/controlled_gravity_architecture.png"
+
+Tech
+    name = "CON_ART_HEAVENLY"
+    description = "CON_ART_HEAVENLY_DESC"
+    short_description = "BUILDING_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "CONSTRUCTION_CATEGORY"
+    researchcost = 100 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 6
+    prerequisites = "CON_CONTGRAV_ARCH"
+    unlock = Item type = Building name = "BLD_ART_MOON"
+    graphic = "icons/tech/artificial_heavenly_bodies.png"
+
+Tech
+    name = "CON_ORBITAL_CON"
+    description = "CON_ORBITAL_CON_DESC"
+    short_description = "SUPPLY_SHORT_DESC"
+    techtype = Application
+    category = "CONSTRUCTION_CATEGORY"
+    researchcost = 40 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 4
+    prerequisites = "CON_ENV_ENCAPSUL"
+    effectsgroups =
+        EffectsGroup
+            scope = And [
+                Planet
+                OwnedBy TheEmpire Source.Owner
+            ]
+            effects = SetMaxSupply Value + 1
+    graphic = "icons/tech/orbital_construction.png"
+
+Tech
+    name = "CON_CONC_CAMP"
+    description = "CON_CONC_CAMP_DESC"
+    short_description = "BUILDING_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "CONSTRUCTION_CATEGORY"
+    researchcost = 36 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 4
+    prerequisites = "CON_ARCH_PSYCH"
+    unlock = Item type = Building name = "BLD_CONC_CAMP"
+
+Tech
+    name = "CON_FRC_ENRG_CAMO"
+    description = "CON_FRC_ENRG_CAMO_DESC"
+    short_description = "STEALTH_SHORT_DESC"
+    techtype = Application
+    category = "SPY_CATEGORY"
+    researchcost = 125 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 3
+    prerequisites = "CON_FRC_ENRG_STRC"
+    effectsgroups =
+        EffectsGroup
+            scope = And [
+                Building
+                OwnedBy TheEmpire Source.Owner
+            ]
+            effects = SetStealth Value + 20
+
+Tech
+    name = "CON_PLANET_DRIVE"
+    description = "CON_PLANET_DRIVE_DESC"
+    short_description = "BUILDING_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "CONSTRUCTION_CATEGORY"
+    researchcost = 250 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 6
+    prerequisites = "CON_GAL_INFRA"
+    unlock = [
+        Item type = Building name = "BLD_PLANET_DRIVE"
+        Item type = Building name = "BLD_PLANET_BEACON"
+    ]
+
+Tech
+    name = "CON_STARGATE"
+    description = "CON_STARGATE_DESC"
+    short_description = "BUILDING_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "CONSTRUCTION_CATEGORY"
+    researchcost = 250 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = "CON_GAL_INFRA"
+    unlock = [
+        Item type = Building name = "BLD_STARGATE"
+    ]
+
+Tech
+    name = "CON_ART_PLANET"
+    description = "CON_ART_PLANET_DESC"
+    short_description = "BUILDING_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "CONSTRUCTION_CATEGORY"
+    researchcost = 500 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 8
+    prerequisites = [
+        "CON_ART_HEAVENLY"
+        "CON_GAL_INFRA"
+    ]
+    unlock = Item type = Building name = "BLD_ART_PLANET"
+
+
+//########################################################
+//#     S H I P S
+//########################################################
+
+
+Tech
+    name = "SHP_GAL_EXPLO"
+    description = "SHP_GAL_EXPLO_DESC"
+    short_description = "THEORY_SHORT_DESC"
+    techtype = Theory
+    category = "SHIPS_CATEGORY"
+    researchcost = 4 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 1
+    graphic = "icons/tech/galactic_exploration.png"
+
+Tech
+    name = "SHP_DOMESTIC_MONSTER"
+    description = "SHP_DOMESTIC_MONSTER_DESC"
+    short_description = "TAME_MONSTER_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 9 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 3
+    prerequisites = "GRO_PLANET_ECOL"
+
+Tech
+    name = "SHP_INTSTEL_LOG"
+    description = "SHP_INTSTEL_LOG_DESC"
+    short_description = "SUPPLY_SHORT_DESC"
+    techtype = Application
+    category = "CONSTRUCTION_CATEGORY"
+    researchcost = 75 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 3
+    prerequisites = "CON_ORBITAL_CON"
+    effectsgroups = EffectsGroup
+            scope = And [
+                Ship
+                OwnedBy TheEmpire Source.Owner
+                StarlaneSpeed low = 1 // Immobile objects do not get the starlane speed boost.
+                WithinDistance 50 And [
+                    Planet
+                    OwnedBy TheEmpire Source.Owner
+                ]
+            ]
+        effects = SetStarlaneSpeed Value + 20
+    graphic = "icons/tech/stellar_navigation.png"
+
+Tech
+    name = "SHP_MIL_ROBO_CONT"
+    description = "SHP_MIL_ROBO_CONT_DESC"
+    short_description = "SHIP_HULL_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 12 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 3
+    prerequisites = "PRO_ROBOTIC_PROD"
+    unlock = [
+        Item type = ShipHull name = "SH_ROBOTIC"
+        Item type = ShipPart name = "ROBOTIC_INTERFACE_SHIELDS"
+    ]
+    graphic = "icons/ship_hulls/robotic_hull_small.png"
+
+Tech
+    name = "SHP_SPACE_FLUX_DRIVE"
+    description = "SHP_SPACE_FLUX_DRIVE_DESC"
+    short_description = "SHIP_HULL_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 25 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 4
+    prerequisites = "SHP_MIL_ROBO_CONT"
+    unlock = Item type = ShipHull name = "SH_SPATIAL_FLUX"
+
+Tech
+    name = "SHP_CONTGRAV_MAINT"
+    description = "SHP_CONTGRAV_MAINT_DESC"
+    short_description = "SHIP_HULL_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 250 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = [
+        "SHP_SPACE_FLUX_DRIVE"
+        "CON_ARCH_MONOFILS"
+    ]
+    unlock = [
+        Item type = ShipHull name = "SH_SELF_GRAVITATING"
+        Item type = Building name = "BLD_SHIPYARD_CON_GEOINT"
+    ]
+    graphic = "icons/ship_hulls/self_gravitating_hull_small.png"
+
+Tech
+    name = "SHP_NANOROBO_MAINT"
+    description = "SHP_NANOROBO_MAINT_DESC"
+    short_description = "SHIP_HULL_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 600 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 8
+    prerequisites = [
+        "SHP_CONTGRAV_MAINT"
+        "PRO_NANOTECH_PROD"
+    ]
+    unlock = [
+        Item type = ShipHull name = "SH_NANOROBOTIC"
+        Item type = Building name = "BLD_SHIPYARD_CON_NANOROBO"
+    ]
+    graphic = "icons/ship_hulls/nano_robotic_hull_small.png"
+
+Tech
+    name = "SHP_MASSPROP_SPEC"
+    description = "SHP_MASSPROP_SPEC_DESC"
+    short_description = "SHIP_HULL_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 1000 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 10
+    prerequisites = "SHP_NANOROBO_MAINT"
+    unlock = [
+        Item type = ShipHull name = "SH_TITANIC"
+        Item type = Building name = "BLD_SHIPYARD_CON_GEOINT"
+    ]
+    graphic = "icons/ship_hulls/titanic_hull_small.png"
+
+Tech
+    name = "SHP_TRANSSPACE_DRIVE"
+    description = "SHP_TRANSSPACE_DRIVE_DESC"
+    short_description = "SHIP_HULL_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 850 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 4
+    prerequisites = "SHP_MASSPROP_SPEC"
+    unlock = [
+        Item type = ShipHull name = "SH_TRANSSPATIAL"
+        Item type = Building name = "BLD_SHIPYARD_CON_ADV_ENGINE"
+    ]
+
+Tech
+    name = "SHP_MIDCOMB_LOG"
+    description = "SHP_MIDCOMB_LOG_DESC"
+    short_description = "SHIP_HULL_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 800 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 8
+    prerequisites = [
+        "SHP_TRANSSPACE_DRIVE"
+        "CON_GAL_INFRA"
+    ]
+    unlock = [
+        Item type = ShipHull name = "SH_LOGISTICS_FACILITATOR"
+        Item type = Building name = "BLD_SHIPYARD_CON_ADV_ENGINE"
+        Item type = Building name = "BLD_SHIPYARD_CON_GEOINT"
+        Item type = Building name = "BLD_SHIPYARD_CON_NANOROBO"
+    ]
+
+Tech
+    name = "SHP_ASTEROID_HULLS"
+    description = "SHP_ASTEROID_HULLS_DESC"
+    short_description = "SHIP_HULL_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 25 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 3
+    prerequisites = "PRO_MICROGRAV_MAN"
+    unlock = [
+        Item type = ShipHull name = "SH_SMALL_ASTEROID"
+        Item type = ShipHull name = "SH_ASTEROID"
+        Item type = Building name = "BLD_SHIPYARD_AST"
+    ]
+    graphic = "icons/ship_hulls/asteroid_hull_small.png"
+
+Tech
+    name = "SHP_HEAVY_AST_HULL"
+    description = "SHP_HEAVY_AST_HULL_DESC"
+    short_description = "SHIP_HULL_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 20 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 8
+    prerequisites = "SHP_ASTEROID_HULLS"
+    unlock = [
+        Item type = ShipHull name = "SH_HEAVY_ASTEROID"
+    ]
+    graphic = "icons/ship_hulls/asteroid_hull_small.png"
+
+Tech
+    name = "SHP_ASTEROID_REFORM"
+    description = "SHP_ASTEROID_REFORM_DESC"
+    short_description = "SHIP_PART_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 100 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 3
+    prerequisites = "SHP_ASTEROID_HULLS"
+    unlock = [
+        //Item type = ShipHull name = "SH_AGREGATE_ASTEROID"
+        Item type = Building name = "BLD_SHIPYARD_AST_REF"
+        Item type = ShipPart name = "AR_ROCK_PLATE"
+    ]
+
+Tech
+    name = "SHP_MONOMOLEC_LATTICE"
+    description = "SHP_MONOMOLEC_LATTICE_DESC"
+    short_description = "SHIP_PART_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 800 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = "SHP_ASTEROID_REFORM"
+    unlock = [
+        Item type = ShipHull name = "SH_CRYSTALLIZED_ASTEROID"
+        Item type = ShipPart name = "AR_CRYSTAL_PLATE"
+        ]
+
+        
+//########################################################
+//#     Organic Hulls
+//########################################################
+
+
+Tech
+    name = "SHP_ORG_HULL"
+    description = "SHP_ORG_HULL_DESC"
+    short_description = "SHIP_HULL_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 8 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = "SHP_DOMESTIC_MONSTER"
+    unlock = [
+        Item type = ShipHull name = "SH_ORGANIC"
+        Item type = Building name = "BLD_SHIPYARD_ORG_ORB_INC"
+    ]
+    graphic = "hulls_design/organic_hull.png"
+        
+Tech
+    name = "SHP_MULTICELL_CAST"
+    description = "SHP_MULTICELL_CAST_DESC"
+    short_description = "SHIP_HULL_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 10 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = [
+        "SHP_ORG_HULL"
+        "GRO_LIFECYCLE_MAN"
+    ]
+    unlock = [
+        Item type = ShipHull name = "SH_STATIC_MULTICELLULAR"
+        Item type = Building name = "BLD_SHIPYARD_ORG_XENO_FAC"
+    ]
+    graphic = "icons/ship_hulls/static_multicellular_small.png"
+        
+Tech
+    name = "SHP_ENDOCRINE_SYSTEMS"
+    description = "SHP_ENDOCRINE_SYSTEMS_DESC"
+    short_description = "SHIP_HULL_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 45 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 8
+    prerequisites = "SHP_MULTICELL_CAST"
+    unlock = [
+        Item type = ShipHull name = "SH_ENDOMORPHIC"
+        Item type = Building name = "BLD_SHIPYARD_ORG_XENO_FAC"
+    ]
+    graphic = "icons/ship_hulls/endomorphic_hull_small.png"
+    
+Tech
+    name = "SHP_ENDOSYMB_HULL"
+    description = "SHP_ENDOSYMB_HULL_DESC"
+    short_description = "SHIP_HULL_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 72 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 4
+    prerequisites = [
+        "SHP_MONOCELL_EXP"
+        "SHP_ENDOCRINE_SYSTEMS"
+    ]
+    unlock = [
+        Item type = ShipHull name = "SH_ENDOSYMBIOTIC"
+        Item type = Building name = "BLD_SHIPYARD_ORG_CELL_GRO_CHAMB"
+        Item type = Building name = "BLD_SHIPYARD_ORG_XENO_FAC"
+    ]
+    graphic = "icons/ship_hulls/endosymbiotic_hull_small.png"
+    
+    
+Tech
+    name = "SHP_MONOCELL_EXP"
+    description = "SHP_MONOCELL_EXP_DESC"
+    short_description = "SHIP_HULL_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 45 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 8
+    prerequisites = [
+        "SHP_CONT_SYMB"
+    ]
+    unlock = [
+        Item type = ShipHull name = "SH_PROTOPLASMIC"
+        Item type = Building name = "BLD_SHIPYARD_ORG_CELL_GRO_CHAMB"
+    ]
+
+Tech
+    name = "SHP_CONT_SYMB"
+    description = "SHP_CONT_SYMB_DESC"
+    short_description = "SHIP_HULL_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 10 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = [        
+        "SHP_ORG_HULL"
+    ]
+    unlock = [
+        Item type = ShipHull name = "SH_SYMBIOTIC"
+        Item type = Building name = "BLD_SHIPYARD_ORG_CELL_GRO_CHAMB"
+    ]
+
+Tech
+    name = "SHP_BIOADAPTIVE_SPEC"
+    description = "SHP_BIOADAPTIVE_SPEC_DESC"
+    short_description = "SHIP_HULL_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 125 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 12
+    prerequisites = [
+        "SHP_MONOCELL_EXP"
+        "GRO_TRANSORG_SENT"
+    ]
+    unlock = [
+        Item type = ShipHull name = "SH_BIOADAPTIVE"
+        Item type = Building name = "BLD_SHIPYARD_ORG_CELL_GRO_CHAMB"
+    ]
+
+Tech
+    name = "SHP_CONT_BIOADAPT"
+    description = "SHP_CONT_BIOADAPT_DESC"
+    short_description = "SHIP_HULL_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 125 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 12
+    prerequisites = [
+        "GRO_XENO_HYBRIDS"
+        "SHP_ENDOCRINE_SYSTEMS"
+    ]
+    unlock = [
+        Item type = ShipHull name = "SH_RAVENOUS"
+        Item type = Building name = "BLD_SHIPYARD_ORG_XENO_FAC"
+    ]
+    graphic = "icons/ship_hulls/ravenous_hull_small.png"
+    
+        
+Tech    name = "SHP_SENT_HULL"
+    description = "SHP_SENT_HULL_DESC"
+    short_description = "SHIP_HULL_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 200 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = [
+        "SHP_BIOADAPTIVE_SPEC"
+        "SHP_CONT_BIOADAPT"
+    ]
+    unlock = [
+        Item type = ShipHull name = "SH_SENTIENT"
+        Item type = Building name = "BLD_SHIPYARD_ORG_CELL_GRO_CHAMB"
+        Item type = Building name = "BLD_SHIPYARD_ORG_XENO_FAC"
+    ]
+
+Tech
+    name = "SHP_FRC_ENRG_COMP"
+    description = "SHP_FRC_ENRG_COMP_DESC"
+    short_description = "SHIP_HULL_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 160 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 3
+    prerequisites = [
+        "LRN_GRAVITONICS"
+    ]
+    unlock = [
+        Item type = ShipHull name = "SH_COMPRESSED_ENERGY"
+        Item type = Building name = "BLD_SHIPYARD_ENRG_COMP"
+    ]
+
+Tech
+    name = "SHP_QUANT_ENRG_MAG"
+    description = "SHP_QUANT_ENRG_MAG_DESC"
+    short_description = "SHIP_HULL_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 420 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = "SHP_FRC_ENRG_COMP"
+    unlock = Item type = ShipHull name = "SH_QUANTUM_ENERGY"
+    graphic = "icons/ship_hulls/quantum_energy_hull_small.png"
+
+Tech
+    name = "SHP_ENRG_BOUND_MAN"
+    description = "SHP_ENRG_BOUND_MAN_DESC"
+    short_description = "SHIP_HULL_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 420 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = "SHP_FRC_ENRG_COMP"
+    unlock = Item type = ShipHull name = "SH_FRACTAL_ENERGY"
+    graphic = "icons/ship_hulls/fractal_energy_hull_small.png"
+
+Tech
+    name = "SHP_SOLAR_CONT"
+    description = "SHP_SOLAR_CONT_DESC"
+    short_description = "SHIP_HULL_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 950 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 7
+    prerequisites = [
+        "SHP_QUANT_ENRG_MAG"
+        "SHP_ENRG_BOUND_MAN"
+        "PRO_ZERO_GEN"
+    ]
+    unlock = [
+        Item type = ShipHull name = "SH_SOLAR"
+        Item type = Building name = "BLD_SHIPYARD_ENRG_SOLAR"
+    ]
+    graphic = "icons/ship_hulls/solar_hull_small.png"
+
+Tech
+    name = "SHP_CAMO_AST_HULL"
+    description = "SHP_CAMO_AST_HULL_DESC"
+    short_description = "SHIP_HULL_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 26 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 2
+    prerequisites = "SHP_ASTEROID_HULLS"
+    unlock = [
+        Item type = ShipHull name = "SH_SMALL_CAMOUFLAGE_ASTEROID"
+        Item type = ShipHull name = "SH_CAMOUFLAGE_ASTEROID"
+        Item type = Building name = "BLD_SHIPYARD_AST"
+    ]
+
+Tech
+    name = "SHP_MINIAST_SWARM"
+    description = "SHP_MINIAST_SWARM_DESC"
+    short_description = "SHIP_HULL_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 80 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 4
+    prerequisites = "SHP_ASTEROID_REFORM"
+    unlock = [
+        Item type = ShipHull name = "SH_MINIASTEROID_SWARM"
+        Item type = Building name = "BLD_SHIPYARD_AST_REF"
+    ]
+
+Tech
+    name = "SHP_SCAT_AST_HULL"
+    description = "SHP_SCAT_AST_HULL_DESC"
+    short_description = "SHIP_HULL_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 145 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = "SHP_MINIAST_SWARM"
+    unlock = [
+        Item type = ShipHull name = "SH_SCATTERED_ASTEROID"
+        Item type = Building name = "BLD_SHIPYARD_AST_REF"
+    ]
+
+Tech
+    name = "SHP_FLEET_REPAIR"
+    description = "SHP_FLEET_REPAIR_DESC"
+    short_description = "SHIP_REPAIR_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 40 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 10
+    prerequisites = "SHP_INTSTEL_LOG"
+    effectsgroups =
+        EffectsGroup
+            scope = And [
+                Ship
+                InSystem
+                Stationary
+                OwnedBy TheEmpire Source.Owner
+                Turn low = LocalCandidate.System.LastTurnBattleHere + 2
+                Structure high = LocalCandidate.MaxStructure - 0.001
+                ResupplyableBy empire = Source.Owner
+            ]
+            effects = SetStructure Value + 1
+
+Tech
+    name = "SHP_IMPROVED_ENGINE_COUPLINGS"
+    description = "SHP_IMPROVED_ENGINE_COUPLINGS_DESC"
+    short_description = "SHIP_PART_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 24 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 3
+    prerequisites = "SHP_GAL_EXPLO"
+    unlock = Item type = ShipPart name = "FU_IMPROVED_ENGINE_COUPLINGS"
+    graphic = "icons/ship_parts/engine-1.png"
+    
+Tech
+    name = "SHP_N_DIMENSIONAL_ENGINE_MATRIX"
+    description = "SHP_N_DIMENSIONAL_ENGINE_MATRIX_DESC"
+    short_description = "SHIP_PART_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 250 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = [
+        "SHP_IMPROVED_ENGINE_COUPLINGS"
+        "LRN_NDIM_SUBSPACE"
+    ]
+    unlock = Item type = ShipPart name = "FU_N_DIMENSIONAL_ENGINE_MATRIX"
+    graphic = "icons/ship_parts/engine-2.png"
+    
+Tech
+    name = "SHP_SINGULARITY_ENGINE_CORE"
+    description = "SHP_SINGULARITY_ENGINE_CORE_DESC"
+    short_description = "SHIP_PART_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 500 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 10
+    prerequisites = [
+        "SHP_N_DIMENSIONAL_ENGINE_MATRIX"
+        "PRO_SINGULAR_GEN"
+    ]
+    unlock = Item type = ShipPart name = "FU_SINGULARITY_ENGINE_CORE"
+    graphic = "icons/ship_parts/engine-3.png"
+    
+Tech
+    name = "SHP_DEUTERIUM_TANK"
+    description = "SHP_DEUTERIUM_TANK_DESC"
+    short_description = "SHIP_PART_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 24 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 3
+    prerequisites = [
+        "SHP_GAL_EXPLO"
+        "PRO_FUSION_GEN"
+    ]
+    unlock = [
+        Item type = ShipPart name = "FU_DEUTERIUM_TANK"
+        Item type = ShipPart name = "FU_RAMSCOOP"
+    ]
+    graphic = "icons/ship_parts/deuterium_tank.png"
+
+Tech
+    name = "SHP_REINFORCED_HULL"
+    description = "SHP_REINFORCED_HULL_DESC"
+    short_description = "STRUCTURE_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 36 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 3
+    prerequisites = "CON_ARCH_MONOFILS"
+    effectsgroups =
+        EffectsGroup
+            scope = And [
+                Ship
+                OwnedBy TheEmpire Source.Owner
+            ]
+            effects = SetMaxStructure Value + 5
+
+Tech
+    name = "SHP_BASIC_DAM_CONT"
+    description = "SHP_BASIC_DAM_CONT_DESC"
+    short_description = "STRUCTURE_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 40 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 4
+    prerequisites = "SHP_MIL_ROBO_CONT"
+    effectsgroups =
+        EffectsGroup
+            scope = And [
+                Ship
+                OwnedBy TheEmpire Source.Owner
+            ]
+            activation = Not OwnerHasTech "SHP_ADV_DAM_CONT"
+            effects = SetStructure Value + 1
+
+Tech
+    name = "SHP_ADV_DAM_CONT"
+    description = "SHP_ADV_DAM_CONT_DESC"
+    short_description = "STRUCTURE_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 200 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 3
+    prerequisites = "SHP_BASIC_DAM_CONT"
+    effectsgroups =
+        EffectsGroup
+            scope = And [
+                Ship
+                OwnedBy TheEmpire Source.Owner
+            ]
+            effects = SetStructure Value + (Target.MaxStructure/4)
+
+Tech
+    name = "SHP_ANTIMATTER_TANK"
+    description = "SHP_ANTIMATTER_TANK_DESC"
+    short_description = "SHIP_PART_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 175 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 3
+    prerequisites = [
+        "SHP_DEUTERIUM_TANK"
+        "LRN_FORCE_FIELD"
+    ]
+    unlock = Item type = ShipPart name = "FU_ANTIMATTER_TANK"
+    graphic = "icons/ship_parts/antimatter_tank.png"
+
+Tech
+    name = "SHP_NOVA_BOMB"
+    description = "SHP_NOVA_BOMB_DESC"
+    short_description = "SHIP_PART_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 750 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 12
+    prerequisites = [
+        "LRN_TIME_MECH"
+        "PRO_ZERO_GEN"
+    ]
+    unlock = [
+        Item type = ShipPart name = "SP_NOVA_BOMB"
+        Item type = Building name = "BLD_NOVA_BOMB_ACTIVATOR"
+    ]
+
+Tech
+    name = "SHP_DEATH_SPORE"
+    description = "SHP_DEATH_SPORE_DESC"
+    short_description = "SHIP_PART_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 450 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 3
+    prerequisites = 
+        "GRO_ADV_ECOMAN"
+    unlock = Item type = ShipPart name = "SP_DEATH_SPORE"
+
+Tech
+    name = "SHP_BIOTERM"
+    description = "SHP_BIOTERM_DESC"
+    short_description = "SHIP_PART_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 75 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = [
+        "SHP_DEATH_SPORE"
+        "GRO_BIOTERROR"
+    ]
+    unlock = Item type = ShipPart name = "SP_BIOTERM"
+
+//#
+//#     SHIPS SHIELDS
+//#
+
+Tech
+    name = "SHP_DEFLECTOR_SHIELD"
+    description = "SHP_DEFLECTOR_SHIELD_DESC"
+    short_description = "SHIP_PART_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 150 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 10
+    prerequisites = "LRN_FORCE_FIELD"
+    unlock = Item type = ShipPart name = "SH_DEFLECTOR"
+    graphic = "icons/ship_parts/deflector_shield.png"
+
+Tech
+    name = "SHP_PLASMA_SHIELD"
+    description = "SHP_PLASMA_SHIELD_DESC"
+    short_description = "SHIP_PART_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 750 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 10
+    prerequisites = "SHP_DEFLECTOR_SHIELD"
+    unlock = Item type = ShipPart name = "SH_PLASMA"
+    graphic = "icons/ship_parts/plasma_shield.png"
+
+Tech
+    name = "SHP_BLACKSHIELD"
+    description = "SHP_BLACKSHIELD_DESC"
+    short_description = "SHIP_PART_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 3750 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 10
+    prerequisites = "SHP_PLASMA_SHIELD"
+    unlock = Item type = ShipPart name = "SH_BLACK"
+    graphic = "icons/ship_parts/blackshield.png"
+
+Tech
+    name = "SHP_MULTISPEC_SHIELD"
+    description = "SHP_MULTISPEC_SHIELD_DESC"
+    short_description = "SHIP_PART_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 9999
+    researchturns = 9999
+    Unresearchable
+    prerequisites = "SPY_DIST_MOD"
+    unlock = Item type = ShipPart name = "SH_MULTISPEC"
+
+//#
+//#     SHIPS ARMOR
+//#
+
+Tech
+    name = "SHP_ROOT_ARMOR"
+    description = "SHP_ROOT_ARMOR_DESC"
+    short_description = "SHIP_PART_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 1
+    researchturns = 1
+    unlock = Item type = ShipPart name = "AR_STD_PLATE"
+    graphic = "icons/tech/armor_plating.png"
+
+Tech
+    name = "SHP_ZORTRIUM_PLATE"
+    description = "SHP_ZORTRIUM_PLATE_DESC"
+    short_description = "SHIP_PART_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 30 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 2
+    prerequisites = "SHP_ROOT_ARMOR"
+    unlock = Item type = ShipPart name = "AR_ZORTRIUM_PLATE"
+    graphic = "icons/tech/armor_plating.png"
+
+Tech
+    name = "SHP_DIAMOND_PLATE"
+    description = "SHP_DIAMOND_PLATE_DESC"
+    short_description = "SHIP_PART_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 150 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 4
+    prerequisites = "SHP_ZORTRIUM_PLATE"
+    unlock = Item type = ShipPart name = "AR_DIAMOND_PLATE"
+    graphic = "icons/tech/armor_plating.png"
+
+Tech
+    name = "SHP_XENTRONIUM_PLATE"
+    description = "SHP_XENTRONIUM_PLATE_DESC"
+    short_description = "SHIP_PART_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 750 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 6
+    prerequisites = "SHP_DIAMOND_PLATE"
+    unlock = Item type = ShipPart name = "AR_XENTRONIUM_PLATE"
+    graphic = "icons/tech/armor_plating.png"
+
+//#
+//#     SHIPS WEAPONS
+//#
+
+Tech
+    Name ="SHP_ROOT_AGGRESSION"
+    description = "SHP_ROOT_AGGRESSION_DESC"
+    short_description = "SHIP_WEAPON_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 1
+    researchturns = 1
+    unlock = [
+        Item type = ShipPart name = "SR_WEAPON_1_1"
+        Item type = ShipPart name = "GT_TROOP_POD"
+    ]
+    graphic = ""
+
+Tech
+    name = "SHP_WEAPON_1_2"
+    description = "SHP_WEAPON_1_2_DESC"
+    short_description = "SHIP_WEAPON_UNLOCK_SHORT_DESC"
+    techtype = Refinement
+    category = "SHIPS_CATEGORY"
+    researchcost = 4 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 2
+    prerequisites = "SHP_ROOT_AGGRESSION"
+    unlock = Item type = ShipPart name = "SR_WEAPON_1_2"
+    graphic = "icons/ship_parts/mass-driver-2.png"
+    
+Tech
+    name = "SHP_WEAPON_1_3"
+    description = "SHP_WEAPON_1_3_DESC"
+    short_description = "SHIP_WEAPON_UNLOCK_SHORT_DESC"
+    techtype = Refinement
+    category = "SHIPS_CATEGORY"
+    researchcost = 6 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 2
+    prerequisites = "SHP_WEAPON_1_2"
+    unlock = Item type = ShipPart name = "SR_WEAPON_1_3"
+    graphic = "icons/ship_parts/mass-driver-3.png"
+
+Tech
+    name = "SHP_WEAPON_1_4"
+    description = "SHP_WEAPON_1_4_DESC"
+    short_description = "SHIP_WEAPON_UNLOCK_SHORT_DESC"
+    techtype = Refinement
+    category = "SHIPS_CATEGORY"
+    researchcost = 10 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 2
+    prerequisites = "SHP_WEAPON_1_3"
+    unlock = Item type = ShipPart name = "SR_WEAPON_1_4"
+    graphic = "icons/ship_parts/mass-driver-4.png"
+
+Tech
+    name = "SHP_WEAPON_2_1"
+    description = "SHP_WEAPON_2_1_DESC"
+    short_description = "SHIP_WEAPON_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 30 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 8
+    prerequisites = "SHP_ROOT_AGGRESSION"
+    unlock = Item type = ShipPart name = "SR_WEAPON_2_1"
+    graphic = "icons/ship_parts/laser-1.png"
+
+Tech
+    name = "SHP_WEAPON_2_2"
+    description = "SHP_WEAPON_2_2_DESC"
+    short_description = "SHIP_WEAPON_UNLOCK_SHORT_DESC"
+    techtype = Refinement
+    category = "SHIPS_CATEGORY"
+    researchcost = 20 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 2
+    prerequisites = "SHP_WEAPON_2_1"
+    unlock = Item type = ShipPart name = "SR_WEAPON_2_2"
+    graphic = "icons/ship_parts/laser-2.png"
+
+Tech
+    name = "SHP_WEAPON_2_3"
+    description = "SHP_WEAPON_2_3_DESC"
+    short_description = "SHIP_WEAPON_UNLOCK_SHORT_DESC"
+    techtype = Refinement
+    category = "SHIPS_CATEGORY"
+    researchcost = 30 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 2
+    prerequisites = "SHP_WEAPON_2_2"
+    unlock = Item type = ShipPart name = "SR_WEAPON_2_3"
+    graphic = "icons/ship_parts/laser-3.png"
+
+Tech
+    name = "SHP_WEAPON_2_4"
+    description = "SHP_WEAPON_2_4_DESC"
+    short_description = "SHIP_WEAPON_UNLOCK_SHORT_DESC"
+    techtype = Refinement
+    category = "SHIPS_CATEGORY"
+    researchcost = 50 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 2
+    prerequisites = "SHP_WEAPON_2_3"
+    unlock = Item type = ShipPart name = "SR_WEAPON_2_4"
+    graphic = "icons/ship_parts/laser-4.png"
+
+Tech
+    name = "SHP_WEAPON_3_1"
+    description = "SHP_WEAPON_3_1_DESC"
+    short_description = "SHIP_WEAPON_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 150 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 8
+    prerequisites = "SHP_WEAPON_2_1"
+    unlock = Item type = ShipPart name = "SR_WEAPON_3_1"
+    graphic = "icons/ship_parts/plasma-1.png"
+
+Tech
+    name = "SHP_WEAPON_3_2"
+    description = "SHP_WEAPON_3_2_DESC"
+    short_description = "SHIP_WEAPON_UNLOCK_SHORT_DESC"
+    techtype = Refinement
+    category = "SHIPS_CATEGORY"
+    researchcost = 100 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 2
+    prerequisites = "SHP_WEAPON_3_1"
+    unlock = Item type = ShipPart name = "SR_WEAPON_3_2"
+    graphic = "icons/ship_parts/plasma-2.png"
+
+Tech
+    name = "SHP_WEAPON_3_3"
+    description = "SHP_WEAPON_3_3_DESC"
+    short_description = "SHIP_WEAPON_UNLOCK_SHORT_DESC"
+    techtype = Refinement
+    category = "SHIPS_CATEGORY"
+    researchcost = 150 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 2
+    prerequisites = "SHP_WEAPON_3_2"
+    unlock = Item type = ShipPart name = "SR_WEAPON_3_3"
+    graphic = "icons/ship_parts/plasma-3.png"
+
+Tech
+    name = "SHP_WEAPON_3_4"
+    description = "SHP_WEAPON_3_4_DESC"
+    short_description = "SHIP_WEAPON_UNLOCK_SHORT_DESC"
+    techtype = Refinement
+    category = "SHIPS_CATEGORY"
+    researchcost = 250 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 2
+    prerequisites = "SHP_WEAPON_3_3"
+    unlock = Item type = ShipPart name = "SR_WEAPON_3_4"
+    graphic = "icons/ship_parts/plasma-4.png"
+
+Tech
+    name = "SHP_WEAPON_4_1"
+    description = "SHP_WEAPON_4_1_DESC"
+    short_description = "SHIP_WEAPON_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 750 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 10
+    prerequisites = "SHP_WEAPON_3_1"
+    unlock = Item type = ShipPart name = "SR_WEAPON_4_1"
+    graphic = "icons/ship_parts/death-ray-1.png"
+
+Tech
+    name = "SHP_WEAPON_4_2"
+    description = "SHP_WEAPON_4_2_DESC"
+    short_description = "SHIP_WEAPON_UNLOCK_SHORT_DESC"
+    techtype = Refinement
+    category = "SHIPS_CATEGORY"
+    researchcost = 500 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 3
+    prerequisites = "SHP_WEAPON_4_1"
+    unlock = Item type = ShipPart name = "SR_WEAPON_4_2"
+    graphic = "icons/ship_parts/death-ray-2.png"
+
+Tech
+    name = "SHP_WEAPON_4_3"
+    description = "SHP_WEAPON_4_3_DESC"
+    short_description = "SHIP_WEAPON_UNLOCK_SHORT_DESC"
+    techtype = Refinement
+    category = "SHIPS_CATEGORY"
+    researchcost = 750 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 3
+    prerequisites = "SHP_WEAPON_4_2"
+    unlock = Item type = ShipPart name = "SR_WEAPON_4_3"
+    graphic = "icons/ship_parts/death-ray-3.png"
+
+Tech
+    name = "SHP_WEAPON_4_4"
+    description = "SHP_WEAPON_4_4_DESC"
+    short_description = "SHIP_WEAPON_UNLOCK_SHORT_DESC"
+    techtype = Refinement
+    category = "SHIPS_CATEGORY"
+    researchcost = 1250 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 3
+    prerequisites = "SHP_WEAPON_4_3"
+    unlock = Item type = ShipPart name = "SR_WEAPON_4_4"
+    graphic = "icons/ship_parts/death-ray-4.png"
+
+
+Tech
+    name = "SPY_PLANET_STEALTH_MOD"
+    description = "SPY_PLANET_STEALTH_MOD_DESC"
+    short_description = "GAME_MAKE_WORK_SHORT_DESC"
+    techtype = Application
+    category = "SPY_CATEGORY"
+    researchcost = 1
+    researchturns = 1
+    Unresearchable
+    effectsgroups =
+        EffectsGroup
+            scope = Building
+            stackinggroup = "PLANET_STEALTH_MOD_STACK"
+            effects = SetStealth Value + 0.01
+    graphic = ""
+
+
+//#     Ship Other
+
+Tech
+    name = "SHP_KRILL_SPAWN"
+    description = "SHP_KRILL_SPAWN_DESC"
+    short_description = "SHIP_PART_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SHIPS_CATEGORY"
+    researchcost = 9999
+    researchturns = 9999
+    Unresearchable
+    unlock = Item type = ShipPart name = "SP_KRILL_SPAWNER"
+
+
+//########################################################
+//#     I N T E L L I G E N C E
+//########################################################
+
+
+    
+//#
+//#     D E T E C T I O N
+//#
+
+Tech
+    name = "SPY_DETECT_1"
+    description = "SPY_DETECT_1_DESC"
+    short_description = "DETECTION_SHORT_DESC"
+    techtype = Application
+    category = "SPY_CATEGORY"
+    researchcost = 1
+    researchturns = 1
+    Unresearchable
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                Planet
+                OwnedBy TheEmpire Source.Owner
+            ]
+            activation = And [
+                Not OwnerHasTech "SPY_DETECT_2"
+                Not OwnerHasTech "SPY_DETECT_3"
+                Not OwnerHasTech "SPY_DETECT_4"
+                Not OwnerHasTech "SPY_DETECT_5"
+            ]
+            effects = SetDetection Value + 50
+
+        EffectsGroup
+            scope = Source
+            activation = And [
+                Not OwnerHasTech "SPY_DETECT_2"
+                Not OwnerHasTech "SPY_DETECT_3"
+                Not OwnerHasTech "SPY_DETECT_4"
+                Not OwnerHasTech "SPY_DETECT_5"
+            ]
+            effects = SetEmpireMeter Source.Owner "METER_DETECTION_STRENGTH" Value + 10
+    ]
+
+Tech
+    name = "SPY_DETECT_2"
+    description = "SPY_DETECT_2_DESC"
+    short_description = "DETECTION_SHORT_DESC"
+    techtype = Application
+    category = "SPY_CATEGORY"
+    researchcost = 50 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = "SHP_GAL_EXPLO"
+    unlock = [
+        Item type = ShipPart name = "DT_DETECTOR_2"
+        Item type = Building name = "BLD_SCANNING_FACILITY"
+    ]
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                Planet
+                OwnedBy TheEmpire Source.Owner
+            ]
+            activation = And [
+                Not OwnerHasTech "SPY_DETECT_3"
+                Not OwnerHasTech "SPY_DETECT_4"
+                Not OwnerHasTech "SPY_DETECT_5"
+            ]
+            effects = SetDetection Value + 75
+
+        EffectsGroup
+            scope = Source
+            activation = And [
+                Not OwnerHasTech "SPY_DETECT_3"
+                Not OwnerHasTech "SPY_DETECT_4"
+                Not OwnerHasTech "SPY_DETECT_5"
+            ]
+            effects = SetEmpireMeter Source.Owner "METER_DETECTION_STRENGTH" Value + 30
+    ]
+    graphic = "icons/tech/active_radar.png"
+    
+Tech
+    name = "SPY_DETECT_3"
+    description = "SPY_DETECT_3_DESC"
+    short_description = "DETECTION_SHORT_DESC"
+    techtype = Application
+    category = "SPY_CATEGORY"
+    researchcost = 200 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 6
+    prerequisites = "SPY_DETECT_2"
+    unlock = Item type = ShipPart name = "DT_DETECTOR_3"
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                Planet
+                OwnedBy TheEmpire Source.Owner
+            ]
+            activation = And [
+                Not OwnerHasTech "SPY_DETECT_4"
+                Not OwnerHasTech "SPY_DETECT_5"
+                ]
+            effects = SetDetection Value + 150
+
+        EffectsGroup
+            scope = Source
+            activation = And [
+                Not OwnerHasTech "SPY_DETECT_4"
+                Not OwnerHasTech "SPY_DETECT_5"
+                ]
+            effects = SetEmpireMeter Source.Owner "METER_DETECTION_STRENGTH" Value + 50
+    ]
+    
+Tech
+    name = "SPY_DETECT_4"
+    description = "SPY_DETECT_4_DESC"
+    short_description = "DETECTION_SHORT_DESC"
+    techtype = Application
+    category = "SPY_CATEGORY"
+    researchcost = 500 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 7
+    prerequisites = "SPY_DETECT_3"
+    unlock = Item type = ShipPart name = "DT_DETECTOR_4"
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                Planet
+                OwnedBy TheEmpire Source.Owner
+            ]
+            activation = Not OwnerHasTech "SPY_DETECT_5"
+            effects = SetDetection Value + 200
+
+        EffectsGroup
+            scope = Source
+            activation = Not OwnerHasTech "SPY_DETECT_5"
+            effects = SetEmpireMeter Source.Owner "METER_DETECTION_STRENGTH" Value + 70
+    ]
+    
+Tech
+    name = "SPY_DETECT_5"
+    description = "SPY_DETECT_5_DESC"
+    short_description = "DETECTION_SHORT_DESC"
+    techtype = Application
+    category = "SPY_CATEGORY"
+    researchcost = 1000 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 8
+    prerequisites = "SPY_DETECT_4"
+    effectsgroups = [
+        EffectsGroup
+            scope = And [
+                Planet
+                OwnedBy TheEmpire Source.Owner
+            ]
+            effects = SetDetection Value + 300
+
+        EffectsGroup
+            scope = Source
+            effects = SetEmpireMeter Source.Owner "METER_DETECTION_STRENGTH" Value + 200
+    ]
+
+Tech
+    name = "SPY_DIST_MOD"
+    description = "SPY_DIST_MOD_DESC"
+    short_description = "SHIP_PART_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SPY_CATEGORY"
+    researchcost = 75 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 4
+    prerequisites = "LRN_EVERYTHING"
+    unlock = Item type = ShipPart name = "SP_DISTORTION_MODULATOR"
+    
+Tech
+    name = "SPY_LIGHTHOUSE"
+    description = "SPY_LIGHTHOUSE_DESC"
+    short_description = "BUILDING_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SPY_CATEGORY"
+    researchcost = 75 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 4
+    prerequisites = "SPY_DETECT_2"
+    unlock = Item type = Building name = "BLD_LIGHTHOUSE"
+    graphic = "icons/tech/interstellar_lighthouse.png"
+
+//#
+//#     S T E A L T H
+//#    
+
+Tech
+    name = "SPY_ROOT_DECEPTION"
+    description = "SPY_ROOT_DECEPTION_DESC"
+    short_description = "THEORY_SHORT_DESC"
+    techtype = Theory
+    category = "SPY_CATEGORY"
+    researchcost = 1
+    researchturns = 1
+
+Tech
+    name = "SPY_STEALTH_1"
+    description = "SPY_STEALTH_1_DESC"
+    short_description = "SHIP_PART_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SPY_CATEGORY"
+    researchcost = 100 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 5
+    prerequisites = "SPY_ROOT_DECEPTION"
+    unlock = Item type = ShipPart name = "ST_CLOAK_1"
+    effectsgroups =
+        EffectsGroup
+            scope = And [
+                OwnedBy TheEmpire Source.Owner
+                Or [
+                    Planet
+                    System
+                ]
+            ]
+            activation = And [
+                Not OwnerHasTech "SPY_STEALTH_2"
+                Not OwnerHasTech "SPY_STEALTH_3"
+                Not OwnerHasTech "SPY_STEALTH_4"
+            ]
+            effects = AddSpecial "CLOUD_COVER_SLAVE_SPECIAL"
+            
+Tech
+    name = "SPY_STEALTH_2"
+    description = "SPY_STEALTH_2_DESC"
+    short_description = "SHIP_PART_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SPY_CATEGORY"
+    researchcost = 200 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 6
+    prerequisites = "SPY_STEALTH_1"
+    unlock = Item type = ShipPart name = "ST_CLOAK_2"
+    effectsgroups =
+        EffectsGroup
+            scope = And [
+                OwnedBy TheEmpire Source.Owner
+                Or [
+                    Planet
+                    System
+                ]
+            ]
+            activation = And [
+                Not OwnerHasTech "SPY_STEALTH_3"
+                Not OwnerHasTech "SPY_STEALTH_4"
+            ]
+            effects = [
+                AddSpecial "VOLCANIC_ASH_SLAVE_SPECIAL"
+                RemoveSpecial "CLOUD_COVER_SLAVE_SPECIAL"
+            ]
+            
+Tech
+    name = "SPY_STEALTH_3"
+    description = "SPY_STEALTH_3_DESC"
+    short_description = "SHIP_PART_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SPY_CATEGORY"
+    researchcost = 500 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 7
+    prerequisites = "SPY_STEALTH_2"
+    unlock = Item type = ShipPart name = "ST_CLOAK_3"
+    effectsgroups =
+        EffectsGroup
+            scope = And [
+                OwnedBy TheEmpire Source.Owner
+                Or [
+                    Planet
+                    System
+                ]
+            ]
+            activation = Not OwnerHasTech "SPY_STEALTH_4"
+            effects = [
+                AddSpecial "DIM_RIFT_SLAVE_SPECIAL"
+                RemoveSpecial "VOLCANIC_ASH_SLAVE_SPECIAL"
+                RemoveSpecial "CLOUD_COVER_SLAVE_SPECIAL"
+            ]
+            
+Tech
+    name = "SPY_STEALTH_4"
+    description = "SPY_STEALTH_4_DESC"
+    short_description = "SHIP_PART_UNLOCK_SHORT_DESC"
+    techtype = Application
+    category = "SPY_CATEGORY"
+    researchcost = 1000 * [[TECH_COST_MULTIPLIER]]
+    researchturns = 8
+    prerequisites = "SPY_STEALTH_3"
+    unlock = Item type = ShipPart name = "ST_CLOAK_4"
+    effectsgroups =
+        EffectsGroup
+            scope = And [
+                OwnedBy TheEmpire Source.Owner
+                Or [
+                    Planet
+                    System
+                ]
+            ]
+            effects = [
+                AddSpecial "VOID_SLAVE_SPECIAL"
+                RemoveSpecial "DIM_RIFT_SLAVE_SPECIAL"
+                RemoveSpecial "VOLCANIC_ASH_SLAVE_SPECIAL"
+                RemoveSpecial "CLOUD_COVER_SLAVE_SPECIAL"
+            ]
+

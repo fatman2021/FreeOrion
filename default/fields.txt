@@ -1,0 +1,141 @@
+FieldType
+    name = "FLD_ION_STORM"
+    description = "FLD_ION_STORM_DESC"
+    stealth = 0.01
+    tags = [ "EXOTIC" ]
+    effectsgroups = [
+        EffectsGroup    // move around, grow when near stars, shrink a bit each turn
+            scope = Source
+            effects = [
+                SetStarlaneSpeed value = 15
+                
+                MoveTowards speed = Source.StarlaneSpeed/1.4 x = UniverseCentreX y = UniverseCentreY
+                MoveInOrbit speed = Source.StarlaneSpeed/1.4 x = UniverseCentreX y = UniverseCentreY
+
+                SetSize Value - 0.3*(Count condition = And [
+                    System
+                    WithinDistance distance = 80 condition = Source
+                ])
+            ]
+            
+        EffectsGroup    // affect stealth / detection of objects in storm
+            scope = WithinDistance distance = Source.Size condition = Source
+            stackinggroup = "ION_STORM_STEALTH_DETECTION_REDUCTION"
+            effects = [
+                SetStealth Value - 40
+                SetDetection Value - 40
+            ]
+            
+        EffectsGroup    // dissipate when small
+            scope = Source
+            activation = Size high = 10
+            effects = Destroy
+    ]
+    graphic = "fields/rainbow_storm.png"
+
+FieldType
+    name = "FLD_MOLECULAR_CLOUD"
+    description = "FLD_MOLECULAR_CLOUD_DESC"
+    stealth = 0.01
+    tags = [ "EXOTIC" ]
+    effectsgroups = [
+        EffectsGroup    // move around, grow when near stars, shrink a bit each turn
+            scope = Source
+            effects = [
+                SetStarlaneSpeed value = 5
+                
+                MoveTowards speed = Source.StarlaneSpeed/1.4 x = UniverseCentreX y = UniverseCentreY
+                MoveInOrbit speed = Source.StarlaneSpeed/1.4 x = UniverseCentreX y = UniverseCentreY
+
+                SetSize Value - 0.1*(Count condition = And [
+                    System
+                    WithinDistance distance = 80 condition = Source
+                ])
+            ]
+            
+        EffectsGroup    // reduce shields
+            scope = And [
+                Ship
+                WithinDistance distance = Source.Size condition = Source
+            ]
+            stackinggroup = "MOLECULAR_CLOUD_SHIELD_REDUCTION"
+            effects = SetMaxShield Value - 15
+            
+        EffectsGroup    // dissipate when small
+            scope = Source
+            activation = Size high = 10
+            effects = Destroy
+    ]
+    graphic = "nebulae/nebula8.png"
+
+FieldType
+    name = "FLD_NEBULA_1"
+    description = "FLD_NEBULA_1_DESC"
+    stealth = 0.01
+    effectsgroups = [
+        EffectsGroup    // shrink slowly when in no-star system
+            scope = Source
+            activation = And [
+                Size low = 2 high = 180
+                Star type = NoStar
+            ]            
+            effects =
+                SetSize Value + Random(-0.8, 0.3)
+
+        EffectsGroup    // shrink slowly when in no-star system
+            scope = Source
+            activation = And [
+                Size low = 180
+                Star type = NoStar
+            ]            
+            effects =
+                SetSize Value + Random(-0.8, 0)
+        
+        EffectsGroup    // spawn new star when small enough
+            scope = And [ 
+                    System
+                    Object id = Source.SystemID
+                ]
+            activation = And [
+                Size high = 3
+                Star type = NoStar
+            ]
+            effects = SetStarType type = Blue         
+    ]
+    graphic = "nebulae/nebula9.png"
+    
+FieldType
+    name = "FLD_NEBULA_2"
+    description = "FLD_NEBULA_2_DESC"
+    stealth = 0.01
+    effectsgroups = [
+        EffectsGroup    // shrink slowly when in no-star system
+            scope = Source
+            activation = And [
+                Size low = 2 high = 180
+                Star type = NoStar
+            ]
+            effects =
+                SetSize Value + Random(-0.5, 0.3)
+
+        EffectsGroup    // shrink slowly when in no-star system
+            scope = Source
+            activation = And [
+                Size low = 180
+                Star type = NoStar
+            ]
+            effects =
+                SetSize Value + Random(-0.5, 0)
+        
+        EffectsGroup    // spawn new star when small enough
+            scope = And [
+                System
+                Object id = Source.SystemID
+            ]
+            activation = And [
+                Size high = 3
+                Star type = NoStar
+            ]
+            effects = SetStarType type = White         
+    ]
+    graphic = "nebulae/nebula15.png"

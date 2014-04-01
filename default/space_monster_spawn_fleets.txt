@@ -1,0 +1,210 @@
+MonsterFleet
+    name = "SM_KRILL_1"
+    ships = [
+        "SM_KRILL_1"
+    ]
+    spawnrate = 0.5
+    spawnlimit = 9999
+    location = And [
+        Not Contains Monster
+        Not WithinStarlaneJumps 2 Contains And [
+            Planet
+            OwnedBy AnyEmpire
+        ]
+    ]
+
+MonsterFleet
+    name = "SM_TREE"
+    ships = [
+        "SM_TREE"
+    ]
+    spawnrate = 0.7
+    spawnlimit = 9999
+    location = And [
+        Star type = [Blue White Yellow Orange Red]
+        Not Contains Monster
+        Not WithinStarlaneJumps 1 Contains And [
+            Planet
+            OwnedBy AnyEmpire
+        ]
+    ]
+
+MonsterFleet
+    name = "SM_DRONE_FACTORY"
+    ships = [
+        "SM_DRONE_FACTORY"
+    ]
+    spawnrate = 0.4
+    spawnlimit = 5
+    location = And [
+        Not Contains Or [
+            Armed
+            Monster
+        ]
+        Not WithinStarlaneJumps 3 Contains And [
+            Planet
+            OwnedBy AnyEmpire
+        Not Star type = NoStar
+        ]
+    ]
+
+MonsterFleet
+    name = "SM_DRONE"
+    ships = [
+        "SM_DRONE"
+    ]
+    spawnrate = 0.1
+    spawnlimit = 9999
+    location = And [
+        Not Contains Or [
+            Armed
+            Monster
+        ]
+        Not WithinStarlaneJumps 2 Contains And [
+            Planet
+            OwnedBy AnyEmpire
+        ]
+    ]
+
+MonsterFleet
+    name = "SM_FLOATER"
+    ships = [
+        "SM_FLOATER"
+    ]
+    spawnrate = 0.7
+    spawnlimit = 50
+    location = And [
+        Not Contains Monster
+        Not WithinStarlaneJumps 2 Contains And [
+            Planet
+            OwnedBy AnyEmpire
+        ]
+    ]
+
+MonsterFleet
+    name = "SM_DRAGON"
+    ships = [
+        "SM_DRAGON"
+    ]
+    spawnrate = 0.3
+    spawnlimit = 50
+    location = And [
+        Not Contains Monster
+        Not WithinStarlaneJumps 4 Contains And [
+            Planet
+            OwnedBy AnyEmpire
+        ]
+    ]
+
+MonsterFleet
+    name = "SM_KRAKEN_1"
+    ships = [
+        "SM_KRAKEN_1"
+    ]
+    spawnrate = 0.5
+    spawnlimit = 100
+    location = And [
+        Not Contains Monster
+        Contains Planet type = GasGiant
+        Not WithinStarlaneJumps 3 Contains And [
+            Planet
+            OwnedBy AnyEmpire
+        ]
+    ]
+
+MonsterFleet
+    name = "SM_SNOWFLAKE_1"
+    ships = [
+        "SM_SNOWFLAKE_1"
+    ]
+    spawnrate = 1.0
+    spawnlimit = 100
+    location = And [
+        Not Contains Monster
+        Contains Planet size = Small
+        Not WithinStarlaneJumps 2 Contains And [
+            Planet
+            OwnedBy AnyEmpire
+        ]
+    ]
+
+MonsterFleet
+    name = "SM_JUGGERNAUT_1"
+    ships = [
+        "SM_JUGGERNAUT_1"
+    ]
+    spawnrate = 1.0
+    spawnlimit = 100
+    location = And [
+        Not Contains Monster
+        Contains Planet type = Asteroids
+        Not WithinStarlaneJumps 4 Contains And [
+            Planet
+            OwnedBy AnyEmpire
+        ]
+    ]
+
+MonsterFleet
+    name = "SM_CLOUD"
+    ships = [
+        "SM_CLOUD"
+    ]
+    spawnrate = 3.0
+    spawnlimit = 2
+    location = And [
+        Not Contains Monster
+        Not WithinStarlaneJumps 4 Contains And [
+            Planet
+            OwnedBy AnyEmpire
+        ]
+    ]
+
+MonsterFleet
+    name = "SM_SNAIL"
+    ships = [
+        "SM_SNAIL"
+    ]
+    spawnrate = 2.0
+    spawnlimit = 20
+    location = And [
+        Not Contains Monster
+        Contains Planet type = Asteroids
+        Not WithinStarlaneJumps 2 Contains And [
+            Planet
+            OwnedBy AnyEmpire
+        ]
+    ]
+
+MonsterFleet
+    name = "SM_EXP_OUTPOST"
+    ships = [
+        "SM_EXP_OUTPOST"
+    ]
+    spawnrate = 1000.0
+    spawnlimit = 1
+    location = And [
+        Contains And [
+            Planet
+            Not OwnedBy AnyEmpire
+            Not Planet type = [Asteroids GasGiant]
+        ]
+        Not WithinStarlaneJumps 6 And [
+            Planet
+            OwnedBy AnyEmpire
+        ]
+    ]
+
+MonsterFleet
+    name = "SM_DAMPENING_CLOUD"
+    ships = [
+         "SM_DAMPENING_CLOUD"
+     ]
+    spawnrate = 0.5
+    spawnlimit = 1
+    location = And [
+        Not Contains Monster
+        Not WithinStarlaneJumps 4 Contains And [
+            Planet
+            OwnedBy AnyEmpire
+        ]
+    ]

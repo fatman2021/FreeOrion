@@ -1,0 +1,310 @@
+// -*- C++ -*-
+#ifndef _MultiplayerCommon_h_
+#define _MultiplayerCommon_h_
+
+#include "../combat/PathingEngine.h"
+#include "../network/Networking.h"
+#include "Export.h"
+
+#include <GG/Clr.h>
+
+#include <set>
+#include <vector>
+
+
+class System;
+class XMLElement;
+
+FO_COMMON_API extern const std::string MP_SAVE_FILE_EXTENSION;
+FO_COMMON_API extern const std::string SP_SAVE_FILE_EXTENSION;
+
+/** Returns an XML representation of a GG::Clr object. */
+XMLElement ClrToXML(const GG::Clr& clr);
+
+/** Returns a GG::Clr object constructed from its XML representation. */
+FO_COMMON_API GG::Clr XMLToClr(const XMLElement& clr);
+
+/** The data that represent the galaxy setup for a new game. */
+struct FO_COMMON_API GalaxySetupData {
+    /** \name Structors */ //@{
+    GalaxySetupData() :
+        m_seed(),
+        m_size(100),
+        m_shape(SPIRAL_2),
+        m_age(GALAXY_SETUP_MEDIUM),
+        m_starlane_freq(GALAXY_SETUP_MEDIUM),
+        m_planet_density(GALAXY_SETUP_MEDIUM),
+        m_specials_freq(GALAXY_SETUP_MEDIUM),
+        m_monster_freq(GALAXY_SETUP_MEDIUM),
+        m_native_freq(GALAXY_SETUP_MEDIUM),
+        m_ai_aggr(MANIACAL)
+    {}
+    //@}
+
+    std::string         m_seed;
+    int                 m_size;
+    Shape               m_shape;
+    GalaxySetupOption   m_age;
+    GalaxySetupOption   m_starlane_freq;
+    GalaxySetupOption   m_planet_density;
+    GalaxySetupOption   m_specials_freq;
+    GalaxySetupOption   m_monster_freq;
+    GalaxySetupOption   m_native_freq;
+    Aggression          m_ai_aggr;
+
+private:
+    friend class boost::serialization::access;
+    template <class Archive>
+    void serialize(Archive& ar, const unsigned int version);
+};
+
+/** Contains the UI data that must be saved in save game files in order to
+  * restore games to the users' last views. */
+struct FO_COMMON_API SaveGameUIData {
+    int     map_top;
+    int     map_left;
+    double  map_zoom_steps_in;
+    std::set<int> fleets_exploring;
+
+private:
+    friend class boost::serialization::access;
+    template <class Archive>
+    void serialize(Archive& ar, const unsigned int version);
+};
+
+/** The data for one empire necessary for game-setup during multiplayer loading. */
+struct FO_COMMON_API SaveGameEmpireData {
+    /** \name Structors */ //@{
+    SaveGameEmpireData() :
+        m_empire_id(ALL_EMPIRES),
+        m_empire_name(),
+        m_player_name(),
+        m_color()
+    {}
+    SaveGameEmpireData(int empire_id, const std::string& empire_name,
+                       const std::string& player_name, const GG::Clr& colour) :
+        m_empire_id(empire_id),
+        m_empire_name(empire_name),
+        m_player_name(player_name),
+        m_color(colour)
+    {}
+    //@}
+
+    int         m_empire_id;
+    std::string m_empire_name;
+    std::string m_player_name;
+    GG::Clr     m_color;
+
+private:
+    friend class boost::serialization::access;
+    template <class Archive>
+    void serialize(Archive& ar, const unsigned int version);
+};
+
+/** The data structure used to represent a single player's setup options for a
+  * multiplayer game (in the multiplayer lobby screen). */
+struct PlayerSetupData {
+    /** \name Structors */ //@{
+    PlayerSetupData() :
+        m_player_name(),
+        m_empire_name(),
+        m_empire_color(GG::Clr(0, 0, 0, 0)),
+        m_starting_species_name(),
+        m_save_game_empire_id(ALL_EMPIRES),
+        m_client_type(Networking::INVALID_CLIENT_TYPE)
+    {}
+    //@}
+
+    std::string             m_player_name;          ///< the player's name
+
+    std::string             m_empire_name;          ///< the name of the player's empire when starting a new game
+    GG::Clr                 m_empire_color;         ///< the color used to represent this player's empire when starting a new game
+    std::string             m_starting_species_name;///< name of the species with which the player starts when starting a new game
+
+    int                     m_save_game_empire_id;  ///< when loading a game, the ID of the empire that this player will control
+
+    Networking::ClientType  m_client_type;          ///< is this player an AI, human player or...?
+
+private:
+    friend class boost::serialization::access;
+    template <class Archive>
+    void serialize(Archive& ar, const unsigned int version);
+};
+bool FO_COMMON_API operator==(const PlayerSetupData& lhs, const PlayerSetupData& rhs);
+bool operator!=(const PlayerSetupData& lhs, const PlayerSetupData& rhs);
+
+
+/** The data needed to establish a new single player game.  If \a m_new_game
+  * is true, a new game is to be started, using the remaining members besides
+  * \a m_filename.  Otherwise, the saved game \a m_filename will be loaded
+  * instead. */
+struct SinglePlayerSetupData : public GalaxySetupData {
+    /** \name Structors */ //@{
+    SinglePlayerSetupData():
+        m_new_game(true),
+        m_filename(),
+        m_players()
+    {}
+    //@}
+
+    bool                                m_new_game;
+    std::string                         m_filename;
+    std::vector<PlayerSetupData>        m_players;
+
+private:
+    friend class boost::serialization::access;
+    template <class Archive>
+    void serialize(Archive& ar, const unsigned int version);
+};
+
+/** The data structure that represents the state of the multiplayer lobby. */
+struct FO_COMMON_API MultiplayerLobbyData : public GalaxySetupData {
+    /** \name Structors */ //@{
+    MultiplayerLobbyData() :
+        m_new_game(true),
+        m_save_file_index(-1),
+        m_players(),
+        m_save_games(),
+        m_save_game_empire_data()
+    {}
+    explicit MultiplayerLobbyData(bool build_save_game_list); ///< Basic ctor.
+    //@}
+
+    std::string Dump() const;
+
+    bool                                        m_new_game;
+    int                                         m_save_file_index;
+    std::list<std::pair<int, PlayerSetupData> > m_players;              // <player_id, PlayerSetupData>
+
+    std::vector<std::string>                    m_save_games;
+    std::map<int, SaveGameEmpireData>           m_save_game_empire_data;// indexed by empire_id
+
+private:
+    friend class boost::serialization::access;
+    template <class Archive>
+    void serialize(Archive& ar, const unsigned int version);
+};
+
+/** Information about one player that other players are informed of.  Assembled by server and sent to players. */
+struct PlayerInfo {
+    PlayerInfo() :
+        name(""),
+        empire_id(ALL_EMPIRES),
+        client_type(Networking::INVALID_CLIENT_TYPE),
+        host(false)
+    {}
+    PlayerInfo(const std::string& player_name_, int empire_id_,
+               Networking::ClientType client_type_, bool host_) :
+        name(player_name_),
+        empire_id(empire_id_),
+        client_type(client_type_),
+        host(host_)
+    {}
+
+    std::string             name;           ///< name of this player (not the same as the empire name)
+    int                     empire_id;      ///< id of the player's empire
+    Networking::ClientType  client_type;    ///< is this a human player, AI player, or observer?
+    bool                    host;           ///< true iff this is the host player
+
+    friend class boost::serialization::access;
+    template <class Archive>
+    void serialize(Archive& ar, const unsigned int version);
+};
+
+struct CombatSetupGroup;
+
+/** The state of combat (units, planets, their health, etc.) at the start of a
+    round of combat. */
+struct FO_COMMON_API CombatData {
+    CombatData() :
+        m_combat_turn_number(0)
+    {}
+    CombatData(TemporaryPtr<System> system, std::map<int, std::vector<CombatSetupGroup> >& setup_groups);
+
+    unsigned int m_combat_turn_number;
+    TemporaryPtr<System> m_system;
+    std::map<int, TemporaryPtr<UniverseObject> > m_combat_universe;
+    PathingEngine m_pathing_engine;
+
+    friend class boost::serialization::access;
+    template<class Archive>
+    void save(Archive & ar, const unsigned int version) const;
+    template<class Archive>
+    void load(Archive & ar, const unsigned int version);
+    BOOST_SERIALIZATION_SPLIT_MEMBER()
+};
+
+/** Regions in which the user is allowed or disallowed to place ships during
+    combat setup. */
+struct CombatSetupRegion {
+    /** The types of setup-regions. */
+    enum Type {
+        RING,           ///< A ring concentric with the System.
+        ELLIPSE,        ///< An ellipse.
+        PARTIAL_ELLIPSE ///< An angular portion of an ellipse.
+    };
+
+    CombatSetupRegion() :
+        m_type(RING),
+        m_radius_begin(),
+        m_radius_end(),
+        m_centroid(),
+        m_radial_axis(),
+        m_tangent_axis(),
+        m_theta_begin(),
+        m_theta_end()
+    {}
+    CombatSetupRegion(float radius_begin, float radius_end) :
+        m_type(RING),
+        m_radius_begin(radius_begin),
+        m_radius_end(radius_end),
+        m_centroid(),
+        m_radial_axis(),
+        m_tangent_axis(),
+        m_theta_begin(),
+        m_theta_end()
+    {}
+    CombatSetupRegion(float centroid_x, float centroid_y, float radius);
+    CombatSetupRegion(float centroid_x, float centroid_y, float radial_axis, float tangent_axis);
+    CombatSetupRegion(float centroid_x, float centroid_y, float radial_axis, float tangent_axis,
+                      float theta_begin, float theta_end);
+
+    Type m_type;          ///< The type/shape of the region.
+    float m_radius_begin; ///< The start radius of a ring.
+    float m_radius_end;   ///< The end radius of a ring.
+    float m_centroid[2];  ///< The (x, y) position of the ellipse centroid.
+    float m_radial_axis;  ///< The length of the radial axis; the radial axis always points to the star.
+    float m_tangent_axis; ///< The length of the tangent axis (perpendicular to the radial axis).
+    float m_theta_begin;  ///< The start of the angular region of the ellipse.
+    float m_theta_end;    ///< The end of the angular region of the ellipse.
+
+    friend class boost::serialization::access;
+    template <class Archive>
+    void serialize(Archive& ar, const unsigned int version);
+};
+
+/** Returns true iff \a point falls within \a region. */
+FO_COMMON_API bool PointInRegion(double point[2], const CombatSetupRegion& region);
+
+/** A group of ships and a description of where they may be placed. */
+struct CombatSetupGroup {
+    CombatSetupGroup() :
+        m_allow(false)
+    {}
+
+    std::set<int> m_ships;                    ///< The ships in this group.
+    std::vector<CombatSetupRegion> m_regions; ///< The regions the ships are/are not allowed in.
+    bool m_allow;                             ///< Whether the regions are allow-regions or deny-regions.
+
+    friend class boost::serialization::access;
+    template <class Archive>
+    void serialize(Archive& ar, const unsigned int version);
+};
+
+// Note: *::serialize() implemented in SerializeMultiplayerCommon.cpp.
+
+// TemporaryPtr<System> doesn't allow incomplete "System" type in the final .cpp
+// in order to avoid cyclic inclusion problems, we #include this as late as possible
+#include "../universe/System.h"
+
+#endif // _MultiplayerCommon_h_

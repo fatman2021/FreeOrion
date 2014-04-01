@@ -1,0 +1,168 @@
+/*   R E S O U R C E    P R O D U C T I O N    */
+
+// Base Production Values
+// Production Boosters based on population should be calculate based on these.
+
+INDUSTRY_PER_POP
+'''0.2'''
+
+RESEARCH_PER_POP
+'''0.2'''
+
+
+TECH_COST_MULTIPLIER
+'''2.0'''
+
+
+/*   S T E A L T H   */
+
+STEALTH_BOOST_LOW
+'''EffectsGroup
+        scope = Or [
+            Source
+            ContainedBy Source
+        ]
+        stackinggroup = "TECH_STEALTH_STACK"
+        effects = SetStealth Value + [[LOW_STEALTH]]
+'''
+
+STEALTH_BOOST_MEDIUM
+'''EffectsGroup
+        scope = Or [
+            Source
+            ContainedBy Source
+        ]
+        stackinggroup = "TECH_STEALTH_STACK"
+        effects = SetStealth Value + [[MEDIUM_STEALTH]]
+'''
+
+STEALTH_BOOST_HIGH
+'''EffectsGroup
+        scope = Or [
+            Source
+            ContainedBy Source
+        ]
+        stackinggroup = "TECH_STEALTH_STACK"
+        effects = SetStealth Value + [[HIGH_STEALTH]]
+'''
+
+STEALTH_BOOST_ULTIMATE
+'''EffectsGroup
+        scope = Or [
+            Source
+            ContainedBy Source
+        ]
+        stackinggroup = "TECH_STEALTH_STACK"
+        effects = SetStealth Value + [[VERY_HIGH_STEALTH]]
+'''
+
+STEALTH_BOOST_LOW_NO_ORBITAL
+'''EffectsGroup
+        scope = Or [
+            Source
+            And [
+                ContainedBy Source
+                Not HasTag "ORBITAL"
+            ]
+        ]
+        stackinggroup = "TECH_STEALTH_STACK"
+        effects = SetStealth Value + [[LOW_STEALTH]]
+'''
+
+STEALTH_BOOST_MEDIUM_NO_ORBITAL
+'''EffectsGroup
+        scope = Or [
+            Source
+            And [
+                ContainedBy Source
+                Not HasTag "ORBITAL"
+            ]
+        ]
+        stackinggroup = "TECH_STEALTH_STACK"
+        effects = SetStealth Value + [[MEDIUM_STEALTH]]
+'''
+
+STEALTH_BOOST_HIGH_NO_ORBITAL
+'''EffectsGroup
+        scope = Or [
+            Source
+            And [
+                ContainedBy Source
+                Not HasTag "ORBITAL"
+            ]
+        ]
+        stackinggroup = "TECH_STEALTH_STACK"
+        effects = SetStealth Value + [[HIGH_STEALTH]]
+'''
+
+STEALTH_BOOST_ULTIMATE_NO_ORBITAL
+'''EffectsGroup
+        scope = Or [
+            Source
+            And [
+                ContainedBy Source
+                Not HasTag "ORBITAL"
+            ]
+        ]
+        stackinggroup = "TECH_STEALTH_STACK"
+        effects = SetStealth Value + [[VERY_HIGH_STEALTH]]
+'''
+
+STEALTH_BOOST_PLUS_PLUS
+'''EffectsGroup
+        scope = Or [
+            Source
+            ContainedBy Source
+        ]
+        stackinggroup = "SPECIES_STEALTH_STACK"
+        effects = SetStealth Value + [[PLUS_PLUS_STEALTH]]
+'''
+
+SYSTEM_STEALTH_PLUS_PLUS
+'''EffectsGroup
+            scope = Or [
+                Source
+                ContainedBy Source
+            ]
+            stackinggroup = "SPECIES_STEALTH_STACK"
+            effects = SetStealth Value + [[PLUS_PLUS_STEALTH]]
+'''
+
+LOW_STEALTH
+'''20'''
+
+MEDIUM_STEALTH
+'''40'''
+
+HIGH_STEALTH
+'''60'''
+
+VERY_HIGH_STEALTH
+'''80'''
+
+PLUS_STEALTH
+'''5'''
+
+PLUS_PLUS_STEALTH
+'''[[PLUS_STEALTH]] + [[PLUS_STEALTH]]'''
+
+
+/*   M U L T I P L I C A T O R S   */
+
+COLONY_UPKEEP_MULTIPLICATOR
+'''(1 + 0.06 *
+        Count condition = And [
+            Planet
+            OwnedBy TheEmpire Source.Owner
+            VisibleToEmpire Source.Owner
+            Not Population high = 0
+        ])'''
+
+FLEET_UPKEEP_MULTIPLICATOR
+'''(1 + 0.01 *
+        Count condition = And [
+            Ship
+            OwnedBy TheEmpire Source.Owner
+            VisibleToEmpire Source.Owner
+        ])'''
+		
